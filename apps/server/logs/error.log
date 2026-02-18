@@ -1,0 +1,13 @@
+2026-02-18T13:04:47.528Z [ERROR]: Validation error: [{"origin":"string","code":"invalid_format","format":"email","pattern":"/^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$/","path":["email"],"message":"Invalid email address"}]
+2026-02-18T13:11:08.264Z [ERROR]: Error: Email is already registered. Please use a different email.
+2026-02-18T13:28:44.984Z [ERROR]: Error: Email is already registered. Please use a different email.
+2026-02-18T14:09:45.045Z [ERROR]: Error: Email is already registered. Please use a different email.
+2026-02-18T14:11:48.621Z [ERROR]: Error: Expected double-quoted property name in JSON at position 66 (line 5 column 1)
+2026-02-18T14:11:58.840Z [ERROR]: Validation error: [{"expected":"string","code":"invalid_type","path":["password"],"message":"Invalid input: expected string, received undefined"}]
+2026-02-18T14:12:08.735Z [ERROR]: Error: Email is already registered. Please use a different email.
+2026-02-18T14:12:46.322Z [ERROR]: Error: Email is already registered. Please use a different email.
+2026-02-18T14:14:50.924Z [ERROR]: Error: Email is already registered. Please use a different email.
+2026-02-18T14:24:36.366Z [ERROR]: Error: Invalid email or password.
+2026-02-18T14:24:47.653Z [ERROR]: Error: Illegal arguments: string, undefined
+2026-02-18T14:32:20.790Z [ERROR]: Error: Invalid email or password.
+2026-02-18T14:32:59.118Z [ERROR]: Error: Invalid email or password.
