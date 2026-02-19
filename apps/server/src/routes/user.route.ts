@@ -68,12 +68,12 @@ router.post("/loginToAccount", userController.login);
 
 /**
  * @swagger
- * /api/v1/activateAccount:
+ * /api/v1/verifyAccount:
  *   post:
  *     tags:
  *       - UserAuth
- *     summary: Activate account.
- *     description: Activate a user account using the activation token received via email.
+ *     summary: Verify account.
+ *     description: Verify a user account using the activation token received via email.
  *     requestBody:
  *       required: true
  *       content:
@@ -95,8 +95,36 @@ router.post("/loginToAccount", userController.login);
  *       500:
  *         description: Internal server error.
  */
-router.post("/activateAccount", () => {});
+router.post("/verifyAccount", userController.verifyEmail);
 
+/**
+ * @swagger
+ * /api/v1/loginWith2FA:
+ *   post:
+ *     tags:
+ *       - UserAuth
+ *     summary: Login with 2FA.
+ *     description: Log in to an account using two-factor authentication (2FA) token.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               token:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login successful.
+ *       401:
+ *         description: Unauthorized - Invalid email or token.
+ *       500:
+ *         description: Internal server error.
+ */
+router.post("/loginWith2FA", userController.loginWith2FA);
 /**
  * @swagger
  * /api/v1/forgotPassword:

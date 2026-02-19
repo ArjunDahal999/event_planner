@@ -1,33 +1,37 @@
 import db from "../database/db.ts";
+import type { IUser } from "../database/types.ts";
 
 class UserService {
-  async createUser(user: { name: string; email: string; password: string }) {
-    return db("users")
-      .insert(user)
-      .then((result) => {
-        return result;
-      })
-      .catch((err) => {
-        console.error("Error creating user:", err);
-        throw err;
-      });
+  async createUser(user: {
+    name: string;
+    email: string;
+    password: string;
+  }): Promise<number> {
+    const [id] = await db("users").insert(user);
+    return id;
   }
   async getUserByEmail(
     email: string,
   ): Promise<
-    { id: number; name: string; email: string; password: string } | undefined
+    | {
+        id: number;
+        name: string;
+        email: string;
+        password: string;
+        is_email_verified: boolean;
+      }
+    | undefined
   > {
-    return await db("users")
-      .select("id", "name", "email", "password")
-      .where({ email })
-      .first()
-      .then((user) => {
-        return user;
-      })
-      .catch((err) => {
-        console.error("Error fetching user:", err);
-        throw err;
-      });
+    const user = await db<IUser>("users").where({ email }).first();
+    return user
+      ? {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          password: user.password,
+          is_email_verified: user.is_email_verified,
+        }
+      : undefined;
   }
 }
 

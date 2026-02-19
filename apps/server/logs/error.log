@@ -11,3 +11,16 @@
 2026-02-18T14:24:47.653Z [ERROR]: Error: Illegal arguments: string, undefined
 2026-02-18T14:32:20.790Z [ERROR]: Error: Invalid email or password.
 2026-02-18T14:32:59.118Z [ERROR]: Error: Invalid email or password.
+2026-02-18T15:32:18.721Z [ERROR]: Error: Email is already registered. Please use a different email.
+2026-02-18T15:32:56.312Z [ERROR]: Error: Email is already registered. Please use a different email.
+2026-02-18T16:04:13.831Z [ERROR]: Error: insert into `user_activation` (`activation_token`, `expires_at`, `user_id`) values ('f33511a6-7670-4c0e-9452-a052fb022241', '2026-02-19 21:49:13.825', DEFAULT) - Field 'user_id' doesn't have a default value
+2026-02-18T16:17:56.872Z [ERROR]: Error: Invalid email or password.
+2026-02-18T16:22:50.732Z [ERROR]: Error: Invalid email or password.
+2026-02-18T16:22:59.820Z [ERROR]: Error: Invalid  password.
+2026-02-19T02:59:02.221Z [ERROR]: Error: Email is already registered.
+2026-02-19T03:00:25.409Z [ERROR]: Error: Invalid token or email ID.
+2026-02-19T03:00:35.101Z [ERROR]: Error: Invalid token or email ID.
+2026-02-19T03:01:10.036Z [ERROR]: Error: Invalid token or email ID.
+2026-02-19T03:04:34.105Z [ERROR]: Error: Email is not verified. Please verify your email before logging in.
+2026-02-19T03:21:30.670Z [ERROR]: Error: Invalid email or token.
+2026-02-19T03:21:40.871Z [ERROR]: Error: Invalid email or token.
