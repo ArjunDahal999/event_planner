@@ -2,21 +2,6 @@ import { type NextFunction, type Request, type Response } from "express";
 import { z } from "zod";
 import logger from "../libs/winston.ts";
 
-export class HttpError extends Error {
-  statusCode: number;
-  constructor({
-    message,
-    statusCode,
-  }: {
-    message: string;
-    statusCode: number;
-  }) {
-    super(message);
-    this.statusCode = statusCode;
-    this.name = "HttpError";
-  }
-}
-
 export function zodMiddleware(
   err: unknown,
   _: Request,

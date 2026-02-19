@@ -37,7 +37,40 @@ router.post("/registerAccount", userController.register);
 
 /**
  * @swagger
- * /api/v1/loginToAccount:
+ * /api/v1/verifyEmail:
+ *   post:
+ *     tags:
+ *       - UserAuth
+ *     summary: Verify email.
+ *     description: Verify a user email using the activation token received via email.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 default: dahalarjun404@gmail.com
+ *               token:
+ *                 type: string
+ *                 default: 1234567890abcdef
+ *     responses:
+ *       200:
+ *         description: Email verified successfully.
+ *       401:
+ *         description: Unauthorized - Invalid token or token expired.
+ *       409:
+ *         description: Conflict - Invalid token or email ID.
+ *       500:
+ *         description: Internal server error.
+ */
+router.post("/verifyEmail", userController.verifyEmail);
+
+/**
+ * @swagger
+ * /api/v1/generate2FA:
  *   post:
  *     tags:
  *       - UserAuth
@@ -64,38 +97,7 @@ router.post("/registerAccount", userController.register);
  *       500:
  *         description: Internal server error.
  */
-router.post("/loginToAccount", userController.login);
-
-/**
- * @swagger
- * /api/v1/verifyAccount:
- *   post:
- *     tags:
- *       - UserAuth
- *     summary: Verify account.
- *     description: Verify a user account using the activation token received via email.
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *               token:
- *                 type: string
- *     responses:
- *       200:
- *         description: Account activated successfully.
- *       401:
- *         description: Unauthorized - Invalid token or token expired.
- *       409:
- *         description: Conflict - Invalid token or email ID.
- *       500:
- *         description: Internal server error.
- */
-router.post("/verifyAccount", userController.verifyEmail);
+router.post("/generate2FA", userController.generate2FA);
 
 /**
  * @swagger
@@ -114,8 +116,10 @@ router.post("/verifyAccount", userController.verifyEmail);
  *             properties:
  *               email:
  *                 type: string
+ *                 default: dahalarjun404@gmail.com
  *               token:
  *                 type: string
+ *                 default: 1234567890abcdef
  *     responses:
  *       200:
  *         description: Login successful.
@@ -125,31 +129,6 @@ router.post("/verifyAccount", userController.verifyEmail);
  *         description: Internal server error.
  */
 router.post("/loginWith2FA", userController.loginWith2FA);
-/**
- * @swagger
- * /api/v1/forgotPassword:
- *   post:
- *     tags:
- *       - UserAuth
- *     summary: Request password reset.
- *     description: Request to reset password. An email with reset instructions will be sent to the registered email address.
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *     responses:
- *       200:
- *         description: Password reset request successful. A reset link has been sent to your email.
- *       401:
- *         description: Unauthorized - Email address not registered.
- *       500:
- *         description: Internal server error.
- */
 
 /**
  * @swagger
@@ -166,7 +145,6 @@ router.post("/loginWith2FA", userController.loginWith2FA);
  *         description: Internal server error.
  *
  */
-
 router.get("/logout", () => {});
 
 /**
@@ -186,6 +164,10 @@ router.get("/logout", () => {});
  *             properties:
  *               refreshToken:
  *                 type: string
+ *                 default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjIsImlhdCI6MTc3MTQ5Mjk5NiwiZXhwIjoxNzcyMDk3Nzk2fQ.fY5yy1A9k7I_ThXmYY2Wt0kZVsQ9cX9HYOoxv1nu6PY
+ *               userId:
+ *                 type: integer
+ *                 default: 1
  *     responses:
  *       200:
  *         description: Token refreshed successfully.
@@ -194,5 +176,5 @@ router.get("/logout", () => {});
  *       500:
  *         description: Internal server error.
  */
-router.post("/refresh", () => {});
+router.post("/refresh", userController.refreshToken);
 export default router;

@@ -1,12 +1,14 @@
 import {
+  REFRESH_TOKEN_TABLE,
   TWO_FACTOR_AUTHENTICATION_TABLE,
   USER_TABLE,
 } from "../database/constants.ts";
 import db from "../database/db.ts";
-import type {
-  ITwoFactorAuthentication,
-  IUser,
-  IUserActivation,
+import {
+  type IRefreshToken,
+  type ITwoFactorAuthentication,
+  type IUser,
+  type IUserActivation,
 } from "../database/types.ts";
 
 const userActivationTable = "user_activation";
@@ -19,13 +21,26 @@ class AuthService {
   }): Promise<string | null> {
     try {
       const row = await db<IUserActivation>(userActivationTable)
-        .select("activation_token")
+        .select("activation_token", "expires_at")
         .where({ user_id: userId })
         .first();
-
+      if (row && row.expires_at && new Date(row.expires_at) < new Date()) {
+        return null;
+      }
       return row?.activation_token ?? null;
     } catch (err) {
       console.error("Error fetching activation token:", err);
+      throw err;
+    }
+  }
+
+  async revoke2FASecret({ email }: { email: string }): Promise<void> {
+    try {
+      await db<ITwoFactorAuthentication>(TWO_FACTOR_AUTHENTICATION_TABLE)
+        .where({ email })
+        .del();
+    } catch (err) {
+      console.error("Error revoking 2FA secret:", err);
       throw err;
     }
   }
@@ -52,6 +67,7 @@ class AuthService {
       throw err;
     }
   }
+
   async createUserActivationToken({
     userId,
     token,
@@ -121,6 +137,59 @@ class AuthService {
         .del();
     } catch (err) {
       console.error("Error deleting 2FA secret:", err);
+      throw err;
+    }
+  }
+
+  async getRefreshToken({
+    userId,
+  }: {
+    userId: number;
+  }): Promise<string | null> {
+    try {
+      const row = await db<IRefreshToken>(REFRESH_TOKEN_TABLE)
+        .select("token")
+        .where({ user_id: userId })
+        .first();
+
+      return row?.token ?? null;
+    } catch (err) {
+      console.error("Error fetching refresh token:", err);
+      throw err;
+    }
+  }
+  async createAccessToken({
+    userId,
+    refreshToken,
+  }: {
+    userId: number;
+    refreshToken: string;
+  }): Promise<string> {
+    try {
+      const as = await db<IRefreshToken>(REFRESH_TOKEN_TABLE).insert({
+        user_id: userId,
+        token: refreshToken,
+      });
+      console.log("Inserted refresh token with ID:", as);
+      return refreshToken;
+    } catch (err) {
+      console.error("Error generating access token:", err);
+      throw err;
+    }
+  }
+  async updateAccessToken({
+    userId,
+    refreshToken,
+  }: {
+    userId: number;
+    refreshToken: string;
+  }): Promise<void> {
+    try {
+      await db<IRefreshToken>(REFRESH_TOKEN_TABLE)
+        .where({ user_id: userId })
+        .update({ token: refreshToken });
+    } catch (err) {
+      console.error("Error updating access token:", err);
       throw err;
     }
   }

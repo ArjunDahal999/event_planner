@@ -10,28 +10,10 @@ class UserService {
     const [id] = await db("users").insert(user);
     return id;
   }
-  async getUserByEmail(
-    email: string,
-  ): Promise<
-    | {
-        id: number;
-        name: string;
-        email: string;
-        password: string;
-        is_email_verified: boolean;
-      }
-    | undefined
-  > {
+
+  async getUserByEmail(email: string): Promise<IUser | undefined> {
     const user = await db<IUser>("users").where({ email }).first();
-    return user
-      ? {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          password: user.password,
-          is_email_verified: user.is_email_verified,
-        }
-      : undefined;
+    return user ?? undefined;
   }
 }
 

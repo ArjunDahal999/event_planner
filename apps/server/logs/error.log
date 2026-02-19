@@ -24,3 +24,19 @@
 2026-02-19T03:04:34.105Z [ERROR]: Error: Email is not verified. Please verify your email before logging in.
 2026-02-19T03:21:30.670Z [ERROR]: Error: Invalid email or token.
 2026-02-19T03:21:40.871Z [ERROR]: Error: Invalid email or token.
+2026-02-19T06:36:10.492Z [ERROR]: Error: Email is already registered.
+2026-02-19T06:37:08.002Z [ERROR]: Error: Email is already registered.
+2026-02-19T06:38:40.282Z [ERROR]: Error: Invalid email or token.
+2026-02-19T06:38:55.803Z [ERROR]: Error: Invalid email or token.
+2026-02-19T06:38:56.084Z [ERROR]: Error: Invalid email or token.
+2026-02-19T08:15:52.529Z [ERROR]: Error: Invalid token or email ID.
+2026-02-19T08:16:35.109Z [ERROR]: Error: Invalid or expired token.
+2026-02-19T08:17:33.384Z [ERROR]: Error: Invalid or expired token.
+2026-02-19T08:21:06.280Z [ERROR]: Error: Invalid email or token.
+2026-02-19T08:21:30.569Z [ERROR]: Error: Invalid token.
+2026-02-19T09:24:20.681Z [ERROR]: Error: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select `token` from `refresh_tokens` where `user_id` = ? limit ?
+2026-02-19T09:26:32.206Z [ERROR]: Error: Invalid refresh token.
+2026-02-19T09:27:42.471Z [ERROR]: Error: Invalid refresh token.
+2026-02-19T09:27:58.179Z [ERROR]: Error: Invalid refresh token.
+2026-02-19T09:28:16.338Z [ERROR]: Error: Invalid refresh token.
+2026-02-19T09:32:05.336Z [ERROR]: Error: Invalid refresh token.

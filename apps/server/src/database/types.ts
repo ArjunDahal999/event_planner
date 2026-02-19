@@ -23,3 +23,10 @@ export interface ITwoFactorAuthentication {
   secret: string;
   created_at: Date;
 }
+
+export interface IRefreshToken {
+  id: number;
+  user_id: number;
+  token: string;
+  created_at: Date;
+}

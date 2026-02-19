@@ -14,6 +14,8 @@ export const env = cleanEnv(process.env, {
   SMTP_PORT: str({ default: "587" }),
   SMTP_MAIL: str({ default: "user@example.com" }),
   SMTP_PASSWORD: str({ default: "password" }),
+  JWT_ACCESS_TOKEN_EXPIRY: str({ default: "15m" }),
+  JWT_REFRESH_TOKEN_EXPIRY: str({ default: "7d" }),
   JWT_REFRESH_TOKEN_SECRET: str({
     default: "4f6e8d0c2b1a3957c6d8e0f1a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d",
   }),
