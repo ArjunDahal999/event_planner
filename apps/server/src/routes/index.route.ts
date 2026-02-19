@@ -5,6 +5,6 @@ import { isUserAuthenticated } from "../middleware/auth.middleware.ts";
 const router = express.Router();
 
 router.use("/", userRouter);
-router.use("/", isUserAuthenticated, eventRouter);
+router.use("/event", isUserAuthenticated, eventRouter);
 
 export { router };

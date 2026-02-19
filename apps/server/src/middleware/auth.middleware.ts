@@ -3,38 +3,36 @@ import type { NextFunction, Request, Response } from "express";
 import { env } from "../libs/validate-env.ts";
 import { HttpError } from "../utils/http-error.ts";
 
-export const isUserAuthenticated = async (
+interface JwtPayload {
+  _id: string;
+  iat: number;
+  exp: number;
+}
+
+export const isUserAuthenticated = (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  let token;
   try {
-    if (
-      req.headers.authorization &&
-      req.headers.authorization.startsWith("Bearer")
-    ) {
-      token = req.headers?.authorization?.split(" ")[1];
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      throw new HttpError({
+        message: "Not logged in",
+        statusCode: 401,
+      });
     }
-    if (!token)
-      return res.status(400).json({ success: false, message: "Not logged In" });
-    const decodedToken: any = jwt.verify(
+
+    const token = authHeader.split(" ")[1];
+
+    const decoded = jwt.verify(
       token,
       env.JWT_ACCESS_TOKEN_SECRET,
-      (err: any, decoded: any) => {
-        if (err) {
-          throw new HttpError({
-            message: "Token Expired",
-            statusCode: 403,
-          });
-        }
-        return decoded;
-      },
-    );
-    const userId: string = decodedToken._id;
-    res.locals.user = userId;
+    ) as JwtPayload;
+    res.locals.userID = decoded._id;
+    next();
   } catch (error) {
     next(error);
   }
-  next();
 };

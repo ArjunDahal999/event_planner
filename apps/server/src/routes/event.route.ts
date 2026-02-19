@@ -4,7 +4,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/v1/me:
+ * /api/v1/event/me:
  *   get:
  *     tags:
  *       - Event
@@ -35,5 +35,7 @@ router.get("/me", (req, res) => {
   console.log("User profile endpoint hit");
   res.status(200).json({ message: "User profile endpoint" });
 });
+
+router.post;
 
 export default router;
