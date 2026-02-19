@@ -40,3 +40,15 @@
 2026-02-19T09:27:58.179Z [ERROR]: Error: Invalid refresh token.
 2026-02-19T09:28:16.338Z [ERROR]: Error: Invalid refresh token.
 2026-02-19T09:32:05.336Z [ERROR]: Error: Invalid refresh token.
+2026-02-19T11:59:43.858Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
+2026-02-19T12:00:13.026Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
+2026-02-19T12:00:27.679Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
+2026-02-19T12:01:04.992Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
+2026-02-19T12:02:10.851Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
+2026-02-19T12:09:46.476Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
+2026-02-19T12:10:10.825Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
+2026-02-19T12:10:32.805Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
+2026-02-19T12:10:34.676Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
+2026-02-19T12:11:19.561Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
+2026-02-19T12:11:42.521Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
+2026-02-19T12:12:24.530Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')

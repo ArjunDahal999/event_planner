@@ -207,21 +207,28 @@ class UserController {
         refreshToken: hashedRefreshToken,
       });
       logger.info(`User logged in successfully with 2FA: ${email}`);
-      res.status(200).json({
-        message: "Logged in successfully.",
-        success: true,
-        statusCode: 200,
-        data: {
-          user: {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            is_email_verified: user.is_email_verified,
+      res
+        .cookie("access_token", accessToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
+        })
+        .status(200)
+        .json({
+          message: "Logged in successfully.",
+          success: true,
+          statusCode: 200,
+          data: {
+            user: {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              is_email_verified: user.is_email_verified,
+            },
+            accessToken,
+            refreshToken,
           },
-          accessToken,
-          refreshToken,
-        },
-      });
+        });
     } catch (err) {
       next(err);
     }

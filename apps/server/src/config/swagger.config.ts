@@ -1,6 +1,7 @@
 import { env } from "../libs/validate-env.ts";
+import type { Options } from "swagger-jsdoc";
 
-export const swaggerConfig = {
+export const swaggerConfig: Options = {
   swaggerDefinition: {
     openapi: "3.0.0",
     info: {
@@ -11,6 +12,22 @@ export const swaggerConfig = {
     servers: [
       {
         url: `http://localhost:${env.PORT}`,
+      },
+    ],
+
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+
+    security: [
+      {
+        bearerAuth: [],
       },
     ],
   },
