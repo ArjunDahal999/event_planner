@@ -36,10 +36,21 @@ export interface IEvent {
   title: string;
   user_id: number;
   description: string;
-  date: Date;
   event_date: Date;
   location: string;
   event_type: string;
   created_at: Date;
   updated_at: Date;
+}
+
+export interface ITags {
+  id: number;
+  name: string;
+  color: string;
+}
+
+export interface IEventTag {
+  id: number;
+  event_id: number;
+  tag_id: number;
 }

@@ -1,5 +1,7 @@
 import express from "express";
 import eventController from "../controller/event.controller.ts";
+import { createEventSchema } from "../../../../packages/shared/src/schemas/event.schema.ts";
+import { validateRequest } from "../middleware/validate-request.middleware.ts";
 
 const router = express.Router();
 
@@ -78,7 +80,7 @@ router.get("/", (req, res) => {
  *       properties:
  *         title:
  *           type: string
- *           example: "Team Meeting"
+ *           example: "Team Meeting 2026"
  *         description:
  *           type: string
  *           example: "Discuss Q2 roadmap"
@@ -94,28 +96,69 @@ router.get("/", (req, res) => {
  *           enum:
  *             - public
  *             - private
- *           default: public
+ *           default: "public"
+ *         tags:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: ["team", "meeting"]
+ *
  *     Event:
- *       allOf:
- *         - $ref: '#/components/schemas/EventCreate'
- *         - type: object
- *           properties:
- *             id:
- *               type: integer
- *               example: 1
- *             user_id:
- *               type: integer
- *               example: 42
- *             created_at:
- *               type: string
- *               format: date-time
- *               example: "2026-02-01T12:00:00Z"
- *             updated_at:
- *               type: string
- *               format: date-time
- *               example: "2026-02-01T12:00:00Z"
+ *       type: object
+ *       required:
+ *         - id
+ *         - title
+ *         - location
+ *         - event_date
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         title:
+ *           type: string
+ *           example: "Team Meeting 2026"
+ *         description:
+ *           type: string
+ *           example: "Discuss Q2 roadmap"
+ *         location:
+ *           type: string
+ *           example: "Conference Room A"
+ *         event_date:
+ *           type: string
+ *           format: date-time
+ *           example: "2026-03-10T14:00:00Z"
+ *         event_type:
+ *           type: string
+ *           enum:
+ *             - public
+ *             - private
+ *           default: "public"
+ *         tags:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: ["team", "meeting"]
+ *         created_by:
+ *           type: integer
+ *           description: ID of the user who created the event
+ *           example: 42
+ *       example:
+ *         id: 1
+ *         title: "Team Meeting 2026"
+ *         description: "Discuss Q2 roadmap"
+ *         location: "Conference Room A"
+ *         event_date: "2026-03-10T14:00:00Z"
+ *         event_type: "private"
+ *         tags:
+ *           - "team"
+ *           - "meeting"
+ *         created_by: 42
  */
-router.post("/", eventController.createEvent);
+router.post(
+  "/",
+  validateRequest(createEventSchema),
+  eventController.createEvent,
+);
 
 /**
  * @swagger
@@ -240,7 +283,11 @@ router.get("/:id", eventController.getEventById);
  *       500:
  *         description: Internal server error
  */
-router.put("/:id", eventController.updateEvent);
+router.put(
+  "/:id",
+  validateRequest(createEventSchema),
+  eventController.updateEvent,
+);
 
 /** * @swagger
  * /api/v1/event/{id}:

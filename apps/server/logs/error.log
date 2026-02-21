@@ -1,84 +1,121 @@
-2026-02-18T13:04:47.528Z [ERROR]: Validation error: [{"origin":"string","code":"invalid_format","format":"email","pattern":"/^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$/","path":["email"],"message":"Invalid email address"}]
-2026-02-18T13:11:08.264Z [ERROR]: Error: Email is already registered. Please use a different email.
-2026-02-18T13:28:44.984Z [ERROR]: Error: Email is already registered. Please use a different email.
-2026-02-18T14:09:45.045Z [ERROR]: Error: Email is already registered. Please use a different email.
-2026-02-18T14:11:48.621Z [ERROR]: Error: Expected double-quoted property name in JSON at position 66 (line 5 column 1)
-2026-02-18T14:11:58.840Z [ERROR]: Validation error: [{"expected":"string","code":"invalid_type","path":["password"],"message":"Invalid input: expected string, received undefined"}]
-2026-02-18T14:12:08.735Z [ERROR]: Error: Email is already registered. Please use a different email.
-2026-02-18T14:12:46.322Z [ERROR]: Error: Email is already registered. Please use a different email.
-2026-02-18T14:14:50.924Z [ERROR]: Error: Email is already registered. Please use a different email.
-2026-02-18T14:24:36.366Z [ERROR]: Error: Invalid email or password.
-2026-02-18T14:24:47.653Z [ERROR]: Error: Illegal arguments: string, undefined
-2026-02-18T14:32:20.790Z [ERROR]: Error: Invalid email or password.
-2026-02-18T14:32:59.118Z [ERROR]: Error: Invalid email or password.
-2026-02-18T15:32:18.721Z [ERROR]: Error: Email is already registered. Please use a different email.
-2026-02-18T15:32:56.312Z [ERROR]: Error: Email is already registered. Please use a different email.
-2026-02-18T16:04:13.831Z [ERROR]: Error: insert into `user_activation` (`activation_token`, `expires_at`, `user_id`) values ('f33511a6-7670-4c0e-9452-a052fb022241', '2026-02-19 21:49:13.825', DEFAULT) - Field 'user_id' doesn't have a default value
-2026-02-18T16:17:56.872Z [ERROR]: Error: Invalid email or password.
-2026-02-18T16:22:50.732Z [ERROR]: Error: Invalid email or password.
-2026-02-18T16:22:59.820Z [ERROR]: Error: Invalid  password.
-2026-02-19T02:59:02.221Z [ERROR]: Error: Email is already registered.
-2026-02-19T03:00:25.409Z [ERROR]: Error: Invalid token or email ID.
-2026-02-19T03:00:35.101Z [ERROR]: Error: Invalid token or email ID.
-2026-02-19T03:01:10.036Z [ERROR]: Error: Invalid token or email ID.
-2026-02-19T03:04:34.105Z [ERROR]: Error: Email is not verified. Please verify your email before logging in.
-2026-02-19T03:21:30.670Z [ERROR]: Error: Invalid email or token.
-2026-02-19T03:21:40.871Z [ERROR]: Error: Invalid email or token.
-2026-02-19T06:36:10.492Z [ERROR]: Error: Email is already registered.
-2026-02-19T06:37:08.002Z [ERROR]: Error: Email is already registered.
-2026-02-19T06:38:40.282Z [ERROR]: Error: Invalid email or token.
-2026-02-19T06:38:55.803Z [ERROR]: Error: Invalid email or token.
-2026-02-19T06:38:56.084Z [ERROR]: Error: Invalid email or token.
-2026-02-19T08:15:52.529Z [ERROR]: Error: Invalid token or email ID.
-2026-02-19T08:16:35.109Z [ERROR]: Error: Invalid or expired token.
-2026-02-19T08:17:33.384Z [ERROR]: Error: Invalid or expired token.
-2026-02-19T08:21:06.280Z [ERROR]: Error: Invalid email or token.
-2026-02-19T08:21:30.569Z [ERROR]: Error: Invalid token.
-2026-02-19T09:24:20.681Z [ERROR]: Error: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select `token` from `refresh_tokens` where `user_id` = ? limit ?
-2026-02-19T09:26:32.206Z [ERROR]: Error: Invalid refresh token.
-2026-02-19T09:27:42.471Z [ERROR]: Error: Invalid refresh token.
-2026-02-19T09:27:58.179Z [ERROR]: Error: Invalid refresh token.
-2026-02-19T09:28:16.338Z [ERROR]: Error: Invalid refresh token.
-2026-02-19T09:32:05.336Z [ERROR]: Error: Invalid refresh token.
-2026-02-19T11:59:43.858Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
-2026-02-19T12:00:13.026Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
-2026-02-19T12:00:27.679Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
-2026-02-19T12:01:04.992Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
-2026-02-19T12:02:10.851Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
-2026-02-19T12:09:46.476Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
-2026-02-19T12:10:10.825Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
-2026-02-19T12:10:32.805Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
-2026-02-19T12:10:34.676Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
-2026-02-19T12:11:19.561Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
-2026-02-19T12:11:42.521Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
-2026-02-19T12:12:24.530Z [ERROR]: Error: Cannot read properties of undefined (reading 'access_token')
-2026-02-19T14:37:49.801Z [ERROR]: Error: Invalid refresh token.
-2026-02-19T14:40:27.514Z [ERROR]: Error: Not logged in
-2026-02-19T14:40:53.564Z [ERROR]: Error: Not logged in
-2026-02-19T14:41:40.894Z [ERROR]: Error: invalid signature
-2026-02-19T14:41:56.034Z [ERROR]: Error: Invalid token.
-2026-02-19T14:44:09.168Z [ERROR]: Error: Not logged in
-2026-02-19T17:18:42.125Z [ERROR]: Error: Not logged in
-2026-02-19T17:19:51.559Z [ERROR]: Validation error: [{"expected":"string","code":"invalid_type","path":["title"],"message":"Invalid input: expected string, received undefined"},{"expected":"string","code":"invalid_type","path":["location"],"message":"Invalid input: expected string, received undefined"}]
-2026-02-19T17:20:28.780Z [ERROR]: Validation error: [{"expected":"string","code":"invalid_type","path":["location"],"message":"Invalid input: expected string, received undefined"}]
-2026-02-19T17:32:19.795Z [ERROR]: Error: Not logged in
-2026-02-19T17:33:12.556Z [ERROR]: Error creating event: insert into `event` (`description`, `event_date`, `event_type`, `location`, `title`, `user_id`) values ('Discuss Q2 roadmap', '2026-03-10 19:45:00.000', 'public', 'Conference Room A', 'Team Meeting', DEFAULT) - Field 'user_id' doesn't have a default value
-2026-02-19T17:33:12.558Z [ERROR]: Error: insert into `event` (`description`, `event_date`, `event_type`, `location`, `title`, `user_id`) values ('Discuss Q2 roadmap', '2026-03-10 19:45:00.000', 'public', 'Conference Room A', 'Team Meeting', DEFAULT) - Field 'user_id' doesn't have a default value
-2026-02-19T17:33:47.588Z [ERROR]: Error creating event: insert into `event` (`description`, `event_date`, `event_type`, `location`, `title`, `user_id`) values ('Discuss Q2 roadmap', '2026-03-10 19:45:00.000', 'public', 'Conference Room A', 'Team Meeting', DEFAULT) - Field 'user_id' doesn't have a default value
-2026-02-19T17:33:47.592Z [ERROR]: Error: insert into `event` (`description`, `event_date`, `event_type`, `location`, `title`, `user_id`) values ('Discuss Q2 roadmap', '2026-03-10 19:45:00.000', 'public', 'Conference Room A', 'Team Meeting', DEFAULT) - Field 'user_id' doesn't have a default value
-2026-02-19T17:44:02.465Z [ERROR]: Error creating event: [
-  {
-    "code": "invalid_value",
-    "values": [
-      "public",
-      "private"
-    ],
-    "path": [
-      "event_type"
-    ],
-    "message": "Invalid option: expected one of \"public\"|\"private\""
-  }
-]
-2026-02-19T17:44:02.468Z [ERROR]: Validation error: [{"code":"invalid_value","values":["public","private"],"path":["event_type"],"message":"Invalid option: expected one of \"public\"|\"private\""}]
-2026-02-19T18:03:34.520Z [ERROR]: Error updating event: Event not found or user not authorized to update
-2026-02-19T18:03:34.522Z [ERROR]: Error: Event not found or user not authorized to update
+2026-02-20T10:01:29.327Z [ERROR]: Error creating event: The query is empty
+2026-02-20T10:01:29.330Z [ERROR]: Error: The query is empty
+2026-02-20T10:01:51.781Z [ERROR]: Error creating event: The query is empty
+2026-02-20T10:01:51.781Z [ERROR]: Error: The query is empty
+2026-02-20T10:02:23.047Z [ERROR]: Error creating event: The query is empty
+2026-02-20T10:02:23.050Z [ERROR]: Error: The query is empty
+2026-02-20T10:02:36.882Z [ERROR]: Error creating event: The query is empty
+2026-02-20T10:02:36.886Z [ERROR]: Error: The query is empty
+2026-02-20T10:04:09.610Z [ERROR]: Error creating event: The query is empty
+2026-02-20T10:04:09.613Z [ERROR]: Error: The query is empty
+2026-02-20T10:04:39.033Z [ERROR]: Error creating event: The query is empty
+2026-02-20T10:04:39.036Z [ERROR]: Error: The query is empty
+2026-02-20T10:12:44.803Z [ERROR]: Error retrieving event: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`user_id` as `userId`, `users`.`name` as `userName`,  COALESCE(
+    JSON_ARRAYAGG(
+      CASE 
+        WHEN tag.id IS NOT NULL THEN
+          JSON_OBJECT(
+            'tagName', tag.name,
+            'tagColor', tag.color
+          )
+        ELSE 
+      END
+    ),
+    JSON_ARRAY()
+  ) as tags from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where `event`.`id` = 36 group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `users`.`name` - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '),
+    JSON_ARRAY()
+  ) as tags from `event` left join `event_tag` on `event`.`i' at line 11
+2026-02-20T10:12:44.806Z [ERROR]: Error: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`user_id` as `userId`, `users`.`name` as `userName`,  COALESCE(
+    JSON_ARRAYAGG(
+      CASE 
+        WHEN tag.id IS NOT NULL THEN
+          JSON_OBJECT(
+            'tagName', tag.name,
+            'tagColor', tag.color
+          )
+        ELSE 
+      END
+    ),
+    JSON_ARRAY()
+  ) as tags from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where `event`.`id` = 36 group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `users`.`name` - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '),
+    JSON_ARRAY()
+  ) as tags from `event` left join `event_tag` on `event`.`i' at line 11
+2026-02-20T10:21:13.091Z [ERROR]: Error retrieving event: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`user_id` as `userId`, `users`.`name` as `userName`,  COALESCE(
+    JSON_ARRAYAGG(
+      JSON_OBJECT(
+        'tagName', tag.name,
+        'tagColor', tag.color
+      )
+    ) FILTER (WHERE tag.id IS NOT NULL),
+    JSON_ARRAY()
+  ) as tags from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where `event`.`id` = 36 group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `users`.`name` - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FILTER (WHERE tag.id IS NOT NULL),
+    JSON_ARRAY()
+  ) as tags from `event` lef' at line 7
+2026-02-20T10:21:13.094Z [ERROR]: Error: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`user_id` as `userId`, `users`.`name` as `userName`,  COALESCE(
+    JSON_ARRAYAGG(
+      JSON_OBJECT(
+        'tagName', tag.name,
+        'tagColor', tag.color
+      )
+    ) FILTER (WHERE tag.id IS NOT NULL),
+    JSON_ARRAY()
+  ) as tags from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where `event`.`id` = 36 group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `users`.`name` - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FILTER (WHERE tag.id IS NOT NULL),
+    JSON_ARRAY()
+  ) as tags from `event` lef' at line 7
+2026-02-20T10:21:28.773Z [ERROR]: Error retrieving event: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`user_id` as `userId`, `users`.`name` as `userName`, COALESCE(
+    JSON_ARRAYAGG(
+      JSON_OBJECT(
+        'tagName', tag.name,
+        'tagColor', tag.color
+      )
+    ) FILTER (WHERE tag.id IS NOT NULL),
+    JSON_ARRAY()
+  ) as tags from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where `event`.`id` = 36 group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `users`.`name` - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FILTER (WHERE tag.id IS NOT NULL),
+    JSON_ARRAY()
+  ) as tags from `event` lef' at line 7
+2026-02-20T10:21:28.775Z [ERROR]: Error: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`user_id` as `userId`, `users`.`name` as `userName`, COALESCE(
+    JSON_ARRAYAGG(
+      JSON_OBJECT(
+        'tagName', tag.name,
+        'tagColor', tag.color
+      )
+    ) FILTER (WHERE tag.id IS NOT NULL),
+    JSON_ARRAY()
+  ) as tags from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where `event`.`id` = 36 group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `users`.`name` - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FILTER (WHERE tag.id IS NOT NULL),
+    JSON_ARRAY()
+  ) as tags from `event` lef' at line 7
+2026-02-20T10:32:59.958Z [ERROR]: Error: Unexpected non-whitespace character after JSON at position 337 (line 16 column 4)
+2026-02-20T10:33:09.794Z [ERROR]: Validation error: [{"expected":"string","code":"invalid_type","path":["tags",0],"message":"Invalid input: expected string, received object"}]
+2026-02-20T10:33:25.910Z [ERROR]: Validation error: [{"expected":"string","code":"invalid_type","path":["tags",0],"message":"Invalid input: expected string, received object"}]
+2026-02-20T11:42:15.430Z [ERROR]: Error: Email is already registered.
+2026-02-20T11:42:50.470Z [ERROR]: Error: Invalid token.
+2026-02-20T11:48:40.693Z [ERROR]: Error retrieving event: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`user_id` as `userId`, `users`.`name` as `userName`,  IF(COUNT(tag.id) = 0,
+                JSON_ARRAY(),
+                JSON_ARRAYAGG(JSON_OBJECT('tagName', tag.name,'tagColor', tag.color))) as tags from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where where event.id =36 group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `users`.`name` - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where event.id =36 group by `event`.`id`, `event`.`title`, `event`.`description`' at line 3
+2026-02-20T11:48:40.695Z [ERROR]: Error: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`user_id` as `userId`, `users`.`name` as `userName`,  IF(COUNT(tag.id) = 0,
+                JSON_ARRAY(),
+                JSON_ARRAYAGG(JSON_OBJECT('tagName', tag.name,'tagColor', tag.color))) as tags from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where where event.id =36 group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `users`.`name` - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where event.id =36 group by `event`.`id`, `event`.`title`, `event`.`description`' at line 3
+2026-02-20T11:48:44.040Z [ERROR]: Error retrieving event: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`user_id` as `userId`, `users`.`name` as `userName`,  IF(COUNT(tag.id) = 0,
+                JSON_ARRAY(),
+                JSON_ARRAYAGG(JSON_OBJECT('tagName', tag.name,'tagColor', tag.color))) as tags from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where where event.id =38 group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `users`.`name` - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where event.id =38 group by `event`.`id`, `event`.`title`, `event`.`description`' at line 3
+2026-02-20T11:48:44.041Z [ERROR]: Error: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`user_id` as `userId`, `users`.`name` as `userName`,  IF(COUNT(tag.id) = 0,
+                JSON_ARRAY(),
+                JSON_ARRAYAGG(JSON_OBJECT('tagName', tag.name,'tagColor', tag.color))) as tags from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where where event.id =38 group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `users`.`name` - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where event.id =38 group by `event`.`id`, `event`.`title`, `event`.`description`' at line 3
+2026-02-20T12:18:48.834Z [ERROR]: Error retrieving events: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`user_id` as `userId`, `users`.`name` as `userName`,  IF(COUNT(tag.id) = 0,
+                JSON_ARRAY(),
+                JSON_ARRAYAGG(JSON_OBJECT('tagName', tag.name,'tagColor', tag.color))) as tags from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `users`.`name` having SUM(tag.name IN (?)) > 0,['a']) - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?)) > 0,['a'])' at line 3
+2026-02-20T12:18:48.836Z [ERROR]: Error: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`user_id` as `userId`, `users`.`name` as `userName`,  IF(COUNT(tag.id) = 0,
+                JSON_ARRAY(),
+                JSON_ARRAYAGG(JSON_OBJECT('tagName', tag.name,'tagColor', tag.color))) as tags from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `users`.`name` having SUM(tag.name IN (?)) > 0,['a']) - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?)) > 0,['a'])' at line 3
+2026-02-20T12:21:39.192Z [ERROR]: Error retrieving events: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`user_id` as `userId`, `users`.`name` as `userName`,  IF(COUNT(tag.id) = 0,
+                JSON_ARRAY(),
+                JSON_ARRAYAGG(JSON_OBJECT('tagName', tag.name,'tagColor', tag.color))) as tags from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `users`.`name` having SUM(tag.name IN (['a'])) > 0 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '['a'])) > 0' at line 3
+2026-02-20T12:21:39.194Z [ERROR]: Error: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`user_id` as `userId`, `users`.`name` as `userName`,  IF(COUNT(tag.id) = 0,
+                JSON_ARRAY(),
+                JSON_ARRAYAGG(JSON_OBJECT('tagName', tag.name,'tagColor', tag.color))) as tags from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `users`.`name` having SUM(tag.name IN (['a'])) > 0 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '['a'])) > 0' at line 3
+2026-02-20T12:26:07.370Z [ERROR]: Error retrieving user events: Expected 1 bindings, saw 0
+2026-02-20T12:26:07.372Z [ERROR]: Error: Expected 1 bindings, saw 0
+2026-02-20T12:27:41.670Z [ERROR]: Error retrieving user events: Expected 1 bindings, saw 0
+2026-02-20T12:27:41.670Z [ERROR]: Error: Expected 1 bindings, saw 0
+2026-02-20T12:29:44.091Z [ERROR]: Error retrieving events: Expected 2 bindings, saw 1
+2026-02-20T12:29:44.094Z [ERROR]: Error: Expected 2 bindings, saw 1

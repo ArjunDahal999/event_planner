@@ -1,102 +1,182 @@
-import type { CreateEvent } from "../../../../packages/shared/src/schemas/event.schema.ts";
-import { EVENT_TABLE } from "../database/constants.ts";
+import type { CreateEventDTO } from "../../../../packages/shared/src/schemas/event.schema.ts";
+import {
+  EVENT_TABLE,
+  EVENT_TAG_TABLE,
+  TAG_TABLE,
+  USER_TABLE,
+} from "../database/constants.ts";
+import { getEventWithTagsQuery } from "../database/data-access/get-event-with.query.ts";
 import db from "../database/db.ts";
-import type { IEvent } from "../database/types.ts";
+import type { ITags, IEvent, IEventTag, IUser } from "../database/types.ts";
+import { generateRandomColor } from "../helper/random-color-generator.ts";
 
-class EventService {
-  async createEvent({
-    userId,
-    eventData,
-  }: {
-    userId: number;
-    eventData: CreateEvent;
-  }) {
-    try {
-      await db<IEvent>(EVENT_TABLE).insert({ ...eventData, user_id: userId });
-    } catch (error) {
-      throw new Error(
-        error instanceof Error ? error.message : "Failed to create event",
-      );
-    }
-  }
+export const eventService = () => {
+  return Object.freeze({
+    createEventWithTags,
+    getAllUserEvents,
+    getAllEvents,
+    getEventById,
+    deleteEvent,
+    updateEvent,
+  });
+};
 
-  async getAllUserEvents({ userId }: { userId: number }) {
-    try {
-      const events = await db<IEvent>(EVENT_TABLE)
-        .select("*")
-        .where({ user_id: userId });
-      return events;
-    } catch (error) {
-      throw new Error(
-        error instanceof Error ? error.message : "Failed to retrieve events",
-      );
-    }
-  }
+async function createEventWithTags({
+  userId,
+  eventData,
+}: {
+  userId: number;
+  eventData: CreateEventDTO;
+}) {
+  try {
+    const { tags, ...eventDetails } = eventData;
+    // first creating the event to get the event ID
+    const [eventId] = await db<IEvent>(EVENT_TABLE).insert({
+      ...eventDetails,
+      user_id: userId,
+    });
 
-  async getAllEvents() {
-    try {
-      const events = await db<IEvent>(EVENT_TABLE).select("*");
-      return events;
-    } catch (error) {
-      throw new Error(
-        error instanceof Error ? error.message : "Failed to retrieve events",
-      );
-    }
-  }
+    if (tags.length <= 0) return;
+    // payload for tags table
+    const tagsPayload = tags.map((tag) => {
+      return {
+        name: tag,
+        color: generateRandomColor(),
+      };
+    });
 
-  async getEventById({ eventId }: { eventId: number }) {
-    try {
-      const event = await db<IEvent>(EVENT_TABLE)
-        .select("*")
-        .where({ id: eventId })
-        .first();
-      return event;
-    } catch (error) {
-      throw new Error(
-        error instanceof Error ? error.message : "Failed to retrieve event",
-      );
-    }
-  }
+    // if existing name is sent, ignore that row
+    await db<ITags>(TAG_TABLE).insert(tagsPayload).onConflict("name").ignore();
 
-  async deleteEvent({ eventId, userId }: { eventId: number; userId: number }) {
-    try {
-      const deletedCount = await db<IEvent>(EVENT_TABLE)
-        .where({ id: eventId, user_id: userId })
-        .del();
-      if (deletedCount === 0) {
-        throw new Error("Event not found or user not authorized to delete");
-      }
-    } catch (error) {
-      throw new Error(
-        error instanceof Error ? error.message : "Failed to delete event",
-      );
-    }
-  }
+    // we need to refetch all tags id that were recently created
+    const createdTags = await db<ITags>(TAG_TABLE)
+      .select("id", "name")
+      .whereIn("name", tags);
 
-  async updateEvent({
-    eventId,
-    userId,
-    eventData,
-  }: {
-    eventId: number;
-    userId: number;
-    eventData: Partial<CreateEvent>;
-  }) {
-    try {
-      const updatedCount = await db<IEvent>(EVENT_TABLE)
-        .where({ id: eventId, user_id: userId })
-        .update(eventData);
-      if (updatedCount === 0) {
-        throw new Error("Event not found or user not authorized to update");
-      }
-    } catch (error) {
-      throw new Error(
-        error instanceof Error ? error.message : "Failed to update event",
-      );
-    }
+    // now we insert into event_tag table
+    await db<IEventTag>(EVENT_TAG_TABLE).insert(
+      createdTags.map((t) => {
+        return {
+          event_id: eventId,
+          tag_id: t.id,
+        };
+      }),
+    );
+  } catch (error) {
+    throw new Error(
+      error instanceof Error ? error.message : "Failed to create event",
+    );
   }
 }
 
-const eventService = new EventService();
+async function getAllUserEvents({ userId }: { userId: number }) {
+  try {
+    const events = await getEventWithTagsQuery({
+      where: `${USER_TABLE}.id = ${userId} `,
+    });
+    return events;
+  } catch (error) {
+    throw new Error(
+      error instanceof Error ? error.message : "Failed to retrieve events",
+    );
+  }
+}
 
-export default eventService;
+async function getAllEvents() {
+  try {
+    const events = await getEventWithTagsQuery({
+      having: `COUNT(${TAG_TABLE}.name IN (?,?)) > 0`,
+      havingBindings: ["b", "birthday"],
+    });
+    return events;
+  } catch (error) {
+    throw new Error(
+      error instanceof Error ? error.message : "Failed to retrieve events",
+    );
+  }
+}
+
+async function getEventById({ eventId }: { eventId: number }) {
+  try {
+    const events = await getEventWithTagsQuery({
+      where: `${EVENT_TABLE}.id =${eventId}`,
+    });
+    return events;
+  } catch (error) {
+    throw new Error(
+      error instanceof Error ? error.message : "Failed to retrieve event",
+    );
+  }
+}
+
+async function deleteEvent({
+  eventId,
+  userId,
+}: {
+  eventId: number;
+  userId: number;
+}) {
+  try {
+    const deletedCount = await db<IEvent>(EVENT_TABLE)
+      .where({ id: eventId, user_id: userId })
+      .del();
+    if (deletedCount === 0) {
+      throw new Error("Event not found or user not authorized to delete");
+    }
+  } catch (error) {
+    throw new Error(
+      error instanceof Error ? error.message : "Failed to delete event",
+    );
+  }
+}
+
+async function updateEvent({
+  eventId,
+  userId,
+  eventData,
+}: {
+  eventId: number;
+  userId: number;
+  eventData: CreateEventDTO;
+}) {
+  try {
+    const { tags, ...rest } = eventData;
+    const updatedCount = await db<IEvent>(EVENT_TABLE)
+      .where({ id: eventId, user_id: userId })
+      .update(rest);
+
+    // first of all removing all the tags associated with the event from event_tag table (so deleting the row)
+    await db.raw(`DELETE FROM ${EVENT_TAG_TABLE} where event_id=${eventId}`);
+
+    // create the tags if they are new
+    const tagsPayload = tags.map((tag) => {
+      return {
+        name: tag,
+        color: generateRandomColor(),
+      };
+    });
+    // if existing name is sent, ignore that row
+    await db<ITags>(TAG_TABLE).insert(tagsPayload).onConflict("name").ignore();
+    // we need to refetch all tags id that were recently created
+    const createdTags = await db<ITags>(TAG_TABLE)
+      .select("id", "name")
+      .whereIn("name", tags);
+
+    // now we insert into event_tag table
+    await db<IEventTag>(EVENT_TAG_TABLE).insert(
+      createdTags.map((t) => {
+        return {
+          event_id: eventId,
+          tag_id: t.id,
+        };
+      }),
+    );
+    if (updatedCount === 0) {
+      throw new Error("Event not found or user not authorized to update");
+    }
+  } catch (error) {
+    throw new Error(
+      error instanceof Error ? error.message : "Failed to update event",
+    );
+  }
+}

@@ -14,6 +14,12 @@ export const createEventSchema = z.object({
   description: z.string().min(1),
   event_date: datePreprocess,
   event_type: eventTypeEnum.optional().default("public"),
+  tags: z
+    .array(z.string())
+    .default([])
+    .transform((tags) => [
+      ...new Set(tags.map((t) => t.trim().toLowerCase()).filter(Boolean)),
+    ]),
 });
 
-export type CreateEvent = z.infer<typeof createEventSchema>;
+export type CreateEventDTO = z.infer<typeof createEventSchema>;

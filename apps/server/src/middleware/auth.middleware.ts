@@ -29,6 +29,13 @@ export const isUserAuthenticated = (
       token,
       env.JWT_ACCESS_TOKEN_SECRET,
     ) as JwtPayload;
+
+    if (!decoded._id) {
+      throw new HttpError({
+        message: "Invalid ID",
+        statusCode: 401,
+      });
+    }
     req.userID = parseInt(decoded._id, 10);
     next();
   } catch (error) {

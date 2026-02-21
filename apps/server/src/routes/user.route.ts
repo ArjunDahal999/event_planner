@@ -1,5 +1,7 @@
 import express from "express";
 import userController from "../controller/user.controller.ts";
+import { validateRequest } from "../middleware/validate-request.middleware.ts";
+import { loginUserSchema, registerUserSchema } from "@event-planner/shared";
 
 const router = express.Router();
 
@@ -33,7 +35,11 @@ const router = express.Router();
  *       500:
  *         description: Internal server error.
  */
-router.post("/registerAccount", userController.register);
+router.post(
+  "/registerAccount",
+  validateRequest(registerUserSchema),
+  userController.register,
+);
 
 /**
  * @swagger
@@ -97,7 +103,11 @@ router.post("/verifyEmail", userController.verifyEmail);
  *       500:
  *         description: Internal server error.
  */
-router.post("/generate2FA", userController.generate2FA);
+router.post(
+  "/generate2FA",
+  validateRequest(loginUserSchema),
+  userController.generate2FA,
+);
 
 /**
  * @swagger

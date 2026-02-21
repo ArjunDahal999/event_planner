@@ -8,7 +8,6 @@ export function zodMiddleware(
   res: Response,
   _next: NextFunction,
 ): void {
-  console.log("Error in zodMiddleware:", err);
   if (err instanceof z.ZodError) {
     res.status(400).json({
       message: "Validation error",
