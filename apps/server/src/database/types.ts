@@ -30,3 +30,27 @@ export interface IRefreshToken {
   token: string;
   created_at: Date;
 }
+
+export interface IEvent {
+  id: number;
+  title: string;
+  user_id: number;
+  description: string;
+  event_date: Date;
+  location: string;
+  event_type: string;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export interface ITags {
+  id: number;
+  name: string;
+  color: string;
+}
+
+export interface IEventTag {
+  id: number;
+  event_id: number;
+  tag_id: number;
+}

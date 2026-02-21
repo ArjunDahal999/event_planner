@@ -25,12 +25,18 @@ export const isUserAuthenticated = (
     }
 
     const token = authHeader.split(" ")[1];
-
     const decoded = jwt.verify(
       token,
       env.JWT_ACCESS_TOKEN_SECRET,
     ) as JwtPayload;
-    res.locals.userID = decoded._id;
+
+    if (!decoded._id) {
+      throw new HttpError({
+        message: "Invalid ID",
+        statusCode: 401,
+      });
+    }
+    req.userID = parseInt(decoded._id, 10);
     next();
   } catch (error) {
     next(error);

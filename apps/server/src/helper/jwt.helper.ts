@@ -7,7 +7,7 @@ export const generateAccessToken = (user_id: number) => {
       { _id: user_id },
       env.JWT_ACCESS_TOKEN_SECRET,
       {
-        expiresIn: "1hr",
+        expiresIn: "10d",
       },
     );
     return accessToken;
@@ -22,7 +22,7 @@ export const generateRefreshToken = (user_id: number) => {
       { _id: user_id },
       env.JWT_REFRESH_TOKEN_SECRET,
       {
-        expiresIn: "7d",
+        expiresIn: "27d",
       },
     );
     return refreshToken;
