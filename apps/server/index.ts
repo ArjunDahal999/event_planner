@@ -11,7 +11,7 @@ const app = express();
 const swagger = swaggerJsdoc(swaggerConfig);
 
 app.use(express.json());
-app.use(morgan("tiny"));
+app.use(morgan("combined"));
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swagger));
 app.use(
   cors({

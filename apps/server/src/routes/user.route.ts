@@ -37,7 +37,7 @@ const router = express.Router();
  */
 router.post(
   "/registerAccount",
-  validateRequest(registerUserSchema),
+  validateRequest({ schema: registerUserSchema, scope: "body" }),
   userController.register,
 );
 
@@ -105,7 +105,7 @@ router.post("/verifyEmail", userController.verifyEmail);
  */
 router.post(
   "/generate2FA",
-  validateRequest(loginUserSchema),
+  validateRequest({ schema: loginUserSchema, scope: "body" }),
   userController.generate2FA,
 );
 

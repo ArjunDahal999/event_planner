@@ -7,7 +7,10 @@ declare global {
 }
 import { HttpError } from "../utils/http-error.ts";
 import type { NextFunction, Request, Response } from "express";
-import { type CreateEventDTO } from "../../../../packages/shared/src/schemas/event.schema.ts";
+import {
+  type EventFilterDTO,
+  type CreateEventDTO,
+} from "../../../../packages/shared/src/schemas/event.schema.ts";
 import { eventService } from "../services/event.service.ts";
 import logger from "../libs/winston.ts";
 
@@ -32,9 +35,14 @@ class EventController {
     }
   }
 
-  async getAllEvents(_: Request, res: Response, next: NextFunction) {
+  async getAllEvents(
+    req: Request<{}, {}, {}, EventFilterDTO>,
+    res: Response,
+    next: NextFunction,
+  ) {
     try {
-      const events = await eventService().getAllEvents();
+      const filters = req.query;
+      const events = await eventService().getAllEvents({ filters });
       res.status(200).json(events);
     } catch (error) {
       logger.error("Error retrieving events:", error);

@@ -1,4 +1,7 @@
-import type { CreateEventDTO } from "../../../../packages/shared/src/schemas/event.schema.ts";
+import type {
+  CreateEventDTO,
+  EventFilterDTO,
+} from "../../../../packages/shared/src/schemas/event.schema.ts";
 import {
   EVENT_TABLE,
   EVENT_TAG_TABLE,
@@ -82,11 +85,41 @@ async function getAllUserEvents({ userId }: { userId: number }) {
   }
 }
 
-async function getAllEvents() {
+async function getAllEvents({ filters }: { filters: EventFilterDTO }) {
   try {
+    const whereBuilder = [];
+    if (filters.eventType) {
+      whereBuilder.push(`${EVENT_TABLE}.event_type = '${filters.eventType}'`);
+    }
+    if (filters.location) {
+      whereBuilder.push(
+        `${EVENT_TABLE}.location LIKE '%${filters.location}%' `,
+      );
+    }
+    if (filters.title) {
+      whereBuilder.push(`${EVENT_TABLE}.title LIKE '%${filters.title}%' `);
+    }
+
+    if (filters.description) {
+      whereBuilder.push(
+        `${EVENT_TABLE}.description LIKE '%${filters.description}%' `,
+      );
+    }
+
+    const whereClause =
+      whereBuilder.length > 0 ? whereBuilder.join(" AND ") : "1=1";
+
+    const tags = filters.tags?.split(",");
+    const tagsParameters = tags?.map(() => "?").join(",");
+
     const events = await getEventWithTagsQuery({
-      having: `COUNT(${TAG_TABLE}.name IN (?,?)) > 0`,
-      havingBindings: ["b", "birthday"],
+      where: whereClause,
+      page: filters.page,
+      sortBy: filters.sortBy,
+      sortOrder: filters.sortOrder,
+      limit: filters.limit,
+      having: `SUM(${TAG_TABLE}.name IN (${tagsParameters}))>0`,
+      havingBindings: tags,
     });
     return events;
   } catch (error) {

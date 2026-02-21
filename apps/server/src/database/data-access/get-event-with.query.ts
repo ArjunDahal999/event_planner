@@ -1,3 +1,4 @@
+import { th } from "zod/locales";
 import {
   EVENT_TABLE,
   EVENT_TAG_TABLE,
@@ -11,16 +12,20 @@ export const getEventWithTagsQuery = async ({
   where = "",
   having = "",
   havingBindings = "",
-  take = 10,
-  skip = 10,
+  limit = 1,
+  page = 1,
+  sortBy,
+  sortOrder,
 }: {
   having?: string;
   havingBindings?: any;
   where?: string;
-  take?: number;
-  skip?: number;
+  limit?: number;
+  page?: number;
+  sortBy?: string;
+  sortOrder?: "asc" | "desc";
 }) => {
-  let query = db<IEvent>(EVENT_TABLE)
+  let baseQuery = db<IEvent>(EVENT_TABLE)
     .leftJoin<IEventTag>(
       EVENT_TAG_TABLE,
       `${EVENT_TABLE}.id`,
@@ -29,10 +34,22 @@ export const getEventWithTagsQuery = async ({
     .leftJoin<ITags>(TAG_TABLE, `${EVENT_TAG_TABLE}.tag_id`, `${TAG_TABLE}.id`)
     .leftJoin<IUser>(USER_TABLE, `${USER_TABLE}.id`, `${EVENT_TABLE}.user_id`);
 
-  if (where) query = query.whereRaw(where);
-  if (having && havingBindings) query = query.havingRaw(having, havingBindings);
+  if (where) baseQuery = baseQuery.whereRaw(where);
+  if (having && havingBindings)
+    baseQuery = baseQuery.havingRaw(having, havingBindings);
+  if (sortBy && sortOrder) baseQuery.orderBy(sortBy, sortOrder);
 
-  const events = await query
+  const [count] = await db
+    .count("* as total")
+    .from(
+      baseQuery
+        .clone()
+        .groupBy(`${EVENT_TABLE}.id`)
+        .select(`${EVENT_TABLE}.id`)
+        .as("sub"),
+    );
+
+  const events = await baseQuery
     .groupBy(
       `${EVENT_TABLE}.id`,
       `${EVENT_TABLE}.title`,
@@ -41,6 +58,7 @@ export const getEventWithTagsQuery = async ({
       `${EVENT_TABLE}.location`,
       `${EVENT_TABLE}.event_type`,
       `${EVENT_TABLE}.user_id`,
+      `${EVENT_TABLE}.created_at`,
       `${USER_TABLE}.name`,
     )
     .select(
@@ -50,6 +68,7 @@ export const getEventWithTagsQuery = async ({
       `${EVENT_TABLE}.event_date as eventDate`,
       `${EVENT_TABLE}.location`,
       `${EVENT_TABLE}.event_type as eventType`,
+      `${EVENT_TABLE}.created_at as createdAt`,
       `${EVENT_TABLE}.user_id as userId`,
       `${USER_TABLE}.name as userName`,
       db.raw(
@@ -57,8 +76,18 @@ export const getEventWithTagsQuery = async ({
                 JSON_ARRAY(),
                 JSON_ARRAYAGG(JSON_OBJECT('tagName', ${TAG_TABLE}.name,'tagColor', ${TAG_TABLE}.color))) as tags`,
       ),
-    );
-  return events;
+    )
+    .limit(limit)
+    .offset((page - 1) * limit);
+  return {
+    data: events,
+    meta: {
+      totalCount: count.total,
+      currentPage: +page,
+      limit: +limit,
+      totalPage: Math.ceil((count.total as number) / +limit),
+    },
+  };
 };
 
 /*

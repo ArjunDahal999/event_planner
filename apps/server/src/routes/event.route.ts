@@ -1,6 +1,9 @@
 import express from "express";
 import eventController from "../controller/event.controller.ts";
-import { createEventSchema } from "../../../../packages/shared/src/schemas/event.schema.ts";
+import {
+  createEventSchema,
+  eventFilterSchema,
+} from "../../../../packages/shared/src/schemas/event.schema.ts";
 import { validateRequest } from "../middleware/validate-request.middleware.ts";
 
 const router = express.Router();
@@ -34,8 +37,6 @@ const router = express.Router();
  */
 router.get("/", (req, res) => {
   const userId = res.locals.user;
-  console.log(userId);
-  console.log("User profile endpoint hit");
   res.status(200).json({ message: "User profile endpoint" });
 });
 
@@ -156,7 +157,7 @@ router.get("/", (req, res) => {
  */
 router.post(
   "/",
-  validateRequest(createEventSchema),
+  validateRequest({ schema: createEventSchema, scope: "body" }),
   eventController.createEvent,
 );
 
@@ -164,28 +165,97 @@ router.post(
  * @swagger
  * /api/v1/event/all:
  *   get:
+ *     summary: Get all events
+ *     description: Retrieve a list of all events. Supports filtering and sorting via query parameters.
  *     tags:
  *       - Event
- *     summary: Get all events
- *     description: Retrieve a list of all events.
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: tags
+ *         required: false
+ *         schema:
+ *           type: string
+ *         description: Comma-separated list of tags to filter by (e.g. "team,meeting")
+ *       - in: query
+ *         name: eventType
+ *         required: false
+ *         schema:
+ *           type: string
+ *           enum: [public, private]
+ *         description: Filter by event type
+ *       - in: query
+ *         name: location
+ *         required: false
+ *         schema:
+ *           type: string
+ *         description: Filter by event location
+ *       - in: query
+ *         name: title
+ *         required: false
+ *         schema:
+ *           type: string
+ *         description: Partial match on event title
+ *       - in: query
+ *         name: description
+ *         required: false
+ *         schema:
+ *           type: string
+ *         description: Partial match on event description
+ *       - in: query
+ *         name: sortOrder
+ *         required: false
+ *         schema:
+ *           type: string
+ *           enum: [asc, desc]
+ *           default: asc
+ *         description: Sort direction
+ *       - in: query
+ *         name: sortBy
+ *         required: false
+ *         schema:
+ *           type: string
+ *           enum: [event_date, created_at]
+ *           default: event_date
+ *         description: Field to sort by
+ *       - in: query
+ *         name: page
+ *         required: false
+ *         schema:
+ *           type: number
+ *           default: 1
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         schema:
+ *           type: number
+ *           default: 5
+ *         description: Number of items per page
  *     responses:
  *       200:
- *         description: List of events retrieved successfully.
+ *         description: List of events retrieved successfully
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/Event'
+ *       400:
+ *         description: Invalid query parameters
  *       401:
  *         description: Unauthorized
  *       500:
  *         description: Internal server error
  */
-router.get("/all", eventController.getAllEvents);
-
+router.get(
+  "/all",
+  validateRequest({ schema: eventFilterSchema, scope: "query" }),
+  //@ts-expect-error
+  // we have already ensured that the validated req query  is wbe received
+  eventController.getAllEvents,
+);
 /**
  * @swagger
  * /api/v1/event/user:
@@ -285,7 +355,7 @@ router.get("/:id", eventController.getEventById);
  */
 router.put(
   "/:id",
-  validateRequest(createEventSchema),
+  validateRequest({ schema: createEventSchema, scope: "body" }),
   eventController.updateEvent,
 );
 

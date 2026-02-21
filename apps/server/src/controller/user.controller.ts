@@ -76,7 +76,6 @@ class UserController {
       const getToken = await authService().getUserActivationToken({
         userId: user.id,
       });
-      console.log("getToken", getToken);
       // if token doesn't match or has expired, throw an error
       if (getToken !== token) {
         logger.warn(`Invalid or expired token : ${email}`);
@@ -213,12 +212,7 @@ class UserController {
           success: true,
           statusCode: 200,
           data: {
-            user: {
-              id: user.id,
-              name: user.name,
-              email: user.email,
-              is_email_verified: user.is_email_verified,
-            },
+            user,
             accessToken,
             refreshToken,
           },
@@ -265,7 +259,6 @@ class UserController {
         string: refreshToken,
         hashedString: storedTokenData,
       });
-      console.log("isTokenValid", isTokenValid);
 
       if (!isTokenValid) {
         logger.warn(`Invalid refresh token attempt.`);

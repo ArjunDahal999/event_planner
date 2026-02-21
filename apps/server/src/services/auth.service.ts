@@ -188,7 +188,6 @@ async function createAccessToken({
       user_id: userId,
       token: refreshToken,
     });
-    console.log("Inserted refresh token with ID:", as);
     return refreshToken;
   } catch (err) {
     console.error("Error generating access token:", err);
