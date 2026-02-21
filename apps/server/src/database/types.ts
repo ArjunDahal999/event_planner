@@ -59,6 +59,7 @@ export interface IRSPV {
   id: number;
   event_id: number;
   user_id: number;
+  response: "YES" | "NO" | "MAY BE";
   created_at: Date;
   updated_at: Date;
 }

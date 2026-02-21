@@ -135,7 +135,10 @@ async function getEventById({ eventId }: { eventId: number }) {
       where: `${EVENT_TABLE}.id =${eventId}`,
     });
     return events;
-  } catch (error) {
+  } catch (error: any) {
+    if (error.code === "ER_NO_REFERENCED_ROW_2") {
+      throw new Error("Event or user does not exist.");
+    }
     throw new Error(
       error instanceof Error ? error.message : "Failed to retrieve event",
     );
@@ -153,10 +156,10 @@ async function deleteEvent({
     const deletedCount = await db<IEvent>(EVENT_TABLE)
       .where({ id: eventId, user_id: userId })
       .del();
-    if (deletedCount === 0) {
-      throw new Error("Event not found or user not authorized to delete");
+  } catch (error: any) {
+    if (error.code === "ER_NO_REFERENCED_ROW_2") {
+      throw new Error("Event or user does not exist.");
     }
-  } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : "Failed to delete event",
     );
@@ -174,7 +177,7 @@ async function updateEvent({
 }) {
   try {
     const { tags, ...rest } = eventData;
-    const updatedCount = await db<IEvent>(EVENT_TABLE)
+    await db<IEvent>(EVENT_TABLE)
       .where({ id: eventId, user_id: userId })
       .update(rest);
 
@@ -204,10 +207,10 @@ async function updateEvent({
         };
       }),
     );
-    if (updatedCount === 0) {
-      throw new Error("Event not found or user not authorized to update");
+  } catch (error: any) {
+    if (error.code === "ER_NO_REFERENCED_ROW_2") {
+      throw new Error("Event or user does not exist.");
     }
-  } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : "Failed to update event",
     );
