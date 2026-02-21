@@ -4,7 +4,7 @@ import logger from "../libs/winston.ts";
 
 export function zodMiddleware(
   err: unknown,
-  _: Request,
+  _req: Request,
   res: Response,
   _next: NextFunction,
 ): void {
