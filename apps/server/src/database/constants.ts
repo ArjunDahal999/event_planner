@@ -5,3 +5,4 @@ export const REFRESH_TOKEN_TABLE = "refresh_tokens";
 export const EVENT_TABLE = "event";
 export const TAG_TABLE = "tag";
 export const EVENT_TAG_TABLE = "event_tag";
+export const RSVP_TABLE = "rsvp";
