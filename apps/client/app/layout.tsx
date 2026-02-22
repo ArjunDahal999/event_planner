@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import Provider from "@/providers";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -27,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistMono.variable} antialiased font-mono`}>
-        {children}
+        <Provider>{children}</Provider>
         <Toaster />
       </body>
     </html>

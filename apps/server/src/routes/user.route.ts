@@ -200,9 +200,5 @@ router.get("/logout", () => {});
  *       500:
  *         description: Internal server error.
  */
-router.post(
-  "/refresh",
-  validateRequest({ schema: refreshTokenSchema, scope: "body" }),
-  userController.refreshToken,
-);
+router.post("/refresh", userController.refreshToken);
 export default router;

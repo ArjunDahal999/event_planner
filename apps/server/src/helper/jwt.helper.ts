@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { env } from "../libs/validate-env.ts";
+import logger from "../libs/winston.ts";
 
 export const generateAccessToken = (user_id: number) => {
   try {
@@ -57,6 +58,7 @@ export const verifyRefreshToken = (
     };
     return decoded;
   } catch (error) {
+    logger.error(error);
     throw new Error("Invalid refresh token");
   }
 };

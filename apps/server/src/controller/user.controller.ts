@@ -26,6 +26,7 @@ import {
   verifyRefreshToken,
 } from "../helper/jwt.helper.ts";
 import type { IApiResponse, IRegisterResponse } from "@event-planner/shared";
+import { env } from "../libs/validate-env.ts";
 
 class UserController {
   async register(
@@ -67,7 +68,14 @@ class UserController {
         message: "Account registered successfully.",
         success: true,
         statusCode: 201,
-        data: { name, email, id: createdUserId },
+        data: {
+          name,
+          email,
+          id: createdUserId,
+          activationLink:
+            env.APP_URL +
+            `/activate?email=${encodeURIComponent(email)}&token=${tokenPayload.token}`,
+        },
       });
     } catch (err) {
       next(err);
@@ -217,16 +225,17 @@ class UserController {
 
       await authService().delete2FASecret({ email });
       const accessToken = generateAccessToken(user.id);
+      await authService().revokeRefreshToken({ userId: user.id });
       const refreshToken = generateRefreshToken(user.id);
 
-      const hashedRefreshToken = await hashString(refreshToken!);
+      const hashedRefreshToken = await hashString(refreshToken);
       await authService().createAccessToken({
         userId: user.id,
         refreshToken: hashedRefreshToken,
       });
       logger.info(`User logged in successfully with 2FA: ${email}`);
       res
-        .cookie("access_token", accessToken, {
+        .cookie("refresh_token", refreshToken, {
           httpOnly: true,
           secure: process.env.NODE_ENV === "production",
           sameSite: "strict",
@@ -253,11 +262,17 @@ class UserController {
   }
 
   async refreshToken(
-    req: Request<{}, {}, RefreshTokenDTO>,
+    req: Request,
     res: Response<IApiResponse<IRefreshTokenResponse>>,
     next: NextFunction,
   ) {
-    const { refreshToken } = req.body;
+    const refreshToken = req.cookies.refresh_token;
+    if (!refreshToken) {
+      throw new HttpError({
+        message: "Refresh token missing.",
+        statusCode: 401,
+      });
+    }
     try {
       const decoded = verifyRefreshToken(refreshToken);
       if (!decoded) {
@@ -272,20 +287,19 @@ class UserController {
       });
 
       if (!storedTokenData) {
-        logger.warn(`Invalid refresh token attempt.`);
+        logger.warn(`Refresh token not found in DB.`);
         throw new HttpError({
-          message: "Invalid refresh token.",
+          message: " Refresh token not found in DB.",
           statusCode: 401,
         });
       }
-
-      const isTokenValid = await compareHashWithString({
+      const isMatch = await compareHashWithString({
         string: refreshToken,
         hashedString: storedTokenData,
       });
 
-      if (!isTokenValid) {
-        logger.warn(`Invalid refresh token attempt.`);
+      if (!isMatch) {
+        logger.warn(`Refresh token mismatch.`);
         throw new HttpError({
           message: "Invalid refresh token.",
           statusCode: 401,
@@ -304,15 +318,22 @@ class UserController {
       logger.info(
         `Access token refreshed successfully for user ID: ${decoded._id}`,
       );
-      res.status(200).json({
-        message: "Access token refreshed successfully.",
-        success: true,
-        statusCode: 200,
-        data: {
-          accessToken,
-          refreshToken: newRefreshToken,
-        },
-      });
+      res
+        .cookie("refresh_token", newRefreshToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
+        })
+        .status(200)
+        .json({
+          message: "Access token refreshed successfully.",
+          success: true,
+          statusCode: 200,
+          data: {
+            accessToken,
+            refreshToken: newRefreshToken,
+          },
+        });
     } catch (err) {
       next(err);
     }

@@ -27,4 +27,6 @@ export const env = cleanEnv(process.env, {
   MYSQL_USER: str({ default: "app_user" }),
   MYSQL_PASSWORD: str({ default: "userPassword" }),
   MYSQL_DATABASE: str({ default: "app_db" }),
+  APP_URL: str({ default: "http://localhost:3000" }),
+  SERVER_URL: str({ default: "http://localhost:9000" }),
 });

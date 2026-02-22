@@ -7,9 +7,12 @@ import { env } from "./src/libs/validate-env.ts";
 import { router } from "./src/routes/index.route.ts";
 import morgan from "morgan";
 import { zodMiddleware } from "./src/middleware/zod.middleware.ts";
+import cookieParser from "cookie-parser";
+
 const app = express();
 const swagger = swaggerJsdoc(swaggerConfig);
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(morgan("combined"));
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swagger));

@@ -19,14 +19,13 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { generate2FASchema } from "@event-planner/shared";
+import { Generate2FADTO, generate2FASchema } from "@event-planner/shared";
 import { Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+interface LoginFormProps extends Omit<React.ComponentProps<"div">, "onSubmit"> {
+  onSubmit: (data: Generate2FADTO) => Promise<void>;
+}
+export function LoginForm({ className, onSubmit, ...props }: LoginFormProps) {
   const form = useForm<z.infer<typeof generate2FASchema>>({
     resolver: zodResolver(generate2FASchema),
     defaultValues: {
@@ -34,6 +33,7 @@ export function LoginForm({
       password: "",
     },
   });
+
   const FIELDS = [
     {
       name: "email" as const,
@@ -50,9 +50,6 @@ export function LoginForm({
   ];
   const { isSubmitting } = form.formState;
 
-  const onSubmit = (data: z.infer<typeof generate2FASchema>) => {
-    console.log(data);
-  };
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>

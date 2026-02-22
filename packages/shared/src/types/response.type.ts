@@ -9,6 +9,7 @@ export interface IRegisterResponse {
   id: number;
   name: string;
   email: string;
+  activationLink: string;
 }
 
 export interface IVerifyEmailResponse {
