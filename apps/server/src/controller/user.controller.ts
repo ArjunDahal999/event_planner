@@ -1,22 +1,36 @@
 import type { NextFunction, Request, Response } from "express";
 import { userService } from "../services/user.service.ts";
-import { type LoginUserDTO, type RegisterUserDTO } from "@event-planner/shared";
+import type {
+  Generate2FADTO,
+  IGenerate2FAResponse,
+  ILoginResponse,
+  IRefreshTokenResponse,
+  IVerifyEmailResponse,
+  LoginUserDTO,
+  RefreshTokenDTO,
+  RegisterUserDTO,
+  VerifyEmailDTO,
+} from "@event-planner/shared";
 import logger from "../libs/winston.ts";
 import { HttpError } from "../utils/http-error.ts";
 import { compareHashWithString, hashString } from "../helper/bcrypt.helper.ts";
 import { authService } from "../services/auth.service.ts";
-import { generateToken } from "../helper/token.helper.ts";
+import {
+  generateSixDigitToken,
+  generateToken,
+} from "../helper/token.helper.ts";
 import emailService from "../services/email.service.ts";
 import {
   generateAccessToken,
   generateRefreshToken,
   verifyRefreshToken,
 } from "../helper/jwt.helper.ts";
+import type { IApiResponse, IRegisterResponse } from "@event-planner/shared";
 
 class UserController {
   async register(
     req: Request<{}, {}, RegisterUserDTO>,
-    res: Response,
+    res: Response<IApiResponse<IRegisterResponse>>,
     next: NextFunction,
   ) {
     const { email, name, password } = req.body;
@@ -60,7 +74,11 @@ class UserController {
     }
   }
 
-  async verifyEmail(req: Request, res: Response, next: NextFunction) {
+  async verifyEmail(
+    req: Request<{}, {}, VerifyEmailDTO>,
+    res: Response<IApiResponse<IVerifyEmailResponse>>,
+    next: NextFunction,
+  ) {
     const { token, email } = req.body;
     try {
       //  fetch user by email to get user ID for token verification
@@ -90,7 +108,10 @@ class UserController {
 
       logger.info(`Account verified successfully for email: ${email}`);
       res.status(200).json({
-        message: "Account verified successfully.",
+        data: {
+          id: user.id,
+        },
+        message: "Email verified successfully.",
         success: true,
         statusCode: 200,
       });
@@ -100,8 +121,8 @@ class UserController {
   }
 
   async generate2FA(
-    req: Request<{}, {}, LoginUserDTO>,
-    res: Response,
+    req: Request<{}, {}, Generate2FADTO>,
+    res: Response<IApiResponse<IGenerate2FAResponse>>,
     next: NextFunction,
   ) {
     const { email, password } = req.body;
@@ -136,18 +157,18 @@ class UserController {
         });
       }
 
-      const tokenPayload = generateToken({ timer: 10 * 60 * 60 * 1000 });
+      const tokenPayload = generateSixDigitToken();
       await authService().revoke2FASecret({ email });
       await authService().create2FASecret({
         email,
-        secret: tokenPayload.token,
+        secret: tokenPayload,
         userId: user.id,
       });
 
       emailService.sendEmail({
         to: email,
         subject: "Your 2FA Code",
-        body: `Your 2FA code is: ${tokenPayload.token}`,
+        body: `---SIX DIGIT CODE ----: ${tokenPayload}`,
       });
 
       logger.info(`User logged in successfully: ${email}`);
@@ -169,7 +190,11 @@ class UserController {
     }
   }
 
-  async loginWith2FA(req: Request, res: Response, next: NextFunction) {
+  async loginWith2FA(
+    req: Request<{}, {}, LoginUserDTO>,
+    res: Response<IApiResponse<ILoginResponse>>,
+    next: NextFunction,
+  ) {
     const { email, token } = req.body;
     try {
       const user = await userService().getUserByEmail(email);
@@ -212,7 +237,12 @@ class UserController {
           success: true,
           statusCode: 200,
           data: {
-            user,
+            user: {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              is_email_verified: user.is_email_verified,
+            },
             accessToken,
             refreshToken,
           },
@@ -221,20 +251,14 @@ class UserController {
       next(err);
     }
   }
-  //TODO
-  async logout(req: Request, res: Response, next: NextFunction) {}
 
-  async refreshToken(req: Request, res: Response, next: NextFunction) {
+  async refreshToken(
+    req: Request<{}, {}, RefreshTokenDTO>,
+    res: Response<IApiResponse<IRefreshTokenResponse>>,
+    next: NextFunction,
+  ) {
     const { refreshToken } = req.body;
     try {
-      if (!refreshToken) {
-        logger.warn(`Refresh token or user ID missing in request.`);
-        throw new HttpError({
-          message: "Refresh token and user ID are required.",
-          statusCode: 400,
-        });
-      }
-
       const decoded = verifyRefreshToken(refreshToken);
       if (!decoded) {
         logger.warn(`Invalid refresh token attempt.`);
@@ -293,6 +317,9 @@ class UserController {
       next(err);
     }
   }
+
+  //TODO
+  async logout(req: Request, res: Response, next: NextFunction) {}
 }
 
 const userController = new UserController();

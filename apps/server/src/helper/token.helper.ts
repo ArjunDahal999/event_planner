@@ -8,3 +8,9 @@ const generateToken = ({ timer }: { timer?: number }) => {
 };
 
 export { generateToken };
+
+const generateSixDigitToken = () => {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+};
+
+export { generateSixDigitToken };

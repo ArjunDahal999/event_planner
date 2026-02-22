@@ -1,3 +1,10 @@
+declare global {
+  namespace Express {
+    interface Request {
+      userID?: number;
+    }
+  }
+}
 import type { Request, Response, NextFunction } from "express";
 import { rsvpService } from "../services/rsvp.service.ts";
 import type { CreateRsvpDTO } from "@event-planner/shared/src/schemas/rsvp.schema.ts";

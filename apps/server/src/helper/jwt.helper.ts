@@ -12,7 +12,7 @@ export const generateAccessToken = (user_id: number) => {
     );
     return accessToken;
   } catch (error) {
-    return null;
+    throw new Error("Failed to generate access token");
   }
 };
 
@@ -27,7 +27,7 @@ export const generateRefreshToken = (user_id: number) => {
     );
     return refreshToken;
   } catch (error) {
-    return null;
+    throw new Error("Failed to generate refresh token");
   }
 };
 
@@ -42,7 +42,7 @@ export const verifyAccessToken = (
     };
     return decoded;
   } catch (error) {
-    return null;
+    throw new Error("Invalid access token");
   }
 };
 
