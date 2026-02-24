@@ -1,7 +1,5 @@
-// app/protected-layout.tsx (server component)
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { ViewTransition } from "react";
 
 export default async function ProtectedLayout({
   children,
@@ -13,8 +11,8 @@ export default async function ProtectedLayout({
     redirect("/login");
   }
   return (
-    <div className="flex flex-col pt-4 max-w-7xl mx-auto">
-      <ViewTransition>{children}</ViewTransition>
+    <div className="flex flex-col pt-4 max-w-7xl mx-auto min-h-screen">
+      {children}
     </div>
   );
 }

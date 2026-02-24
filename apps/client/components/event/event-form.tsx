@@ -51,100 +51,102 @@ const EventForm = (props: EventFormProps) => {
   } = form;
 
   return (
-    <div className="max-w-3xl shadow-sm mx-auto bg-white   border p-8">
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800">
-        {props.mode === "create" ? "Create New Event" : "Update Event"}
-      </h2>
+    <>
+      <div className="max-w-3xl shadow-sm mx-auto bg-white   border p-8">
+        <h2 className="text-2xl font-semibold mb-6 text-gray-800">
+          {props.mode === "create" ? "Create New Event" : "Update Event"}
+        </h2>
 
-      <form onSubmit={handleSubmit(props.onSubmit)} className="space-y-6">
-        {/* ___title____ */}
-        <div>
-          <label className={labelStyles}>Title</label>
-          <input
-            {...register("title")}
-            className={inputStyles}
-            placeholder="Enter event title"
-          />
-          {errors.title && (
-            <p className={errorStyles}>{errors.title.message}</p>
-          )}
-        </div>
-        {/* ___description____ */}
-        <div>
-          <label className={labelStyles}>Description</label>
-          <textarea
-            {...register("description")}
-            rows={4}
-            className={inputStyles}
-            placeholder="Describe your event"
-          />
-          {errors.description && (
-            <p className={errorStyles}>{errors.description.message}</p>
-          )}
-        </div>
-
-        {/* ___event_date & location____ */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <form onSubmit={handleSubmit(props.onSubmit)} className="space-y-6">
+          {/* ___title____ */}
           <div>
-            <label className={labelStyles}>Event Date</label>
+            <label className={labelStyles}>Title</label>
             <input
-              {...register("event_date")}
-              type="datetime-local"
+              {...register("title")}
               className={inputStyles}
+              placeholder="Enter event title"
             />
-            {errors.event_date && (
-              <p className={errorStyles}>{errors.event_date.message}</p>
+            {errors.title && (
+              <p className={errorStyles}>{errors.title.message}</p>
             )}
           </div>
+          {/* ___description____ */}
           <div>
-            <label className={labelStyles}>Location</label>
-            <input
-              {...register("location")}
+            <label className={labelStyles}>Description</label>
+            <textarea
+              {...register("description")}
+              rows={4}
               className={inputStyles}
-              placeholder="Event location"
+              placeholder="Describe your event"
             />
-            {errors.location && (
-              <p className={errorStyles}>{errors.location.message}</p>
+            {errors.description && (
+              <p className={errorStyles}>{errors.description.message}</p>
             )}
           </div>
-        </div>
 
-        {/* ___event_type____ */}
-        <div>
-          <label className={labelStyles}>Event Type</label>
-          <select {...register("event_type")} className={inputStyles}>
-            <option value="public"> Public</option>
-            <option value="private"> Private</option>
-          </select>
-        </div>
-        {/* ___tags____ */}
-        <div>
-          <label className={labelStyles}>Tags</label>
-          <input
-            {...register("tags")}
-            className={inputStyles}
-            placeholder="e.g. tech, meetup, networking"
-          />
-          <p className="text-xs text-gray-500 mt-1">
-            Separate tags with commas
-          </p>
-        </div>
+          {/* ___event_date & location____ */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className={labelStyles}>Event Date</label>
+              <input
+                {...register("event_date")}
+                type="datetime-local"
+                className={inputStyles}
+              />
+              {errors.event_date && (
+                <p className={errorStyles}>{errors.event_date.message}</p>
+              )}
+            </div>
+            <div>
+              <label className={labelStyles}>Location</label>
+              <input
+                {...register("location")}
+                className={inputStyles}
+                placeholder="Event location"
+              />
+              {errors.location && (
+                <p className={errorStyles}>{errors.location.message}</p>
+              )}
+            </div>
+          </div>
 
-        <div className="pt-4">
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full  text-white font-medium py-3 rounded-lg shadow-md hover:shadow-none transition disabled:opacity-50"
-          >
-            {isSubmitting
-              ? "Processing..."
-              : props.mode === "create"
-                ? "Create Event"
-                : "Update Event"}
-          </Button>
-        </div>
-      </form>
-    </div>
+          {/* ___event_type____ */}
+          <div>
+            <label className={labelStyles}>Event Type</label>
+            <select {...register("event_type")} className={inputStyles}>
+              <option value="public"> Public</option>
+              <option value="private"> Private</option>
+            </select>
+          </div>
+          {/* ___tags____ */}
+          <div>
+            <label className={labelStyles}>Tags</label>
+            <input
+              {...register("tags")}
+              className={inputStyles}
+              placeholder="e.g. tech, meetup, networking"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              Separate tags with commas
+            </p>
+          </div>
+
+          <div className="pt-4">
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full  text-white font-medium py-3 rounded-lg shadow-md hover:shadow-none transition disabled:opacity-50"
+            >
+              {isSubmitting
+                ? "Processing..."
+                : props.mode === "create"
+                  ? "Create Event"
+                  : "Update Event"}
+            </Button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

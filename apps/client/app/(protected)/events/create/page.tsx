@@ -4,9 +4,8 @@ import { Button } from "@/components/ui/button";
 import { eventService } from "@/services/event.service";
 import { CreateEventDTO } from "@event-planner/shared";
 import { ChevronLeft } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import { ViewTransition } from "react";
 import { toast } from "sonner";
 
 const CreateEventPage = () => {
@@ -20,17 +19,24 @@ const CreateEventPage = () => {
       console.error("Error creating event:", error);
     }
   };
+
+  const handleBack = () => {
+    router.back();
+  };
+
   return (
-    <div className="flex gap-y-2 flex-col ">
-      <Link href="/events">
-        <Button className=" w-fit group">
-          {" "}
-          <ChevronLeft className=" group-hover:translate-x-2 transition-transform duration-500 " />{" "}
-          Back
-        </Button>
-      </Link>
-      <EventForm mode="create" onSubmit={handleCreateEvent} />
-    </div>
+    <>
+      <Button onClick={handleBack} className=" w-fit group">
+        {" "}
+        <ChevronLeft className=" group-hover:translate-x-2 transition-transform duration-500 " />{" "}
+        Back
+      </Button>
+      <ViewTransition enter="slide-out" exit="slide-in" default={"none"}>
+        <div className="flex gap-y-2 flex-col pt-3 ">
+          <EventForm mode="create" onSubmit={handleCreateEvent} />
+        </div>
+      </ViewTransition>
+    </>
   );
 };
 

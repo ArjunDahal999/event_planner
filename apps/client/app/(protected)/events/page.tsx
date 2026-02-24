@@ -1,5 +1,5 @@
 "use client";
-
+import { ViewTransition } from "react";
 import { eventService } from "@/services/event.service";
 import { useQuery } from "@tanstack/react-query";
 import { EventCard } from "@/components/event/event-card";
@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { RotateCcwIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { useDeferredValue, ViewTransition } from "react";
 
 const EventsPage = () => {
   const { filters, updateFilters, isPending, resetFilters } = useEventFilters();
@@ -40,7 +39,6 @@ const EventsPage = () => {
           <Button>Create Event</Button>
         </Link>
       </div>
-
       <div className=" flex gap-x-2 py-4">
         <button
           className=" flex items-center justify-center shadow-sm px-2"
@@ -76,24 +74,29 @@ const EventsPage = () => {
           <option value="createdAt_asc">Created At Ascending</option>
         </select>
       </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 p-4 transition-main-grid">
         {isLoading &&
           [...Array(6)].map((_, index) => <EventCardSkeleton key={index} />)}
         {eventsResponse?.events.map((event) => (
-          <EventCard.Root
-            className=" max-w-sm p-4"
-            key={event.id}
-            event={event}
-          >
-            <EventCard.Header />
-            <EventCard.Description />
-            <EventCard.Date />
-            <EventCard.Location />
-            <EventCard.Type />
-            <EventCard.CreatedBy />
-            <EventCard.Tags />
-            <EventCard.Options />
-          </EventCard.Root>
+          <ViewTransition key={event.id}>
+            <Link href={`/events/${event.id}`} className=" ">
+              <EventCard.Root
+                className=" max-w-sm p-4"
+                key={event.id}
+                event={event}
+              >
+                <EventCard.Header />
+                <EventCard.Description />
+                <EventCard.Date />
+                <EventCard.Location />
+                <EventCard.Type />
+                <EventCard.CreatedBy />
+                <EventCard.Tags />
+                {/* <EventCard.Options /> */}
+              </EventCard.Root>
+            </Link>
+          </ViewTransition>
         ))}
       </div>
     </section>

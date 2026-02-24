@@ -3,6 +3,7 @@ import api from "@/config/axios.config";
 import {
   CreateEventDTO,
   IApiResponse,
+  IEvent,
   IEventResponse,
 } from "@event-planner/shared";
 
@@ -10,6 +11,9 @@ export const eventService = () =>
   Object.freeze({
     createEvent,
     getEvents,
+    getEventById,
+    updateEvent,
+    deleteEvent,
   });
 
 async function createEvent({ payload }: { payload: CreateEventDTO }) {
@@ -17,6 +21,34 @@ async function createEvent({ payload }: { payload: CreateEventDTO }) {
     const { data } = await api.post<IApiResponse<[]>>("event", payload);
     return data;
   } catch (error) {
+    throw error;
+  }
+}
+
+export async function updateEvent({
+  eventId,
+  payload,
+}: {
+  eventId: number;
+  payload: CreateEventDTO;
+}) {
+  try {
+    const { data } = await api.put<IApiResponse<[]>>(
+      `event/${eventId}`,
+      payload,
+    );
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getEventById({ eventId }: { eventId: number }) {
+  try {
+    const { data } = await api.get<IApiResponse<IEvent>>(`event/${eventId}`);
+    return data;
+  } catch (error) {
+    console.error("Error fetching event by ID:", error);
     throw error;
   }
 }
@@ -41,6 +73,15 @@ async function getEvents({ filters }: { filters: EventFilters }) {
     const { data } = await api.get<IApiResponse<IEventResponse>>(
       `event/all?${queryString}`,
     );
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function deleteEvent({ eventId }: { eventId: number }) {
+  try {
+    const { data } = await api.delete<IApiResponse<[]>>(`event/${eventId}`);
     return data;
   } catch (error) {
     throw error;

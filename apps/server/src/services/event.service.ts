@@ -131,10 +131,10 @@ async function getAllEvents({ filters }: { filters: EventFilterDTO }) {
 
 async function getEventById({ eventId }: { eventId: number }) {
   try {
-    const events = await getEventWithTagsQuery({
+    const event = await getEventWithTagsQuery({
       where: `${EVENT_TABLE}.id =${eventId}`,
     });
-    return events;
+    return event;
   } catch (error: any) {
     if (error.code === "ER_NO_REFERENCED_ROW_2") {
       throw new Error("Event or user does not exist.");

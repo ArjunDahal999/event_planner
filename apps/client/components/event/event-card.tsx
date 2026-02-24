@@ -1,5 +1,5 @@
 import { IEvent } from "@event-planner/shared";
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, useContext, ReactNode, ViewTransition } from "react";
 import { hexToRgba } from "@/utils/hex-to-rgb";
 import { GlobeIcon, UserKeyIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -48,77 +48,96 @@ const EventCardRoot = ({
   className?: string;
 }) => (
   <EventContext.Provider value={event}>
-    <div
-      className={cn(
-        `flex flex-col h-full p-4  group   hover:shadow-lg  duration-300
-        bg-primary/10   gap-6 rounded-xl border py-6 shadow-sm
+    <ViewTransition name={`event-${event.id}`}>
+      <div
+        style={{ viewTransitionName: `event-${event.id}` }}
+        className={cn(
+          `flex flex-col h-full p-4  group  bg-white  hover:shadow-lg  duration-300
+          gap-6 rounded-xl border py-6 shadow-sm
         `,
-        className,
-      )}
-    >
-      {children}
-    </div>
+          className,
+        )}
+      >
+        {children}
+      </div>
+    </ViewTransition>
   </EventContext.Provider>
 );
 
 const EventHeader = () => {
-  const { title } = useEventContext();
+  const { id, title } = useEventContext();
   return (
-    <h3
-      className="font-bold cursor-pointer text-black hover:text-primary hover:underline 
+    <ViewTransition name={`event-title-${id}`}>
+      <h3
+        className="font-bold cursor-pointer text-black hover:text-primary hover:underline 
     text-center h-12 flex items-center line-clamp-1 "
-    >
-      {title}
-    </h3>
+      >
+        {title}
+      </h3>
+    </ViewTransition>
   );
 };
 
 const EventDescription = () => {
-  const { description } = useEventContext();
-  return <p className="text-sm h-16  text-start ">{description}</p>;
+  const { id, description } = useEventContext();
+  return (
+    <ViewTransition name={`event-description-${id}`}>
+      <p className="text-sm h-16  text-start ">{description}</p>
+    </ViewTransition>
+  );
 };
 
 const EventDate = () => {
-  const { eventDate } = useEventContext();
+  const { id, eventDate } = useEventContext();
   return (
-    <p className="h-6 flex items-center text-sm">
-      Date :
-      <span className="font-bold ml-1">
-        {new Date(eventDate).toLocaleDateString()}
-      </span>
-    </p>
+    <ViewTransition name={`event-date-${id}`}>
+      <p className="h-6 flex items-center text-sm">
+        Date :
+        <span className="font-bold ml-1">
+          {new Date(eventDate).toLocaleDateString()}
+        </span>
+      </p>
+    </ViewTransition>
   );
 };
 
 const EventLocation = () => {
-  const { location } = useEventContext();
+  const { id, location } = useEventContext();
   return (
-    <p className="h-6 flex items-center text-sm  truncate">
-      <span className="font-medium mr-1">Location:</span>
-      <span className="font-bold">{location} </span>
-    </p>
+    <ViewTransition name={`event-location-${id}`}>
+      <p className="h-6 flex items-center text-sm  truncate">
+        <span className="font-medium mr-1">Location:</span>
+        <span className="font-bold">{location} </span>
+      </p>
+    </ViewTransition>
   );
 };
 
 const EventType = () => {
-  const { eventType } = useEventContext();
-  return eventType === "public" ? (
-    <div className="h-6 text-green-600 font-semibold flex items-center gap-1 text-sm">
-      <GlobeIcon className="w-4 h-4" /> Public
-    </div>
-  ) : (
-    <div className="h-6 text-red-600 font-semibold flex items-center gap-1 text-sm">
-      <UserKeyIcon className="w-4 h-4" /> Private
-    </div>
+  const { id, eventType } = useEventContext();
+  return (
+    <ViewTransition name={`event-type-${id}`}>
+      {eventType === "public" ? (
+        <div className="h-6 text-green-600 font-semibold flex items-center gap-1 text-sm">
+          <GlobeIcon className="w-4 h-4" /> Public
+        </div>
+      ) : (
+        <div className="h-6 text-red-600 font-semibold flex items-center gap-1 text-sm">
+          <UserKeyIcon className="w-4 h-4" /> Private
+        </div>
+      )}
+    </ViewTransition>
   );
 };
 
 const EventCreatedBy = () => {
-  const { userName } = useEventContext();
+  const { id, userName } = useEventContext();
   return (
-    <p className="h-6 flex items-center capitalize text-sm text-muted-foreground">
-      Created by :<span className="font-bold ml-1">{userName}</span>
-    </p>
+    <ViewTransition name={`event-createdBy-${id}`}>
+      <p className="h-6 flex items-center capitalize text-sm text-muted-foreground">
+        Created by :<span className="font-bold ml-1">{userName}</span>
+      </p>
+    </ViewTransition>
   );
 };
 
@@ -141,24 +160,21 @@ const EventOptions = () => {
 };
 
 const EventTags = () => {
-  const { tags } = useEventContext();
+  const { id, tags } = useEventContext();
   return (
-    <div
-      style={{ viewTransitionName: "anything" }}
-      className="h-22  flex flex-wrap overflow-y-auto content-start gap-2"
-    >
-      {tags.map((tag) => (
-        <Link key={tag.tagName} href={"/events?tags=" + tag.tagName}>
+    <ViewTransition name={`event-tags-${id}`}>
+      <div className="h-22  flex flex-wrap overflow-y-auto content-start gap-2">
+        {tags.map((tag) => (
           <Button
-            className="inline-block px-2 py-1 capitalize text-black text-xs"
-            style={{ backgroundColor: hexToRgba(tag.tagColor, 0.7) }}
             key={tag.tagName}
+            className="inline-block px-2 py-1 capitalize text-black text-xs"
+            style={{ backgroundColor: hexToRgba(tag.tagColor, 0.4) }}
           >
             {tag.tagName}
           </Button>
-        </Link>
-      ))}
-    </div>
+        ))}
+      </div>
+    </ViewTransition>
   );
 };
 

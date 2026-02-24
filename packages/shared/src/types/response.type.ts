@@ -46,6 +46,8 @@ export interface IEventResponse {
   meta: IMeta;
 }
 
+export interface IEventByIdResponse extends IEvent {}
+
 export interface IEvent {
   id: number;
   title: string;

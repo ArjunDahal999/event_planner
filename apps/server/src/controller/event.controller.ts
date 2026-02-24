@@ -16,8 +16,10 @@ import logger from "../libs/winston.ts";
 import type {
   IApiResponse,
   IEvent,
+  IEventByIdResponse,
   IEventResponse,
 } from "@event-planner/shared";
+import { th } from "zod/locales";
 
 class EventController {
   async createEvent(
@@ -63,14 +65,26 @@ class EventController {
     }
   }
 
-  async getEventById(req: Request, res: Response, next: NextFunction) {
+  async getEventById(
+    req: Request,
+    res: Response<IApiResponse<IEventByIdResponse>>,
+    next: NextFunction,
+  ) {
     try {
       const eventId = parseInt(req.params.id as string, 10);
-      const event = await eventService().getEventById({ eventId });
-      if (!event) {
-        return res.status(404).json({ message: "Event not found" });
+      const eventResponse = await eventService().getEventById({ eventId });
+      if (!eventResponse) {
+        throw new HttpError({
+          message: "Event not found",
+          statusCode: 404,
+        });
       }
-      res.status(200).json(event);
+      res.status(200).json({
+        message: "Event retrieved successfully",
+        statusCode: 200,
+        success: true,
+        data: eventResponse.events[0],
+      });
     } catch (error) {
       logger.error("Error retrieving event:", error);
       next(error);
@@ -98,14 +112,12 @@ class EventController {
       const eventId = parseInt(req.params.id as string, 10);
       await eventService().deleteEvent({ eventId, userId });
       logger.info(`Event ${eventId} deleted successfully for user ${userId}`);
-      res
-        .status(200)
-        .json({
-          message: "Event deleted successfully",
-          data: [],
-          statusCode: 200,
-          success: true,
-        });
+      res.status(200).json({
+        message: "Event deleted successfully",
+        data: [],
+        statusCode: 200,
+        success: true,
+      });
     } catch (error) {
       logger.error("Error deleting event:", error);
       next(error);
