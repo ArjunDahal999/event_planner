@@ -1,104 +1,84 @@
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from "@/components/ui/input-otp";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import {
   LoginUserDTO,
   loginUserSchema,
 } from "@event-planner/shared/src/schemas/user.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, Controller } from "react-hook-form";
 import z from "zod";
 
-export function InputOTPForm({
-  onSubmit,
-  email,
-}: {
+interface InputOTPFormProps {
   onSubmit: (payload: LoginUserDTO) => Promise<void>;
   email: string;
-}) {
-  const form = useForm<z.infer<typeof loginUserSchema>>({
+}
+
+type OTPFormValues = z.infer<typeof loginUserSchema>;
+
+const inputStyles =
+  "w-full border border-gray-300 bg-white px-4 py-3 text-center text-xl tracking-widest rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition";
+
+const labelStyles = "text-sm font-medium text-gray-700";
+
+const errorStyles = "text-xs text-red-500 mt-1";
+
+const InputOTPForm = ({ onSubmit, email }: InputOTPFormProps) => {
+  const form = useForm<OTPFormValues>({
+    //@ts-ignore
     resolver: zodResolver(loginUserSchema),
     defaultValues: {
-      email: email,
+      email,
       token: "",
     },
     mode: "onSubmit",
   });
 
-  const { isSubmitting } = form.formState;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = form;
 
   return (
-    <Card className="mx-auto min-w-md">
-      <CardHeader>
-        <CardTitle>Verify your login</CardTitle>
-        <CardDescription>Check terminal for verification code</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <FieldGroup>
-            <Field>
-              <div className="flex items-center justify-between">
-                <FieldLabel htmlFor="otp-verification">
-                  Verification code
-                </FieldLabel>
-              </div>
-              <Controller
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <input {...field} type="email" id="email" hidden />
-                )}
-              />
-              <Controller
-                control={form.control}
-                name="token"
-                render={({ field }) => (
-                  <InputOTP
-                    value={field.value ?? ""}
-                    onChange={(value) => field.onChange(value)}
-                    maxLength={6}
-                    id="otp-verification"
-                    required
-                  >
-                    <InputOTPGroup className="*:data-[slot=input-otp-slot]:h-12 *:data-[slot=input-otp-slot]:w-11 *:data-[slot=input-otp-slot]:text-xl">
-                      <InputOTPSlot index={0} />
-                      <InputOTPSlot index={1} />
-                      <InputOTPSlot index={2} />
-                      <InputOTPSlot index={3} />
-                      <InputOTPSlot index={4} />
-                      <InputOTPSlot index={5} />
-                    </InputOTPGroup>
-                  </InputOTP>
-                )}
-              />
-            </Field>
+    <div className="max-w-md mx-auto bg-white border shadow-sm p-8 rounded-lg">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+        Verify your login
+      </h2>
+      <p className="text-sm text-gray-500 mb-6">
+        Check your terminal for the verification code
+      </p>
 
-            <Field className=" py-4">
-              <Button disabled={isSubmitting} type="submit" className="w-full">
-                Verify
-              </Button>
-            </Field>
-          </FieldGroup>
-        </form>
-        {form.formState.errors.token && (
-          <p className="text-red-500 text-sm">
-            {form.formState.errors.token.message}
-          </p>
-        )}
-      </CardContent>
-      <CardFooter></CardFooter>
-    </Card>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        {/* Hidden Email Field */}
+        <input type="hidden" {...register("email")} />
+
+        {/* OTP Field */}
+        <div>
+          <label className={labelStyles}>Verification Code</label>
+          <input
+            {...register("token")}
+            type="text"
+            maxLength={6}
+            className={inputStyles}
+            placeholder="Enter 6-digit code"
+          />
+          {errors.token && (
+            <p className={errorStyles}>{errors.token.message}</p>
+          )}
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full  bg-primary text-white font-medium py-3 rounded-lg shadow-md hover:shadow-none transition disabled:opacity-50"
+        >
+          {isSubmitting ? "Verifying..." : "Verify"}
+        </button>
+      </form>
+    </div>
   );
-}
+};
+
+export default InputOTPForm;

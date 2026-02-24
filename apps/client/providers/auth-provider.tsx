@@ -26,6 +26,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         method: "POST",
         credentials: "include",
       });
+      localStorage.removeItem("userId");
     } finally {
       tokenStore().clearAccessToken();
       setIsAuthenticated(false);
@@ -36,6 +37,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const { data, message } = await authService().loginWith2FA(payload);
     tokenStore().setAccessToken(data.accessToken);
     setIsAuthenticated(true);
+    localStorage.setItem("userId", data.user.id.toString());
     return {
       data,
       message,

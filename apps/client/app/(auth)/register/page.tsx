@@ -4,7 +4,6 @@ import {
   RegisterForm,
   type RegisterFormValues,
 } from "@/components/auth/register-form";
-import { Card } from "@/components/ui/card";
 import { authService } from "@/services/auth.service";
 import Link from "next/link";
 import { useState } from "react";
@@ -24,12 +23,9 @@ const RegisterPage = () => {
 
   return (
     <>
-      <RegisterForm
-        className="min-w-sm md:min-w-lg"
-        onSubmit={handleRegister}
-      />
+      <RegisterForm onSubmit={handleRegister} />
       {activationLink && (
-        <Card className="w-full max-w-sm md:min-w-lg px-2">
+        <div className="w-full max-w-sm md:min-w-lg px-2">
           <span className="text-sm text-muted-foreground">
             For testing purposes, use the link below to activate your account.
             In a production environment, this link would be sent to the
@@ -38,7 +34,7 @@ const RegisterPage = () => {
           <Link className=" text-primary" href={activationLink}>
             {activationLink}
           </Link>
-        </Card>
+        </div>
       )}
     </>
   );

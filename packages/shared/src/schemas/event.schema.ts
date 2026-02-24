@@ -13,11 +13,20 @@ export const createEventSchema = z.object({
   location: z.string().min(1),
   description: z.string().min(1),
   event_date: datePreprocess,
-  event_type: eventTypeEnum.optional().default("public"),
-  tags: z
-    .array(z.string())
-    .default([])
-    .transform((tags) => [...new Set(tags.map((t) => t.trim().toLowerCase()))]),
+  event_type: eventTypeEnum.default("public"),
+  tags: z.preprocess(
+    (val) =>
+      typeof val === "string"
+        ? val
+            .split(",")
+            .map((t) => t.trim().toLowerCase())
+            .filter(Boolean)
+        : val,
+    z
+      .array(z.string())
+      .default([])
+      .transform((tags) => [...new Set(tags)]),
+  ),
 });
 
 export type CreateEventDTO = z.infer<typeof createEventSchema>;

@@ -1,14 +1,15 @@
 "use client";
 
-import { InputOTPForm } from "@/components/auth/login-2FA-form";
+import InputOTPForm from "@/components/auth/login-2FA-form";
 import { AuthContext } from "@/providers/auth-provider";
 import { LoginUserDTO } from "@event-planner/shared";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useContext } from "react";
 import { toast } from "sonner";
 
 const Login2FAPage = () => {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const authContext = useContext(AuthContext);
   if (!authContext) return;
   const { login } = authContext;
@@ -25,6 +26,7 @@ const Login2FAPage = () => {
     try {
       const { message } = await login(payload);
       toast.success(message);
+      router.push("/events");
     } catch (error) {
       console.error("2FA login error:", error);
     }

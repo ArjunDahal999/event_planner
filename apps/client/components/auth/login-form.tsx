@@ -1,32 +1,26 @@
 "use client";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from "@/components/ui/field";
+
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Generate2FADTO, generate2FASchema } from "@event-planner/shared";
-import { Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-interface LoginFormProps extends Omit<React.ComponentProps<"div">, "onSubmit"> {
+
+interface LoginFormProps {
   onSubmit: (data: Generate2FADTO) => Promise<void>;
 }
-export function LoginForm({ className, onSubmit, ...props }: LoginFormProps) {
-  const form = useForm<z.infer<typeof generate2FASchema>>({
+
+type LoginFormValues = z.infer<typeof generate2FASchema>;
+
+const inputStyles =
+  "w-full border border-gray-300 bg-white px-4 py-2 text-sm rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition disabled:opacity-50";
+
+const labelStyles = "text-sm font-medium text-gray-700";
+
+const errorStyles = "text-xs text-red-500 mt-1";
+
+export function LoginForm({ onSubmit }: LoginFormProps) {
+  const form = useForm<LoginFormValues>({
     resolver: zodResolver(generate2FASchema),
     defaultValues: {
       email: "",
@@ -34,68 +28,73 @@ export function LoginForm({ className, onSubmit, ...props }: LoginFormProps) {
     },
   });
 
-  const FIELDS = [
-    {
-      name: "email" as const,
-      label: "Email",
-      type: "email",
-      placeholder: "m@example.com",
-    },
-    {
-      name: "password" as const,
-      label: "Password",
-      type: "password",
-      placeholder: "Your Password",
-    },
-  ];
-  const { isSubmitting } = form.formState;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = form;
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <FieldGroup>
-              {FIELDS.map(({ name, label, type, placeholder }) => (
-                <Controller
-                  key={name}
-                  control={form.control}
-                  name={name}
-                  render={({ field, fieldState }) => (
-                    <Field>
-                      <FieldLabel htmlFor={name}>{label}</FieldLabel>
-                      <Input
-                        id={name}
-                        type={type}
-                        placeholder={placeholder}
-                        disabled={isSubmitting}
-                        aria-invalid={!!fieldState.error}
-                        {...field}
-                      />
-                      {fieldState.error && (
-                        <FieldError>{fieldState.error.message}</FieldError>
-                      )}
-                    </Field>
-                  )}
-                />
-              ))}
-              <Field>
-                <Button type="submit">Login</Button>
-                <FieldDescription className="text-center">
-                  Don&apos;t have an account?{" "}
-                  <Link href="/register">Sign up</Link>
-                </FieldDescription>
-              </Field>
-            </FieldGroup>
-          </form>
-        </CardContent>
-      </Card>
+    <div className="max-w-md mx-auto bg-white border shadow-sm p-8 rounded-lg">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+        Login to your account
+      </h2>
+      <p className="text-sm text-gray-500 mb-6">
+        Enter your email below to login to your account
+      </p>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        {/* Email */}
+        <div>
+          <label className={labelStyles}>Email</label>
+          <input
+            {...register("email")}
+            type="email"
+            placeholder="m@example.com"
+            disabled={isSubmitting}
+            className={inputStyles}
+          />
+          {errors.email && (
+            <p className={errorStyles}>{errors.email.message}</p>
+          )}
+        </div>
+
+        {/* Password */}
+        <div>
+          <label className={labelStyles}>Password</label>
+          <input
+            {...register("password")}
+            type="password"
+            placeholder="Your Password"
+            disabled={isSubmitting}
+            className={inputStyles}
+          />
+          {errors.password && (
+            <p className={errorStyles}>{errors.password.message}</p>
+          )}
+        </div>
+
+        {/* Submit */}
+        <div className="pt-2">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-primary text-white font-medium py-3 rounded-lg shadow-md  hover:shadow-none transition disabled:opacity-50"
+          >
+            {isSubmitting ? "Processing..." : "Login"}
+          </button>
+
+          <p className="text-sm text-gray-600 text-center mt-4">
+            Don&apos;t have an account?{" "}
+            <Link
+              href="/register"
+              className="text-primary hover:underline font-medium"
+            >
+              Sign up
+            </Link>
+          </p>
+        </div>
+      </form>
     </div>
   );
 }

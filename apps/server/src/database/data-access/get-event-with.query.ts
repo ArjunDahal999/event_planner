@@ -1,4 +1,3 @@
-import { th } from "zod/locales";
 import {
   EVENT_TABLE,
   EVENT_TAG_TABLE,
@@ -37,7 +36,7 @@ export const getEventWithTagsQuery = async ({
   if (where) baseQuery = baseQuery.whereRaw(where);
   if (having && havingBindings)
     baseQuery = baseQuery.havingRaw(having, havingBindings);
-  if (sortBy && sortOrder) baseQuery.orderBy(sortBy, sortOrder);
+  baseQuery.orderBy(sortBy ?? `${EVENT_TABLE}.created_at`, sortOrder ?? "desc");
 
   const [count] = await db
     .count("* as total")
@@ -80,12 +79,12 @@ export const getEventWithTagsQuery = async ({
     .limit(limit)
     .offset((page - 1) * limit);
   return {
-    data: events,
+    events: events,
     meta: {
-      totalCount: count.total,
-      currentPage: +page,
+      totalCount: parseInt(count.total as string, 10),
+      currentPage: page,
       limit: +limit,
-      totalPage: Math.ceil((count.total as number) / +limit),
+      totalPage: Math.ceil(parseInt(count.total as string, 10) / +limit),
     },
   };
 };

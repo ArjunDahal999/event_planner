@@ -4,6 +4,7 @@
         "FADTO",
         "ILIKE",
         "IRSPV",
-        "knexfile"
+        "knexfile",
+        "Skeletion"
     ]
 }

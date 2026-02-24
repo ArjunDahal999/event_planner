@@ -40,3 +40,33 @@ export interface IRefreshTokenResponse {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface IEventResponse {
+  events: IEvent[];
+  meta: IMeta;
+}
+
+export interface IEvent {
+  id: number;
+  title: string;
+  description: string;
+  eventDate: string;
+  location: string;
+  eventType: "public" | "private";
+  createdAt: string;
+  userId: number;
+  userName: string;
+  tags: ITags[];
+}
+
+export interface ITags {
+  tagName: string;
+  tagColor: string;
+}
+
+export interface IMeta {
+  totalCount: number;
+  currentPage: number;
+  limit: number;
+  totalPage: number;
+}

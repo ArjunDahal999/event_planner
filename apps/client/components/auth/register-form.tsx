@@ -1,132 +1,115 @@
 // components/auth/register-form.tsx
 "use client";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Field,
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-  FieldError,
-} from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Controller, useForm } from "react-hook-form";
+
+import { useForm } from "react-hook-form";
 import z from "zod";
 import { registerUserSchema } from "@event-planner/shared";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { Loader2 } from "lucide-react";
 
 export type RegisterFormValues = z.infer<typeof registerUserSchema>;
 
-interface RegisterFormProps extends Omit<
-  React.ComponentProps<"div">,
-  "onSubmit"
-> {
+interface RegisterFormProps {
   onSubmit: (data: RegisterFormValues) => Promise<void>;
 }
 
-const FIELDS = [
-  {
-    name: "name" as const,
-    label: "Name",
-    type: "text",
-    placeholder: "Your Name",
-  },
-  {
-    name: "email" as const,
-    label: "Email",
-    type: "email",
-    placeholder: "m@example.com",
-  },
-  {
-    name: "password" as const,
-    label: "Password",
-    type: "password",
-    placeholder: "Your Password",
-  },
-];
+const inputStyles =
+  "w-full border border-gray-300 bg-white px-4 py-2 text-sm rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition disabled:opacity-50";
 
-export function RegisterForm({
-  className,
-  onSubmit,
-  ...props
-}: RegisterFormProps) {
+const labelStyles = "text-sm font-medium text-gray-700";
+
+const errorStyles = "text-xs text-red-500 mt-1";
+
+export function RegisterForm({ onSubmit }: RegisterFormProps) {
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerUserSchema),
-    defaultValues: { name: "", email: "", password: "" },
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
   });
 
-  const { isSubmitting } = form.formState;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = form;
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader>
-          <CardTitle>Register for an account</CardTitle>
-          <CardDescription>
-            Enter your details below to create a new account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <FieldGroup>
-              {FIELDS.map(({ name, label, type, placeholder }) => (
-                <Controller
-                  key={name}
-                  control={form.control}
-                  name={name}
-                  render={({ field, fieldState }) => (
-                    <Field>
-                      <FieldLabel htmlFor={name}>{label}</FieldLabel>
-                      <Input
-                        id={name}
-                        type={type}
-                        placeholder={placeholder}
-                        disabled={isSubmitting}
-                        aria-invalid={!!fieldState.error}
-                        {...field}
-                      />
-                      {fieldState.error && (
-                        <FieldError>{fieldState.error.message}</FieldError>
-                      )}
-                    </Field>
-                  )}
-                />
-              ))}
-              <Field>
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Registering...
-                    </>
-                  ) : (
-                    "Register"
-                  )}
-                </Button>
-                <FieldDescription className="text-center">
-                  Already have an account?{" "}
-                  <Link href="/login" className="underline underline-offset-4">
-                    Sign in
-                  </Link>
-                </FieldDescription>
-              </Field>
-            </FieldGroup>
-          </form>
-        </CardContent>
-      </Card>
+    <div className="max-w-md mx-auto bg-white border shadow-sm p-8 rounded-lg">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+        Register for an account
+      </h2>
+      <p className="text-sm text-gray-500 mb-6">
+        Enter your details below to create a new account
+      </p>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        {/* Name */}
+        <div>
+          <label className={labelStyles}>Name</label>
+          <input
+            {...register("name")}
+            type="text"
+            placeholder="Your Name"
+            disabled={isSubmitting}
+            className={inputStyles}
+          />
+          {errors.name && <p className={errorStyles}>{errors.name.message}</p>}
+        </div>
+
+        {/* Email */}
+        <div>
+          <label className={labelStyles}>Email</label>
+          <input
+            {...register("email")}
+            type="email"
+            placeholder="m@example.com"
+            disabled={isSubmitting}
+            className={inputStyles}
+          />
+          {errors.email && (
+            <p className={errorStyles}>{errors.email.message}</p>
+          )}
+        </div>
+
+        {/* Password */}
+        <div>
+          <label className={labelStyles}>Password</label>
+          <input
+            {...register("password")}
+            type="password"
+            placeholder="Your Password"
+            disabled={isSubmitting}
+            className={inputStyles}
+          />
+          {errors.password && (
+            <p className={errorStyles}>{errors.password.message}</p>
+          )}
+        </div>
+
+        {/* Submit */}
+        <div className="pt-2">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full  bg-primary text-white font-medium py-3 rounded-lg shadow-md hover:shadow-none transition disabled:opacity-50 flex items-center justify-center"
+          >
+            {isSubmitting ? "Registering..." : "Register"}
+          </button>
+
+          <p className="text-sm text-gray-600 text-center mt-4">
+            Already have an account?{" "}
+            <Link
+              href="/login"
+              className="text-primary hover:underline font-medium"
+            >
+              Sign in
+            </Link>
+          </p>
+        </div>
+      </form>
     </div>
   );
 }

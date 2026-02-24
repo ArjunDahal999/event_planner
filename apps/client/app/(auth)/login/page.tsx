@@ -17,7 +17,7 @@ const LoginPage = () => {
       console.error("2FA generation error:", error);
     }
   };
-  return <LoginForm onSubmit={handleGenerate2FA} className=" min-w-lg" />;
+  return <LoginForm onSubmit={handleGenerate2FA} />;
 };
 
 export default LoginPage;
