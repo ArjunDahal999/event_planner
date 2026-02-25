@@ -15,11 +15,10 @@ import { eventService } from "../services/event.service.ts";
 import logger from "../libs/winston.ts";
 import type {
   IApiResponse,
-  IEvent,
   IEventByIdResponse,
   IEventResponse,
 } from "@event-planner/shared";
-import { th } from "zod/locales";
+import { rsvpService } from "../services/rsvp.service.ts";
 
 class EventController {
   async createEvent(

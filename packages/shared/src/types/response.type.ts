@@ -59,6 +59,16 @@ export interface IEvent {
   userId: number;
   userName: string;
   tags: ITags[];
+  rsvpSummary: { response: "YES" | "NO" | "MAY BE" | string; count: number }[];
+}
+
+export interface IRSPV {
+  id: number;
+  userId: number;
+  eventId: number;
+  response: "YES" | "NO" | "MAY BE" | string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface ITags {

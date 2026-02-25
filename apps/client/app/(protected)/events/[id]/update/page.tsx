@@ -2,12 +2,13 @@
 
 import EventForm from "@/components/event/event-form";
 import { Button } from "@/components/ui/button";
+import QUERY_KEY_CONSTANT from "@/constant/query-key-constant";
 import { eventService } from "@/services/event.service";
 import { CreateEventDTO } from "@event-planner/shared";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ChevronLeft } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import React, { ViewTransition } from "react";
+import { ViewTransition } from "react";
 
 const EventUpdatePage = () => {
   const params = useParams<{ id: string }>();
@@ -18,10 +19,35 @@ const EventUpdatePage = () => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["event", params.id],
+    queryKey: [QUERY_KEY_CONSTANT.EVENT, params.id],
     queryFn: () =>
       eventService().getEventById({ eventId: parseInt(params.id) }),
     enabled: !!params.id,
+  });
+
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: (data: CreateEventDTO) =>
+      eventService().updateEvent({
+        eventId: event.id,
+        payload: {
+          description: data.description,
+          event_date: data.event_date,
+          event_type: data.event_type,
+          location: data.location,
+          tags: data.tags,
+          title: data.title,
+        },
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY_CONSTANT.EVENT, params.id],
+      });
+      router.push(`/events/${event.id}`);
+    },
+    onError: (error) => {
+      console.error("Error updating event:", error);
+    },
   });
 
   if (isLoading) return <div>Loading...</div>;
@@ -32,26 +58,6 @@ const EventUpdatePage = () => {
     router.back();
   };
 
-  const handleUpdateEvent = async (data: CreateEventDTO) => {
-    try {
-      // Call the updateEvent function from the event service
-      await eventService().updateEvent({
-        eventId: event.id,
-        payload: {
-          description: data.description,
-          event_date: data.event_date,
-          event_type: data.event_type,
-          location: data.location,
-          tags: data.tags,
-          title: data.title,
-        },
-      });
-      // After successful update, navigate back to the event details page or show a success message
-      router.push(`/events/${event.id}`);
-    } catch (error) {
-      console.error("Error updating event:", error);
-    }
-  };
   return (
     <>
       <Button onClick={handleBack} className="w-fit group mb-3">
@@ -70,7 +76,7 @@ const EventUpdatePage = () => {
                 : undefined,
             }}
             mode="update"
-            onSubmit={handleUpdateEvent}
+            onSubmit={mutate}
           />
         </div>
       </ViewTransition>

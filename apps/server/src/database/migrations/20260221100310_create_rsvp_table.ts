@@ -4,8 +4,8 @@ import { EVENT_TABLE, RSVP_TABLE, USER_TABLE } from "../constants.ts";
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(RSVP_TABLE, (table) => {
     table.increments("id").primary();
-    table.integer("user_id").unsigned().notNullable().unique();
-    table.integer("event_id").unsigned().notNullable().unique().index();
+    table.integer("user_id").unsigned().notNullable();
+    table.integer("event_id").unsigned().notNullable();
     table.enum("response", ["YES", "NO", "MAY BE"]).index();
     table
       .foreign("event_id")
@@ -17,6 +17,7 @@ export async function up(knex: Knex): Promise<void> {
       .references("id")
       .inTable(USER_TABLE)
       .onDelete("CASCADE");
+    table.unique(["user_id", "event_id"]);
     table.timestamps(true, true);
   });
 }

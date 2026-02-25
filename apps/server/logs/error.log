@@ -1,141 +1,180 @@
-2026-02-21T13:34:16.179Z [ERROR]: Error: Event or user does not exist.
-2026-02-21T13:38:31.418Z [ERROR]: Error: You have already RSVP'd to this event.
-2026-02-21T13:39:09.166Z [ERROR]: Error: Failed to delete RSVP
-2026-02-21T13:39:20.053Z [ERROR]: Error: Failed to delete RSVP
-2026-02-21T17:54:12.349Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:01:16.690Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:01:50.022Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:01:53.714Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:01:54.781Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:01:55.108Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:01:55.319Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:01:56.800Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:01:57.070Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:02:03.616Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:09:41.868Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:09:42.597Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:09:43.221Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:09:45.412Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:09:46.231Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:09:47.082Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:09:47.659Z [ERROR]: Error: Email is already registered.
-2026-02-21T18:09:48.253Z [ERROR]: Error: Email is already registered.
-2026-02-22T04:46:53.252Z [ERROR]: Error: Email is already registered.
-2026-02-22T04:46:59.329Z [ERROR]: Error: Email is already registered.
-2026-02-22T05:20:49.972Z [ERROR]: Error: Email is already registered.
-2026-02-22T05:21:17.089Z [ERROR]: Error: Email is already registered.
-2026-02-22T05:21:40.799Z [ERROR]: Error: Email is already registered.
-2026-02-22T05:21:48.302Z [ERROR]: Error: Email is already registered.
-2026-02-22T06:10:26.246Z [ERROR]: Error: Email is already registered.
-2026-02-22T06:10:33.723Z [ERROR]: Error: Email is already registered.
-2026-02-22T06:19:30.043Z [ERROR]: Error: Email is already registered.
-2026-02-22T06:20:11.985Z [ERROR]: Error: Email is not verified. Please verify your email before logging in.
-2026-02-22T06:20:21.256Z [ERROR]: Error: Email is not verified. Please verify your email before logging in.
-2026-02-22T06:21:38.366Z [ERROR]: Error: Email is not verified. Please verify your email before logging in.
-2026-02-22T06:21:40.786Z [ERROR]: Error: Email is not verified. Please verify your email before logging in.
-2026-02-22T06:21:49.052Z [ERROR]: Error: Email is not verified. Please verify your email before logging in.
-2026-02-22T06:37:34.628Z [ERROR]: Error: Email is not verified. Please verify your email before logging in.
-2026-02-22T07:10:16.800Z [ERROR]: Error: Invalid or expired token.
-2026-02-22T07:48:03.367Z [ERROR]: Error: Invalid or expired token.
-2026-02-22T07:48:12.058Z [ERROR]: Error: Email is not verified. Please verify your email before logging in.
-2026-02-22T07:48:20.548Z [ERROR]: Error: Email is not verified. Please verify your email before logging in.
-2026-02-22T07:48:29.077Z [ERROR]: Error: Email is not verified. Please verify your email before logging in.
-2026-02-22T07:58:54.491Z [ERROR]: Error: Invalid  password.
-2026-02-22T08:22:17.018Z [ERROR]: Error: Email is not verified. Please verify your email before logging in.
-2026-02-22T11:22:41.135Z [ERROR]: Error: Invalid token.
-2026-02-22T11:33:37.055Z [ERROR]: Error: Invalid token.
-2026-02-22T12:25:16.355Z [ERROR]: Error: Invalid token.
-2026-02-22T12:38:04.701Z [ERROR]: Error: Invalid token.
-2026-02-22T13:36:24.957Z [ERROR]: Validation error: [{"expected":"object","code":"invalid_type","path":[],"message":"Invalid input: expected object, received undefined"}]
-2026-02-22T13:40:02.309Z [ERROR]: Validation error: [{"expected":"object","code":"invalid_type","path":[],"message":"Invalid input: expected object, received undefined"}]
-2026-02-22T13:42:24.211Z [ERROR]: Validation error: [{"expected":"object","code":"invalid_type","path":[],"message":"Invalid input: expected object, received undefined"}]
-2026-02-22T13:42:39.057Z [ERROR]: Validation error: [{"expected":"object","code":"invalid_type","path":[],"message":"Invalid input: expected object, received undefined"}]
-2026-02-22T13:45:34.099Z [ERROR]: Validation error: [{"expected":"object","code":"invalid_type","path":[],"message":"Invalid input: expected object, received undefined"}]
-2026-02-22T13:55:38.949Z [ERROR]: Error: Invalid refresh token.
-2026-02-22T13:56:18.942Z [ERROR]: Error: Invalid refresh token.
-2026-02-22T13:56:49.353Z [ERROR]: Error: Refresh token missing.
-2026-02-22T13:57:17.170Z [ERROR]: Error: Invalid refresh token.
-2026-02-22T13:57:55.883Z [ERROR]: Error: Invalid refresh token.
-2026-02-22T14:01:12.846Z [ERROR]: Error: Invalid refresh token.
-2026-02-22T14:01:46.233Z [ERROR]: invalid signature
-2026-02-22T14:01:46.236Z [ERROR]: Error: Invalid refresh token
-2026-02-22T14:02:01.862Z [ERROR]: Error: Invalid refresh token.
-2026-02-22T14:03:11.582Z [ERROR]: Error: Invalid refresh token.
-2026-02-22T14:04:50.733Z [ERROR]: Error: Invalid refresh token.
-2026-02-22T14:05:08.493Z [ERROR]: Error: Invalid refresh token.
-2026-02-22T14:05:31.387Z [ERROR]: Error: Invalid refresh token.
-2026-02-22T14:05:49.506Z [ERROR]: Error: Invalid refresh token.
-2026-02-22T14:08:37.470Z [ERROR]: Error:  Refresh token not found in DB.
-2026-02-22T14:08:53.962Z [ERROR]: Error:  Refresh token not found in DB.
-2026-02-22T14:15:03.407Z [ERROR]: Error:  Refresh token not found in DB.
-2026-02-22T14:16:28.639Z [ERROR]: Error:  Refresh token not found in DB.
-2026-02-22T14:18:06.646Z [ERROR]: Error:  Refresh token not found in DB.
-2026-02-22T14:19:51.064Z [ERROR]: Error:  Refresh token not found in DB.
-2026-02-22T14:31:12.949Z [ERROR]: Error: Refresh token missing.
-2026-02-22T14:43:33.862Z [ERROR]: Error: Refresh token missing.
-2026-02-22T15:25:58.047Z [ERROR]: Validation error: [{"expected":"string","code":"invalid_type","path":["name"],"message":"Invalid input: expected string, received undefined"},{"expected":"string","code":"invalid_type","path":["email"],"message":"Invalid input: expected string, received undefined"},{"expected":"string","code":"invalid_type","path":["password"],"message":"Invalid input: expected string, received undefined"}]
-2026-02-22T15:26:02.507Z [ERROR]: Validation error: [{"expected":"string","code":"invalid_type","path":["name"],"message":"Invalid input: expected string, received undefined"},{"expected":"string","code":"invalid_type","path":["email"],"message":"Invalid input: expected string, received undefined"},{"expected":"string","code":"invalid_type","path":["password"],"message":"Invalid input: expected string, received undefined"}]
-2026-02-22T15:26:25.280Z [ERROR]: Validation error: [{"expected":"string","code":"invalid_type","path":["name"],"message":"Invalid input: expected string, received undefined"},{"expected":"string","code":"invalid_type","path":["email"],"message":"Invalid input: expected string, received undefined"},{"expected":"string","code":"invalid_type","path":["password"],"message":"Invalid input: expected string, received undefined"}]
-2026-02-22T15:26:25.281Z [ERROR]: Validation error: [{"expected":"string","code":"invalid_type","path":["name"],"message":"Invalid input: expected string, received undefined"},{"expected":"string","code":"invalid_type","path":["email"],"message":"Invalid input: expected string, received undefined"},{"expected":"string","code":"invalid_type","path":["password"],"message":"Invalid input: expected string, received undefined"}]
-2026-02-22T15:27:55.918Z [ERROR]: Error: Not logged in
-2026-02-22T15:28:27.356Z [ERROR]: Error: Not logged in
-2026-02-22T15:28:30.907Z [ERROR]: Error: Not logged in
-2026-02-22T15:28:58.348Z [ERROR]: Error: Not logged in
-2026-02-22T15:30:13.851Z [ERROR]: Error: Not logged in
-2026-02-23T06:56:42.511Z [ERROR]: Error: Refresh token missing.
-2026-02-23T06:57:00.507Z [ERROR]: Error: Refresh token missing.
-2026-02-23T09:47:37.375Z [ERROR]: Error: Bad control character in string literal in JSON at position 230 (line 3 column 195)
-2026-02-23T09:48:38.864Z [ERROR]: Error creating event: insert into `event` (`description`, `event_date`, `event_type`, `location`, `title`, `user_id`) values ('Word Break defines how text breaks and wraps when it doesn\'t fit within its container. This becomes particularly for ensuring content readability and maintaining responsive layouts, especially in scenarios involving unusually long strings URLs, or dynamic content.', '2026-04-18 15:45:00.000', 'public', 'Design Studio', 'UI/UX Design Sprint', 2) - Data too long for column 'description' at row 1
-2026-02-23T09:48:38.864Z [ERROR]: Error: insert into `event` (`description`, `event_date`, `event_type`, `location`, `title`, `user_id`) values ('Word Break defines how text breaks and wraps when it doesn\'t fit within its container. This becomes particularly for ensuring content readability and maintaining responsive layouts, especially in scenarios involving unusually long strings URLs, or dynamic content.', '2026-04-18 15:45:00.000', 'public', 'Design Studio', 'UI/UX Design Sprint', 2) - Data too long for column 'description' at row 1
-2026-02-23T13:01:58.408Z [ERROR]: Validation error: [{"code":"invalid_value","values":["public","private"],"path":["eventType"],"message":"Invalid option: expected one of \"public\"|\"private\""}]
-2026-02-23T13:01:59.417Z [ERROR]: Validation error: [{"code":"invalid_value","values":["public","private"],"path":["eventType"],"message":"Invalid option: expected one of \"public\"|\"private\""}]
-2026-02-23T13:02:01.424Z [ERROR]: Validation error: [{"code":"invalid_value","values":["public","private"],"path":["eventType"],"message":"Invalid option: expected one of \"public\"|\"private\""}]
-2026-02-23T13:02:05.431Z [ERROR]: Validation error: [{"code":"invalid_value","values":["public","private"],"path":["eventType"],"message":"Invalid option: expected one of \"public\"|\"private\""}]
-2026-02-23T15:27:55.090Z [ERROR]: Error: Email is already registered.
-2026-02-23T15:28:34.727Z [ERROR]: Error: Email is already registered.
-2026-02-23T15:30:03.838Z [ERROR]: Error: Email is already registered.
-2026-02-23T15:32:49.224Z [ERROR]: Error retrieving events: select count(*) as `total` from (select `event`.`id` from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where 1=1 group by `event`.`id` order by `created_at` desc) as `sub` - Column 'created_at' in order clause is ambiguous
-2026-02-23T15:32:49.226Z [ERROR]: Error: select count(*) as `total` from (select `event`.`id` from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where 1=1 group by `event`.`id` order by `created_at` desc) as `sub` - Column 'created_at' in order clause is ambiguous
-2026-02-23T15:32:50.235Z [ERROR]: Error retrieving events: select count(*) as `total` from (select `event`.`id` from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where 1=1 group by `event`.`id` order by `created_at` desc) as `sub` - Column 'created_at' in order clause is ambiguous
-2026-02-23T15:32:50.236Z [ERROR]: Error: select count(*) as `total` from (select `event`.`id` from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where 1=1 group by `event`.`id` order by `created_at` desc) as `sub` - Column 'created_at' in order clause is ambiguous
-2026-02-23T15:32:52.271Z [ERROR]: Error retrieving events: select count(*) as `total` from (select `event`.`id` from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where 1=1 group by `event`.`id` order by `created_at` desc) as `sub` - Column 'created_at' in order clause is ambiguous
-2026-02-23T15:32:52.272Z [ERROR]: Error: select count(*) as `total` from (select `event`.`id` from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where 1=1 group by `event`.`id` order by `created_at` desc) as `sub` - Column 'created_at' in order clause is ambiguous
-2026-02-23T15:32:56.281Z [ERROR]: Error retrieving events: select count(*) as `total` from (select `event`.`id` from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where 1=1 group by `event`.`id` order by `created_at` desc) as `sub` - Column 'created_at' in order clause is ambiguous
-2026-02-23T15:32:56.282Z [ERROR]: Error: select count(*) as `total` from (select `event`.`id` from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where 1=1 group by `event`.`id` order by `created_at` desc) as `sub` - Column 'created_at' in order clause is ambiguous
-2026-02-23T16:14:41.038Z [ERROR]: Error: Refresh token missing.
-2026-02-24T04:52:15.601Z [ERROR]: Error: Refresh token missing.
-2026-02-24T12:07:48.006Z [ERROR]: Error: Refresh token missing.
-2026-02-24T12:07:59.876Z [ERROR]: Error: Refresh token missing.
-2026-02-24T12:08:04.931Z [ERROR]: Error: Refresh token missing.
-2026-02-24T13:56:17.980Z [ERROR]: Error: Invalid refresh token.
-2026-02-24T13:56:21.864Z [ERROR]: Error: Not logged in
-2026-02-24T13:56:22.702Z [ERROR]: Error: Not logged in
-2026-02-24T13:56:23.344Z [ERROR]: Error: Not logged in
-2026-02-24T13:56:24.349Z [ERROR]: Error: Not logged in
-2026-02-24T13:56:26.355Z [ERROR]: Error: Not logged in
-2026-02-24T13:56:27.103Z [ERROR]: Error: Not logged in
-2026-02-24T13:56:27.168Z [ERROR]: Error: Invalid refresh token.
-2026-02-24T13:56:28.112Z [ERROR]: Error: Not logged in
-2026-02-24T13:56:29.566Z [ERROR]: Error: Not logged in
-2026-02-24T13:56:30.572Z [ERROR]: Error: Not logged in
-2026-02-24T13:56:32.577Z [ERROR]: Error: Not logged in
-2026-02-24T13:56:36.582Z [ERROR]: Error: Not logged in
-2026-02-24T13:56:40.062Z [ERROR]: Error: Invalid refresh token.
-2026-02-24T14:19:49.386Z [ERROR]: Error: Refresh token missing.
-2026-02-24T14:19:54.786Z [ERROR]: Error: Refresh token missing.
-2026-02-24T15:10:37.917Z [ERROR]: Error: Not logged in
-2026-02-24T15:22:01.158Z [ERROR]: Error: Not logged in
-2026-02-24T16:27:17.333Z [ERROR]: Error: Refresh token missing.
-2026-02-24T16:27:25.306Z [ERROR]: Error: Refresh token missing.
-2026-02-24T16:27:25.309Z [ERROR]: Error: Not logged in
-2026-02-24T16:27:26.323Z [ERROR]: Error: Not logged in
-2026-02-24T16:27:28.328Z [ERROR]: Error: Not logged in
-2026-02-24T16:27:38.474Z [ERROR]: Error: Refresh token missing.
-2026-02-24T16:27:55.793Z [ERROR]: Error: Refresh token missing.
-2026-02-24T16:28:10.972Z [ERROR]: Error: Refresh token missing.
-2026-02-24T16:29:11.292Z [ERROR]: Error: Invalid refresh token.
-2026-02-24T16:29:24.401Z [ERROR]: Error: Not logged in
-2026-02-24T16:29:31.378Z [ERROR]: Error: Invalid refresh token.
-2026-02-24T16:30:29.922Z [ERROR]: Error: Invalid refresh token.
-2026-02-24T16:30:31.927Z [ERROR]: Error: Not logged in
-2026-02-24T16:30:32.046Z [ERROR]: Error: Not logged in
+2026-02-25T02:05:12.773Z [ERROR]: Error: Refresh token missing.
+2026-02-25T02:05:15.730Z [ERROR]: Error: Refresh token missing.
+2026-02-25T02:05:16.609Z [ERROR]: Error: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-25T05:25:18.127Z [ERROR]: Validation error: [{"expected":"number","code":"invalid_type","received":"NaN","path":["eventId"],"message":"Invalid input: expected number, received NaN"},{"code":"invalid_value","values":["YES","NO","MAY BE"],"path":["response"],"message":"Invalid option: expected one of \"YES\"|\"NO\"|\"MAY BE\""}]
+2026-02-25T05:26:03.244Z [ERROR]: Validation error: [{"code":"invalid_value","values":["YES","NO","MAY BE"],"path":["response"],"message":"Invalid option: expected one of \"YES\"|\"NO\"|\"MAY BE\""}]
+2026-02-25T05:27:06.508Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T05:27:27.322Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T05:27:33.778Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T05:32:14.986Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T06:49:18.950Z [ERROR]: Error: Not logged in
+2026-02-25T06:50:19.003Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T07:03:30.582Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T07:03:39.315Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T07:04:12.418Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T07:04:36.123Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T07:04:50.970Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T07:23:59.374Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T07:40:25.659Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T07:50:19.982Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T08:04:44.887Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T08:04:50.537Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T08:28:30.014Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T08:29:09.611Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T08:29:58.330Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T08:31:12.823Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-25T08:35:10.444Z [ERROR]: Error: Not logged in
+2026-02-25T08:35:12.452Z [ERROR]: Error: Not logged in
+2026-02-25T08:35:12.665Z [ERROR]: Error: Not logged in
+2026-02-25T08:35:58.455Z [ERROR]: Error: Email is already registered.
+2026-02-25T09:51:14.412Z [ERROR]: Error: Refresh token missing.
+2026-02-25T10:35:07.113Z [ERROR]: Error updating event: The query is empty
+2026-02-25T10:35:07.114Z [ERROR]: Error: The query is empty
+2026-02-25T10:35:08.797Z [ERROR]: Error updating event: The query is empty
+2026-02-25T10:35:08.797Z [ERROR]: Error: The query is empty
+2026-02-25T11:28:45.169Z [ERROR]: Error: Invalid refresh token.
+2026-02-25T11:30:05.498Z [ERROR]: Error: Not logged in
+2026-02-25T11:30:05.499Z [ERROR]: Error: Not logged in
+2026-02-25T11:30:05.502Z [ERROR]: Error: Not logged in
+2026-02-25T11:30:05.506Z [ERROR]: Error: Not logged in
+2026-02-25T12:30:21.235Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-25T12:30:24.276Z [ERROR]: Error: Invalid email or password.
+2026-02-25T12:48:50.079Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-25T12:48:57.373Z [ERROR]: Error: Not logged in
+2026-02-25T12:48:58.388Z [ERROR]: Error: Not logged in
+2026-02-25T12:48:58.417Z [ERROR]: Error: Not logged in
+2026-02-25T12:48:59.424Z [ERROR]: Error: Not logged in
+2026-02-25T12:48:59.810Z [ERROR]: Error: Not logged in
+2026-02-25T12:49:01.429Z [ERROR]: Error: Not logged in
+2026-02-25T12:49:05.434Z [ERROR]: Error: Not logged in
+2026-02-25T12:49:07.199Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-25T12:52:15.556Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-25T12:52:17.503Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:18.059Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:18.528Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:19.011Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:19.351Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:19.678Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:19.997Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:20.320Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:20.648Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:20.977Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:21.304Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:21.644Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:22.125Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:22.482Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:22.912Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:23.335Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:24.343Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:26.349Z [ERROR]: Error: Not logged in
+2026-02-25T12:52:28.054Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-25T13:05:37.798Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-25T13:06:08.336Z [ERROR]: Error: Not logged in
+2026-02-25T13:06:08.336Z [ERROR]: Error: Not logged in
+2026-02-25T13:06:09.346Z [ERROR]: Error: Not logged in
+2026-02-25T13:06:09.347Z [ERROR]: Error: Not logged in
+2026-02-25T13:06:11.353Z [ERROR]: Error: Not logged in
+2026-02-25T13:06:11.353Z [ERROR]: Error: Not logged in
+2026-02-25T13:06:15.358Z [ERROR]: Error: Not logged in
+2026-02-25T13:06:15.360Z [ERROR]: Error: Not logged in
+2026-02-25T13:06:19.471Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-25T13:09:10.951Z [ERROR]: Error retrieving events: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`created_at` as `createdAt`, `event`.`user_id` as `userId`, `users`.`name` as `userName`, 
+        IF(COUNT(tag.id) = 0,
+          JSON_ARRAY(),
+          JSON_ARRAYAGG(
+            DISTINCT JSON_OBJECT(
+              'tagName', tag.name,
+              'tagColor', tag.color
+            )
+          )
+        ) as tags
+       from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where 1=1 group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `event`.`created_at`, `users`.`name` order by `event`.`created_at` desc limit 6 offset 6 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DISTINCT JSON_OBJECT(
+              'tagName', tag.name,
+              'tagColor' at line 5
+2026-02-25T13:09:10.953Z [ERROR]: Error: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`created_at` as `createdAt`, `event`.`user_id` as `userId`, `users`.`name` as `userName`, 
+        IF(COUNT(tag.id) = 0,
+          JSON_ARRAY(),
+          JSON_ARRAYAGG(
+            DISTINCT JSON_OBJECT(
+              'tagName', tag.name,
+              'tagColor', tag.color
+            )
+          )
+        ) as tags
+       from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where 1=1 group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `event`.`created_at`, `users`.`name` order by `event`.`created_at` desc limit 6 offset 6 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DISTINCT JSON_OBJECT(
+              'tagName', tag.name,
+              'tagColor' at line 5
+2026-02-25T13:09:11.988Z [ERROR]: Error retrieving events: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`created_at` as `createdAt`, `event`.`user_id` as `userId`, `users`.`name` as `userName`, 
+        IF(COUNT(tag.id) = 0,
+          JSON_ARRAY(),
+          JSON_ARRAYAGG(
+            DISTINCT JSON_OBJECT(
+              'tagName', tag.name,
+              'tagColor', tag.color
+            )
+          )
+        ) as tags
+       from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where 1=1 group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `event`.`created_at`, `users`.`name` order by `event`.`created_at` desc limit 6 offset 6 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DISTINCT JSON_OBJECT(
+              'tagName', tag.name,
+              'tagColor' at line 5
+2026-02-25T13:09:11.989Z [ERROR]: Error: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`created_at` as `createdAt`, `event`.`user_id` as `userId`, `users`.`name` as `userName`, 
+        IF(COUNT(tag.id) = 0,
+          JSON_ARRAY(),
+          JSON_ARRAYAGG(
+            DISTINCT JSON_OBJECT(
+              'tagName', tag.name,
+              'tagColor', tag.color
+            )
+          )
+        ) as tags
+       from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where 1=1 group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `event`.`created_at`, `users`.`name` order by `event`.`created_at` desc limit 6 offset 6 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DISTINCT JSON_OBJECT(
+              'tagName', tag.name,
+              'tagColor' at line 5
+2026-02-25T13:09:14.015Z [ERROR]: Error retrieving events: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`created_at` as `createdAt`, `event`.`user_id` as `userId`, `users`.`name` as `userName`, 
+        IF(COUNT(tag.id) = 0,
+          JSON_ARRAY(),
+          JSON_ARRAYAGG(
+            DISTINCT JSON_OBJECT(
+              'tagName', tag.name,
+              'tagColor', tag.color
+            )
+          )
+        ) as tags
+       from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where 1=1 group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `event`.`created_at`, `users`.`name` order by `event`.`created_at` desc limit 6 offset 6 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DISTINCT JSON_OBJECT(
+              'tagName', tag.name,
+              'tagColor' at line 5
+2026-02-25T13:09:14.016Z [ERROR]: Error: select `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date` as `eventDate`, `event`.`location`, `event`.`event_type` as `eventType`, `event`.`created_at` as `createdAt`, `event`.`user_id` as `userId`, `users`.`name` as `userName`, 
+        IF(COUNT(tag.id) = 0,
+          JSON_ARRAY(),
+          JSON_ARRAYAGG(
+            DISTINCT JSON_OBJECT(
+              'tagName', tag.name,
+              'tagColor', tag.color
+            )
+          )
+        ) as tags
+       from `event` left join `event_tag` on `event`.`id` = `event_tag`.`event_id` left join `tag` on `event_tag`.`tag_id` = `tag`.`id` left join `users` on `users`.`id` = `event`.`user_id` where 1=1 group by `event`.`id`, `event`.`title`, `event`.`description`, `event`.`event_date`, `event`.`location`, `event`.`event_type`, `event`.`user_id`, `event`.`created_at`, `users`.`name` order by `event`.`created_at` desc limit 6 offset 6 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DISTINCT JSON_OBJECT(
+              'tagName', tag.name,
+              'tagColor' at line 5
+2026-02-25T13:49:35.366Z [ERROR]: Error: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-25T13:49:37.604Z [ERROR]: Error: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-25T13:49:52.018Z [ERROR]: Error: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-25T13:49:54.614Z [ERROR]: Error: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-25T13:49:55.344Z [ERROR]: Error: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-25T13:49:55.519Z [ERROR]: Error: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-25T13:49:55.686Z [ERROR]: Error: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-25T13:50:27.193Z [ERROR]: Error: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-25T13:51:00.119Z [ERROR]: Error: Invalid email or password.
+2026-02-25T13:51:28.406Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-25T13:51:28.411Z [ERROR]: Error: Not logged in
+2026-02-25T13:51:29.420Z [ERROR]: Error: Not logged in
+2026-02-25T13:51:31.425Z [ERROR]: Error: Not logged in
+2026-02-25T13:51:34.500Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-25T13:52:11.900Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-25T13:52:14.946Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-25T13:53:25.196Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-25T13:53:38.000Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-25T14:06:50.139Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-25T14:06:51.550Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-25T14:06:55.950Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-25T14:42:33.684Z [ERROR]: Error: Invalid refresh token.

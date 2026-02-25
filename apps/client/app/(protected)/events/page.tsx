@@ -6,18 +6,19 @@ import { EventCard } from "@/components/event/event-card";
 import { useEventFilters } from "@/components/event/use-filter.hook";
 import { EventCardSkeleton } from "@/components/event/event-loading-skeletion";
 import { Button } from "@/components/ui/button";
-import { RotateCcwIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
+import QUERY_KEY_CONSTANT from "@/constant/query-key-constant";
+import EventFilter from "@/components/event/event-filter";
+import Pagination from "@/components/event/event-pagination";
 
 const EventsPage = () => {
-  const { filters, updateFilters, isPending, resetFilters } = useEventFilters();
+  const { filters, updateFilters } = useEventFilters();
   const {
     data: eventsResponse,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["events", filters],
+    queryKey: [QUERY_KEY_CONSTANT.EVENTS, filters],
     queryFn: async () => {
       const response = await eventService().getEvents({ filters });
       return response.data;
@@ -33,73 +34,48 @@ const EventsPage = () => {
     );
 
   return (
-    <section className=" ">
-      <div>
-        <Link href="/events/create">
-          <Button>Create Event</Button>
-        </Link>
-      </div>
-      <div className=" flex gap-x-2 py-4">
-        <button
-          className=" flex items-center justify-center shadow-sm px-2"
-          onClick={resetFilters}
-          disabled={isPending}
-        >
-          <RotateCcwIcon />
-        </button>
-        <Button
-          className={cn(
-            " bg-inherit text-black",
-            filters.eventType === "public" &&
-              "underline underline-offset-4 bg-primary/40",
-          )}
-          onClick={() => updateFilters({ eventType: "public" })}
-        >
-          Public Events
-        </Button>
-        <Button
-          className={cn(
-            " bg-inherit text-black",
-            filters.eventType === "private" &&
-              "underline underline-offset-4 bg-primary/40",
-          )}
-          onClick={() => updateFilters({ eventType: "private" })}
-        >
-          Private Events
-        </Button>
-        <select className=" shadow-sm">
-          <option value="date_desc">Date Descending</option>
-          <option value="date_asc">Date Ascending</option>
-          <option value="createdAt_desc">Created At Descending</option>
-          <option value="createdAt_asc">Created At Ascending</option>
-        </select>
-      </div>
+    <ViewTransition enter={"slide-out"} exit={"slide-in"} default={"none"}>
+      <section className=" relative pb-12 ">
+        <div>
+          <Link href="/events/create">
+            <Button>Create Event</Button>
+          </Link>
+        </div>
+        <EventFilter />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 p-4 transition-main-grid">
-        {isLoading &&
-          [...Array(6)].map((_, index) => <EventCardSkeleton key={index} />)}
-        {eventsResponse?.events.map((event) => (
-          <ViewTransition key={event.id}>
-            <Link href={`/events/${event.id}`} className=" ">
-              <EventCard.Root
-                className=" max-w-sm p-4"
-                key={event.id}
-                event={event}
-              >
-                <EventCard.Header />
-                <EventCard.Description />
-                <EventCard.Date />
-                <EventCard.Location />
-                <EventCard.Type />
-                <EventCard.CreatedBy />
-                <EventCard.Tags />
-                {/* <EventCard.Options /> */}
-              </EventCard.Root>
-            </Link>
-          </ViewTransition>
-        ))}
-      </div>
-    </section>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 p-4 transition-main-grid min-h-[70vh]">
+          {isLoading &&
+            [...Array(6)].map((_, index) => <EventCardSkeleton key={index} />)}
+          {!isLoading && eventsResponse?.events.length === 0 && (
+            <div className="col-span-full text-center text-gray-500">
+              No events found. Try adjusting your filters.
+            </div>
+          )}
+          {eventsResponse?.events.map((event) => (
+            <ViewTransition key={event.id}>
+              <Link href={`/events/${event.id}`} className="h-fit">
+                <EventCard.Root className="max-w-sm p-4" event={event}>
+                  <EventCard.Header />
+                  <EventCard.Description />
+                  <EventCard.Date />
+                  <EventCard.Location />
+                  <EventCard.Type />
+                  <EventCard.CreatedBy />
+                  <EventCard.Tags />
+                  <EventCard.RsvpSummary />
+                </EventCard.Root>
+              </Link>
+            </ViewTransition>
+          ))}
+        </div>
+        <Pagination
+          page={filters.page || 1}
+          total={eventsResponse?.meta.totalCount || 0}
+          limit={filters.limit || 6}
+          updateFilters={updateFilters}
+        />
+      </section>
+    </ViewTransition>
   );
 };
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { eventService } from "@/services/event.service";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
 import { useState, ViewTransition } from "react";
 import { CalendarDays, ChevronLeft, MapPin, Tag, User } from "lucide-react";
@@ -11,6 +11,10 @@ import { hexToRgba } from "@/utils/hex-to-rgb";
 import { IEvent } from "@event-planner/shared";
 import { Dialog } from "@/components/ui/dialog";
 import { toast } from "sonner";
+import EventResponseForm from "@/components/event/event-response-form";
+import { rsvpService } from "@/services/rsvp.service";
+import QUERY_KEY_CONSTANT from "@/constant/query-key-constant";
+import { EventOptions } from "@/components/event/event-option";
 
 const Event = () => {
   const params = useParams<{ id: string }>();
@@ -20,9 +24,15 @@ const Event = () => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["event", params.id],
+    queryKey: [QUERY_KEY_CONSTANT.EVENT, params.id],
     queryFn: () =>
       eventService().getEventById({ eventId: parseInt(params.id) }),
+    enabled: !!params.id,
+  });
+
+  const { data: rsvpResponse, isLoading: isRsvpLoading } = useQuery({
+    queryKey: [QUERY_KEY_CONSTANT.RSVP, params.id],
+    queryFn: () => rsvpService().getRsvp({ eventId: parseInt(params.id) }),
     enabled: !!params.id,
   });
 
@@ -47,15 +57,13 @@ const Event = () => {
       </div>
     );
 
-  const handleBack = () => {
-    router.back();
-  };
-
   return (
     <div className="max-w-7xl   px-6  space-y-10  flex flex-col gap-y-12">
-      <Button className=" w-fit" onClick={handleBack}>
-        <ChevronLeft /> Back
-      </Button>
+      <Link href="/events">
+        <Button className=" w-fit">
+          <ChevronLeft /> Back
+        </Button>
+      </Link>
       <ViewTransition>
         <div className=" bg-primary/10  p-4 shadow-sm  rounded-lg space-y-8">
           <div className="space-y-4 p-6 rounded-xl">
@@ -89,9 +97,9 @@ const Event = () => {
           {event.tags?.length > 0 && (
             <ViewTransition name={`event-tags-${event.id}`}>
               <div className="flex flex-wrap gap-2 p-4">
-                {event.tags.map((tag) => (
+                {event.tags.map((tag, index) => (
                   <Link
-                    key={tag.tagName}
+                    key={tag.tagName + index}
                     href={{ pathname: "/events", query: { tags: tag.tagName } }}
                   >
                     <Button
@@ -128,65 +136,29 @@ const Event = () => {
           </ViewTransition>
         </div>
       </ViewTransition>
+
+      {!isRsvpLoading && rsvpResponse?.data && (
+        <div className="bg-green-400/40 rounded-lg shadow-md p-6  w-full mx-auto">
+          <h2 className="text-2xl font-semibold mb-4">
+            {rsvpResponse?.data
+              ? `Your response: ${rsvpResponse.data.response}`
+              : "Are you attending the event?"}
+          </h2>
+          <p className="text-muted-foreground mb-4">
+            You Have Submitted your response in{" "}
+            <span className="font-medium">
+              {rsvpResponse?.data?.createdAt
+                ? new Date(rsvpResponse.data!.createdAt).toUTCString()
+                : "N/A"}
+            </span>
+          </p>
+        </div>
+      )}
+      {!isRsvpLoading && !rsvpResponse?.data && (
+        <EventResponseForm eventId={event.id} />
+      )}
     </div>
   );
 };
 
 export default Event;
-
-const EventOptions = ({ event }: { event: IEvent }) => {
-  const router = useRouter();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const userId = localStorage.getItem("userId");
-
-  const { mutate } = useMutation({
-    mutationKey: ["deleteEvent", event.id],
-    mutationFn: () => eventService().deleteEvent({ eventId: event.id }),
-    onSuccess: () => {
-      toast.success("Event deleted successfully");
-      router.push("/events");
-    },
-  });
-
-  if (userId !== event?.userId.toString()) {
-    return null;
-  }
-  const handleDelete = () => {
-    setIsDialogOpen(false);
-    mutate();
-  };
-  return (
-    <div className="h-6 flex items-center gap-2">
-      <Link href={`/events/${event.id}/update`}>
-        <Button variant="outline" size="sm">
-          Edit
-        </Button>
-      </Link>
-
-      <Button
-        onClick={() => setIsDialogOpen(true)}
-        variant="outline"
-        size="sm"
-        className="text-red-600"
-      >
-        Delete
-      </Button>
-
-      <Dialog
-        open={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-        title="Confirm Deletion"
-      >
-        <p>Are you sure you want to delete this event?</p>
-        <div className="mt-4 flex justify-end gap-2">
-          <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
-            Cancel
-          </Button>
-          <Button variant="destructive" onClick={handleDelete}>
-            Delete
-          </Button>
-        </div>
-      </Dialog>
-    </div>
-  );
-};

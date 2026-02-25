@@ -62,6 +62,54 @@ rsvpRouter.post(
 /**
  * @swagger
  * /api/v1/rsvp:
+ *   get:
+ *     tags:
+ *       - RSVP
+ *     summary: Get the user's RSVP for a specific event
+ *     description: Retrieve the user's RSVP response for a specific event.
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: eventId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the event to retrieve the RSVP for.
+ *     responses:
+ *       200:
+ *         description: RSVP retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                     eventId:
+ *                       type: string
+ *                     response:
+ *                       type: string
+ *                       enum: [YES, NO, MAYBE]
+ *               example:
+ *                 message: RSVP retrieved successfully
+ *                 data:
+ *                   id: "12345"
+ *                   eventId: "12345"
+ *                   response: "YES"
+ *       400:
+ *         description: Bad request. Invalid input data.
+ */
+rsvpRouter.get("/", rsvpController.getRsvp);
+
+/**
+ * @swagger
+ * /api/v1/rsvp:
  *   put:
  *     tags:
  *       - RSVP

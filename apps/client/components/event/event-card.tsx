@@ -1,10 +1,10 @@
 import { IEvent } from "@event-planner/shared";
 import { createContext, useContext, ReactNode, ViewTransition } from "react";
 import { hexToRgba } from "@/utils/hex-to-rgb";
-import { GlobeIcon, UserKeyIcon } from "lucide-react";
+import { FlameIcon, GlobeIcon, UserKeyIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { Button } from "../ui/button";
+import Image from "next/image";
 
 type EventCardRootProps = React.ComponentProps<typeof EventCardRoot>;
 type EventCardHeaderProps = React.ComponentProps<typeof EventHeader>;
@@ -15,6 +15,7 @@ type EventCardTypeProps = React.ComponentProps<typeof EventType>;
 type EventCardTagsProps = React.ComponentProps<typeof EventTags>;
 type EventCardCreatedByProps = React.ComponentProps<typeof EventCreatedBy>;
 type EventCardOptionsProps = React.ComponentProps<typeof EventOptions>;
+type EventCardRsvpSummaryProps = React.ComponentProps<typeof EventRsvpSummary>;
 
 interface EventCardComponent {
   Root: React.ComponentType<EventCardRootProps>;
@@ -26,6 +27,7 @@ interface EventCardComponent {
   Tags: React.ComponentType<EventCardTagsProps>;
   CreatedBy: React.ComponentType<EventCardCreatedByProps>;
   Options: React.ComponentType<EventCardOptionsProps>;
+  RsvpSummary: React.ComponentType<EventCardRsvpSummaryProps>;
 }
 
 const EventContext = createContext<IEvent | null>(null);
@@ -82,7 +84,9 @@ const EventDescription = () => {
   const { id, description } = useEventContext();
   return (
     <ViewTransition name={`event-description-${id}`}>
-      <p className="text-sm h-16  text-start ">{description}</p>
+      <p className="text-sm h-20 overflow-hidden  line-clamp-4 text-start ">
+        {description}
+      </p>
     </ViewTransition>
   );
 };
@@ -159,14 +163,38 @@ const EventOptions = () => {
   );
 };
 
+export const EventRsvpSummary = () => {
+  const { id, rsvpSummary } = useEventContext();
+  const rsvpMap: Record<string, number> = {
+    YES: 0,
+    NO: 0,
+    "MAY BE": 0,
+  };
+  rsvpSummary.forEach((rsvp) => {
+    rsvpMap[rsvp.response] = rsvp.count;
+  });
+  return (
+    <ViewTransition name={`event-rsvpSummary-${id}`}>
+      <div className="h-16  flex flex-wrap overflow-y-auto content-start gap-2">
+        <div className="flex items-center gap-1 text-green-600">
+          <Image alt="" src={"/fire.png"} width={60} height={60} />
+          <span className=" text-3xl font-bold text-orange-400">
+            {rsvpMap["YES"]}
+            <span className="text-sm font-bold"> Participants</span>
+          </span>
+        </div>
+      </div>
+    </ViewTransition>
+  );
+};
 const EventTags = () => {
   const { id, tags } = useEventContext();
   return (
     <ViewTransition name={`event-tags-${id}`}>
       <div className="h-22  flex flex-wrap overflow-y-auto content-start gap-2">
-        {tags.map((tag) => (
+        {tags.map((tag, index) => (
           <Button
-            key={tag.tagName}
+            key={`${tag.tagName}-${index}`}
             className="inline-block px-2 py-1 capitalize text-black text-xs"
             style={{ backgroundColor: hexToRgba(tag.tagColor, 0.4) }}
           >
@@ -188,4 +216,5 @@ export const EventCard: EventCardComponent = {
   Tags: EventTags,
   CreatedBy: EventCreatedBy,
   Options: EventOptions,
+  RsvpSummary: EventRsvpSummary,
 };

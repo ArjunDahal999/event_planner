@@ -33,38 +33,40 @@ async function createEventWithTags({
 }) {
   try {
     const { tags, ...eventDetails } = eventData;
-    // first creating the event to get the event ID
-    const [eventId] = await db<IEvent>(EVENT_TABLE).insert({
-      ...eventDetails,
-      user_id: userId,
-    });
 
-    if (tags.length <= 0) return;
-    // payload for tags table
-    const tagsPayload = tags.map((tag) => {
-      return {
+    await db.transaction(async (trx) => {
+      const [eventId] = await trx<IEvent>(EVENT_TABLE).insert({
+        ...eventDetails,
+        user_id: userId,
+      });
+
+      if (tags.length <= 0) return;
+
+      // payload for tags table
+      const tagsPayload = tags.map((tag) => ({
         name: tag,
         color: generateRandomColor(),
-      };
-    });
+      }));
 
-    // if existing name is sent, ignore that row
-    await db<ITags>(TAG_TABLE).insert(tagsPayload).onConflict("name").ignore();
+      // if existing name is sent, ignore that row
+      await trx<ITags>(TAG_TABLE)
+        .insert(tagsPayload)
+        .onConflict("name")
+        .ignore();
 
-    // we need to refetch all tags id that were recently created
-    const createdTags = await db<ITags>(TAG_TABLE)
-      .select("id", "name")
-      .whereIn("name", tags);
+      // we need to refetch all tags id that were recently created
+      const createdTags = await trx<ITags>(TAG_TABLE)
+        .select("id", "name")
+        .whereIn("name", tags);
 
-    // now we insert into event_tag table
-    await db<IEventTag>(EVENT_TAG_TABLE).insert(
-      createdTags.map((t) => {
-        return {
+      // now we insert into event_tag table
+      await trx<IEventTag>(EVENT_TAG_TABLE).insert(
+        createdTags.map((t) => ({
           event_id: eventId,
           tag_id: t.id,
-        };
-      }),
-    );
+        })),
+      );
+    });
   } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : "Failed to create event",
@@ -177,36 +179,48 @@ async function updateEvent({
 }) {
   try {
     const { tags, ...rest } = eventData;
-    await db<IEvent>(EVENT_TABLE)
-      .where({ id: eventId, user_id: userId })
-      .update(rest);
 
-    // first of all removing all the tags associated with the event from event_tag table (so deleting the row)
-    await db.raw(`DELETE FROM ${EVENT_TAG_TABLE} where event_id=${eventId}`);
+    await db.transaction(async (trx) => {
+      const updatedCount = await trx<IEvent>(EVENT_TABLE)
+        .where({ id: eventId, user_id: userId })
+        .update(rest);
 
-    // create the tags if they are new
-    const tagsPayload = tags.map((tag) => {
-      return {
+      if (updatedCount === 0) {
+        throw new Error(
+          "Event not found or you do not have permission to update it.",
+        );
+      }
+
+      // remove all existing tag associations for this event
+      await trx.raw(`DELETE FROM ${EVENT_TAG_TABLE} WHERE event_id = ?`, [
+        eventId,
+      ]);
+
+      // create the tags if they are new
+      const tagsPayload = tags.map((tag) => ({
         name: tag,
         color: generateRandomColor(),
-      };
-    });
-    // if existing name is sent, ignore that row
-    await db<ITags>(TAG_TABLE).insert(tagsPayload).onConflict("name").ignore();
-    // we need to refetch all tags id that were recently created
-    const createdTags = await db<ITags>(TAG_TABLE)
-      .select("id", "name")
-      .whereIn("name", tags);
+      }));
 
-    // now we insert into event_tag table
-    await db<IEventTag>(EVENT_TAG_TABLE).insert(
-      createdTags.map((t) => {
-        return {
+      // if existing name is sent, ignore that row
+      await trx<ITags>(TAG_TABLE)
+        .insert(tagsPayload)
+        .onConflict("name")
+        .ignore();
+
+      // refetch all tag IDs by name
+      const createdTags = await trx<ITags>(TAG_TABLE)
+        .select("id", "name")
+        .whereIn("name", tags);
+
+      // insert new event-tag associations
+      await trx<IEventTag>(EVENT_TAG_TABLE).insert(
+        createdTags.map((t) => ({
           event_id: eventId,
           tag_id: t.id,
-        };
-      }),
-    );
+        })),
+      );
+    });
   } catch (error: any) {
     if (error.code === "ER_NO_REFERENCED_ROW_2") {
       throw new Error("Event or user does not exist.");

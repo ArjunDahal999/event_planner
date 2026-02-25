@@ -148,9 +148,7 @@
   }
 }
 
-::view-transition-group(anything) {
-  z-index: 100;
-}
+
 
 ::view-transition-old(.slide-down) {
   animation: 150ms ease-out both fade-out, 150ms ease-out both slide-down;
@@ -227,7 +225,7 @@
 
 @keyframes slideInLeft {
   from {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
     opacity: 0;
   }
   to {

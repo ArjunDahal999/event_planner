@@ -6,13 +6,14 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --exec ts-node --esm index.ts",
-    "build": "next build",
-    "start": "ts-node  index.ts",
-    "knex": "./node_modules/.bin/knex --knexfile ./src/database/knexfile.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "knex": "knex --knexfile ./src/database/knexfile.ts",
     "migrate:latest": "pnpm run knex -- migrate:latest",
     "migrate:rollback": "pnpm run knex -- migrate:rollback --all",
-    "migrate:make": "pnpm run knex -- migrate:make",
-    "db:reset": "pnpm run knex -- migrate:rollback --all && pnpm run knex -- migrate:latest"
+    "seed:run": "pnpm run knex -- seed:run",
+    "seed:make": "pnpm run knex -- seed:make",
+    "db:reset": "pnpm run knex -- migrate:rollback --all && pnpm run knex -- migrate:latest && pnpm run seed:run"
   },
   "dependencies": {
     "@event-planner/shared": "workspace:*",
@@ -33,6 +34,7 @@
     "winston": "^3.19.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^10.3.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",

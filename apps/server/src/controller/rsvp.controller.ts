@@ -8,6 +8,7 @@ declare global {
 import type { Request, Response, NextFunction } from "express";
 import { rsvpService } from "../services/rsvp.service.ts";
 import type { CreateRsvpDTO } from "@event-planner/shared/src/schemas/rsvp.schema.ts";
+import type { IApiResponse, IRSPV } from "@event-planner/shared";
 class RsvpController {
   async createRsvp(
     req: Request<{}, {}, CreateRsvpDTO>,
@@ -56,6 +57,29 @@ class RsvpController {
         userId,
       });
       res.status(200).json({ message: "RSVP deleted successfully" });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getRsvp(
+    req: Request,
+    res: Response<IApiResponse<IRSPV | undefined>>,
+    next: NextFunction,
+  ) {
+    try {
+      const { eventId } = req.query;
+      const userId = req.userID!;
+      const rsvp = await rsvpService().getRsvp({
+        eventId: Number(eventId),
+        userId,
+      });
+      res.status(200).json({
+        message: "RSVP retrieved successfully",
+        statusCode: 200,
+        success: true,
+        data: rsvp,
+      });
     } catch (error) {
       next(error);
     }
