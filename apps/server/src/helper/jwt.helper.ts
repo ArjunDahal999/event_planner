@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import { env } from "../libs/validate-env.ts";
-import logger from "../libs/winston.ts";
+import { env } from "../libs/validate-env";
+import logger from "../libs/winston";
 
 export const generateAccessToken = (user_id: number) => {
   try {

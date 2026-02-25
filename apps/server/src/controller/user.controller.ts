@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { userService } from "../services/user.service.ts";
+import { userService } from "../services/user.service";
 import type {
   Generate2FADTO,
   IGenerate2FAResponse,
@@ -7,26 +7,22 @@ import type {
   IRefreshTokenResponse,
   IVerifyEmailResponse,
   LoginUserDTO,
-  RefreshTokenDTO,
   RegisterUserDTO,
   VerifyEmailDTO,
 } from "@event-planner/shared";
-import logger from "../libs/winston.ts";
-import { HttpError } from "../utils/http-error.ts";
-import { compareHashWithString, hashString } from "../helper/bcrypt.helper.ts";
-import { authService } from "../services/auth.service.ts";
-import {
-  generateSixDigitToken,
-  generateToken,
-} from "../helper/token.helper.ts";
-import emailService from "../services/email.service.ts";
+import logger from "../libs/winston";
+import { HttpError } from "../utils/http-error";
+import { compareHashWithString, hashString } from "../helper/bcrypt.helper";
+import { authService } from "../services/auth.service";
+import { generateSixDigitToken, generateToken } from "../helper/token.helper";
+import emailService from "../services/email.service";
 import {
   generateAccessToken,
   generateRefreshToken,
   verifyRefreshToken,
-} from "../helper/jwt.helper.ts";
+} from "../helper/jwt.helper";
 import type { IApiResponse, IRegisterResponse } from "@event-planner/shared";
-import { env } from "../libs/validate-env.ts";
+import { env } from "../libs/validate-env";
 
 class UserController {
   async register(

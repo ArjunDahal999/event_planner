@@ -4,9 +4,9 @@ import {
   RSVP_TABLE,
   TAG_TABLE,
   USER_TABLE,
-} from "../constants.ts";
-import db from "../db.ts";
-import type { IEvent, IEventTag, IRSPV, ITags, IUser } from "../types.ts";
+} from "../constants";
+import db from "../db";
+import type { IEvent, IEventTag, IRSPV, ITags, IUser } from "../types";
 
 export const getEventWithTagsQuery = async ({
   where = "",

@@ -1,5 +1,5 @@
 import type { Knex } from "knex";
-import { env } from "../libs/validate-env.ts";
+import { env } from "../libs/validate-env";
 
 const defaultConnection = {
   host: env.MYSQL_HOST,

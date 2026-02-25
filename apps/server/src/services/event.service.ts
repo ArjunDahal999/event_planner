@@ -1,17 +1,17 @@
 import type {
   CreateEventDTO,
   EventFilterDTO,
-} from "../../../../packages/shared/src/schemas/event.schema.ts";
+} from "../../../../packages/shared/src/schemas/event.schema";
 import {
   EVENT_TABLE,
   EVENT_TAG_TABLE,
   TAG_TABLE,
   USER_TABLE,
-} from "../database/constants.ts";
-import { getEventWithTagsQuery } from "../database/data-access/get-event-with.query.ts";
-import db from "../database/db.ts";
-import type { ITags, IEvent, IEventTag, IUser } from "../database/types.ts";
-import { generateRandomColor } from "../helper/random-color-generator.ts";
+} from "../database/constants";
+import { getEventWithTagsQuery } from "../database/data-access/get-event-with.query";
+import db from "../database/db";
+import type { ITags, IEvent, IEventTag, IUser } from "../database/types";
+import { generateRandomColor } from "../helper/random-color-generator";
 
 export const eventService = () => {
   return Object.freeze({

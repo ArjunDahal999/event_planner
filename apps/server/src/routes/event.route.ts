@@ -1,12 +1,9 @@
 import express from "express";
-import eventController from "../controller/event.controller.ts";
-import {
-  createEventSchema,
-  eventFilterSchema,
-} from "../../../../packages/shared/src/schemas/event.schema.ts";
-import { validateRequest } from "../middleware/validate-request.middleware.ts";
+import eventController from "../controller/event.controller";
+import { createEventSchema, eventFilterSchema } from "@event-planner/shared";
+import { validateRequest } from "../middleware/validate-request.middleware";
 
-const router = express.Router();
+const router: express.Router = express.Router();
 
 /**
  * @swagger

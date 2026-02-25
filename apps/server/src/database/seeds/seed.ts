@@ -1,8 +1,8 @@
 import type { Knex } from "knex";
 import { faker } from "@faker-js/faker";
 import bcrypt from "bcryptjs";
-import { TAG_CONSTANT } from "../../constant/tag.ts";
-import { EVENTS_CONSTANT } from "../../constant/event.ts";
+import { TAG_CONSTANT } from "../../constant/tag";
+import { EVENTS_CONSTANT } from "../../constant/event";
 
 const NUM_USERS = 1000;
 const NUM_EVENTS = EVENTS_CONSTANT.length;

@@ -1,4 +1,4 @@
-import { hexColors } from "../constant/hex-color.ts";
+import { hexColors } from "../constant/hex-color";
 
 export const generateRandomColor = (): string => {
   const minIndex = 0;

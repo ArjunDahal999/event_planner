@@ -1,5 +1,5 @@
 import type { Knex } from "knex";
-import { USER_TABLE } from "../constants.ts";
+import { USER_TABLE } from "../constants";
 
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(USER_TABLE, (table) => {

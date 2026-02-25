@@ -1,8 +1,8 @@
-import { RSVP_RESPONSE_ENUM } from "@event-planner/shared/src/schemas/rsvp.schema.ts";
-import db from "../database/db.ts";
-import type { IRSPV } from "../database/types.ts";
-import { RSVP_TABLE } from "../database/constants.ts";
-import logger from "../libs/winston.ts";
+import { RSVP_RESPONSE_ENUM } from "@event-planner/shared";
+import db from "../database/db";
+import type { IRSPV } from "../database/types";
+import { RSVP_TABLE } from "../database/constants";
+import logger from "../libs/winston";
 export const rsvpService = () => {
   return Object.freeze({
     createRsvp,

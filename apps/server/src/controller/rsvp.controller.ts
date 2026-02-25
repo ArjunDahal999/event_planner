@@ -6,7 +6,7 @@ declare global {
   }
 }
 import type { Request, Response, NextFunction } from "express";
-import { rsvpService } from "../services/rsvp.service.ts";
+import { rsvpService } from "../services/rsvp.service";
 import type { CreateRsvpDTO } from "@event-planner/shared/src/schemas/rsvp.schema.ts";
 import type { IApiResponse, IRSPV } from "@event-planner/shared";
 class RsvpController {

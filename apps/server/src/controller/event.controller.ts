@@ -5,20 +5,20 @@ declare global {
     }
   }
 }
-import { HttpError } from "../utils/http-error.ts";
+import { HttpError } from "../utils/http-error";
 import type { NextFunction, Request, Response } from "express";
 import {
   type EventFilterDTO,
   type CreateEventDTO,
-} from "../../../../packages/shared/src/schemas/event.schema.ts";
-import { eventService } from "../services/event.service.ts";
-import logger from "../libs/winston.ts";
+} from "../../../../packages/shared/src/schemas/event.schema";
+import { eventService } from "../services/event.service";
+import logger from "../libs/winston";
 import type {
   IApiResponse,
   IEventByIdResponse,
   IEventResponse,
 } from "@event-planner/shared";
-import { rsvpService } from "../services/rsvp.service.ts";
+import { rsvpService } from "../services/rsvp.service";
 
 class EventController {
   async createEvent(

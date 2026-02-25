@@ -1,6 +1,6 @@
 import express from "express";
-import userController from "../controller/user.controller.ts";
-import { validateRequest } from "../middleware/validate-request.middleware.ts";
+import userController from "../controller/user.controller";
+import { validateRequest } from "../middleware/validate-request.middleware";
 import {
   generate2FASchema,
   loginUserSchema,
@@ -9,7 +9,7 @@ import {
   verifyEmailSchema,
 } from "@event-planner/shared";
 
-const router = express.Router();
+const router: express.Router = express.Router();
 
 /**
  * @swagger

@@ -1,12 +1,12 @@
 import express from "express";
 import cors from "cors";
 import swaggerJsdoc from "swagger-jsdoc";
-import { swaggerConfig } from "./src/config/swagger.config.ts";
+import { swaggerConfig } from "./src/config/swagger.config";
 import swaggerUi from "swagger-ui-express";
-import { env } from "./src/libs/validate-env.ts";
-import { router } from "./src/routes/index.route.ts";
+import { env } from "./src/libs/validate-env";
+import { router } from "./src/routes/index.route";
 import morgan from "morgan";
-import { zodMiddleware } from "./src/middleware/zod.middleware.ts";
+import { zodMiddleware } from "./src/middleware/zod.middleware";
 import cookieParser from "cookie-parser";
 
 const app = express();

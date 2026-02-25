@@ -1,9 +1,9 @@
 import { Router } from "express";
-import rsvpController from "../controller/rsvp.controller.ts";
-import { validateRequest } from "../middleware/validate-request.middleware.ts";
-import { rsvpCreateSchema } from "@event-planner/shared/src/schemas/rsvp.schema.ts";
+import rsvpController from "../controller/rsvp.controller";
+import { validateRequest } from "../middleware/validate-request.middleware";
+import { rsvpCreateSchema } from "@event-planner/shared";
 
-const rsvpRouter = Router();
+const rsvpRouter: Router = Router();
 
 /**
  * @swagger

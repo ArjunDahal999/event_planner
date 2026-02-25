@@ -3,14 +3,14 @@ import {
   TWO_FACTOR_AUTHENTICATION_TABLE,
   USER_ACTIVATION_TABLE,
   USER_TABLE,
-} from "../database/constants.ts";
-import db from "../database/db.ts";
+} from "../database/constants";
+import db from "../database/db";
 import {
   type IRefreshToken,
   type ITwoFactorAuthentication,
   type IUser,
   type IUserActivation,
-} from "../database/types.ts";
+} from "../database/types";
 
 export const authService = () =>
   Object.freeze({

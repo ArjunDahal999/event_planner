@@ -1,11 +1,12 @@
 "use client";
-import { authService } from "@/services/auth.service";
-import { useSearchParams } from "next/navigation";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+
 import { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { authService } from "@/services/auth.service";
+import { toast } from "sonner";
 import { Loader2Icon } from "lucide-react";
-const ActivatePage = () => {
+
+export default function ActivateClient() {
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
   const token = searchParams.get("token");
@@ -20,6 +21,7 @@ const ActivatePage = () => {
           toast.error("Invalid activation link. Missing email or token.");
           return;
         }
+
         const { message } = await authService().verifyEmail({ email, token });
         toast.success(message);
         router.push("/login?email=" + encodeURIComponent(email));
@@ -31,6 +33,7 @@ const ActivatePage = () => {
     };
     verifyEmailOnLoad();
   }, [email, token, router]);
+
   return (
     <div className="p-4">
       <h1 className="text-2xl flex items-center text-center font-bold mb-4">
@@ -39,6 +42,4 @@ const ActivatePage = () => {
       </h1>
     </div>
   );
-};
-
-export default ActivatePage;
+}

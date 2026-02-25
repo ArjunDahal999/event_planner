@@ -1,4 +1,4 @@
-import { env } from "../libs/validate-env.ts";
+import { env } from "../libs/validate-env";
 import type { Options } from "swagger-jsdoc";
 
 export const swaggerConfig: Options = {
