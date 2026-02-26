@@ -1,15 +1,16 @@
-Project Overview
+```markdown
+![Event Planner Screenshot](./images/ss1.png)
+```
 
-Event Planner is a web application that allows users to create, share, and RSVP to events. It is built with Next.js and uses a monorepo architecture with shared schemas and types between the client and server.
-
-Project Setup
-
-To run this project, you need to have Node.js installed. You can install it from [https://nodejs.org/](https://nodejs.org/).
+# Pre-requisites 
+- Node.js
+- Docker
+- pnpm
 
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/ArjunDahal999/event_planner.git
 ```
 
 2. Install dependencies:
@@ -43,14 +44,56 @@ pnpm dev
 
 8. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
+
 9. Open [http://localhost:9000/docs](http://localhost:9000/docs) to view the server docs.
 
+#  Event Planner
 
-Project Strucuture
+A full-stack event management web application built with **React and Express** using a **monorepo architecture**.  
 
-I Have followed the monorepo architecture for this project.
-Where different schema and types are shared between the client and server
+## Features
 
+- [x] Create ,Delete and Edit events
+- [x] View Details of Single event
+- [x] RSVP 
+- [x] Filter events by tags,event_type,title,description,location
+- [x] View all upcomming and past events
+- [x] Shared validation schemas between client & server
+- [x] Dockerized database setup
+- [x] Server docs using swagger
+- [x] Server side filtering
+- [x] Server side pagination
+- [x] User Authentication 
+- [x] JWT access and refresh token rotation
+- [x] Authorization
+- [x] Migartion File for database schema changhes
+- [x] Email Verification
+- [x] Two Factor Authentiation (2FA)
+
+
+
+
+## Tech Stack
+
+### Frontend
+- Next.js
+- React
+- TypeScript
+
+### Backend
+- Node.js
+- Knex.js
+
+- Express / API Server
+- Database (Dockerized)
+
+### Dev Tools
+- pnpm (package manager)
+- Docker & Docker Compose
+- Monorepo workspace setup
+
+
+## 📦 Project Structure
 event_planner
 ├── apps
 │   ├── client
@@ -61,5 +104,4 @@ event_planner
 │           ├── index.ts
 │           ├── schemas
 │           └── types
-
 
