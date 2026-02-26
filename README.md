@@ -1,5 +1,5 @@
 ```markdown
-![Event Planner Screenshot](./images/ss1.png)
+![Event Planner Screenshot](/images/ss1.png)
 ```
 
 # Pre-requisites 
