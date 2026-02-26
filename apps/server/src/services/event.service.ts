@@ -107,6 +107,15 @@ async function getAllEvents({ filters }: { filters: EventFilterDTO }) {
         `${EVENT_TABLE}.description LIKE '%${filters.description}%' `,
       );
     }
+    if (filters.eventTimeLine) {
+      const now = new Date();
+      const formattedDate = now.toISOString().slice(0, 19).replace("T", " "); // YYYY-MM-DD HH:mm:ss
+      if (filters.eventTimeLine === "upcoming") {
+        whereBuilder.push(`${EVENT_TABLE}.event_date >= '${formattedDate}'`);
+      } else {
+        whereBuilder.push(`${EVENT_TABLE}.event_date < '${formattedDate}'`);
+      }
+    }
 
     const whereClause =
       whereBuilder.length > 0 ? whereBuilder.join(" AND ") : "1=1";

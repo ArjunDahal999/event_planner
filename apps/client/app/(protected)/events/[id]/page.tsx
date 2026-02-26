@@ -1,20 +1,18 @@
 "use client";
 
 import { eventService } from "@/services/event.service";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useParams, useRouter } from "next/navigation";
-import { useState, ViewTransition } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
+import { ViewTransition } from "react";
 import { CalendarDays, ChevronLeft, MapPin, Tag, User } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { hexToRgba } from "@/utils/hex-to-rgb";
-import { IEvent } from "@event-planner/shared";
-import { Dialog } from "@/components/ui/dialog";
-import { toast } from "sonner";
 import EventResponseForm from "@/components/event/event-response-form";
 import { rsvpService } from "@/services/rsvp.service";
 import QUERY_KEY_CONSTANT from "@/constant/query-key-constant";
 import { EventOptions } from "@/components/event/event-option";
+import Image from "next/image";
 
 const Event = () => {
   const params = useParams<{ id: string }>();
@@ -37,7 +35,24 @@ const Event = () => {
   });
 
   const event = eventResponse?.data;
-  const router = useRouter();
+
+  const rsvpMap = {
+    "YES":{
+      image:"/fire.png",
+      count:0
+    },
+    "NO":{
+      image:"/cross.png",
+      count:0
+    },
+    "MAY BE":{
+      image:"/question.png",
+      count:0
+    }
+  }
+  event?.rsvpSummary?.forEach((rsvp)=>{
+    rsvpMap[rsvp.response as "YES" | "NO" | "MAY BE"].count = rsvp.count;
+  })
 
   if (isLoading)
     return (
@@ -58,7 +73,7 @@ const Event = () => {
     );
 
   return (
-    <div className="max-w-7xl   px-6  space-y-10  flex flex-col gap-y-12">
+    <div className="max-w-7xl   px-6  space-y-10 pb-20  flex flex-col gap-y-12">
       <Link href="/events">
         <Button className=" w-fit">
           <ChevronLeft /> Back
@@ -91,6 +106,7 @@ const Event = () => {
                 {event.eventType}
               </div>
             </div>
+            <EventRsvpSummary rsvpMap={rsvpMap} />
           </div>
 
           {/* Tags */}
@@ -162,3 +178,20 @@ const Event = () => {
 };
 
 export default Event;
+
+
+
+const EventRsvpSummary = ({rsvpMap}: {rsvpMap: Record<string, {image:string, count:number}>}) => {
+  return (
+    <div className="flex flex-wrap items-center gap-6 text-muted-foreground text-sm">
+      <div className="flex items-center gap-2">
+        {Object.entries(rsvpMap).map(([key, value]) => (
+            <div key={key} className="flex items-center gap-2">
+              <Image src={value.image} alt="" width={40} height={40} />
+              {key}: {value.count}
+            </div>
+        ))} 
+      </div>
+    </div>
+  )
+}

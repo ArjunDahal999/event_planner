@@ -65,6 +65,8 @@ async function getEvents({ filters }: { filters: EventFilters }) {
     if (filters.description) params.append("description", filters.description);
     if (filters.sortOrder) params.append("sortOrder", filters.sortOrder);
     if (filters.sortBy) params.append("sortBy", filters.sortBy);
+    if (filters.eventTimeLine)
+      params.append("eventTimeLine", filters.eventTimeLine);
     return params.toString();
   };
   const queryString = createQueryString(filters);

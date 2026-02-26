@@ -11,6 +11,7 @@ export interface EventFilters {
   description?: string;
   sortOrder?: string;
   sortBy?: string;
+  eventTimeLine?: string;
 }
 
 export function useEventFilters() {
@@ -21,14 +22,15 @@ export function useEventFilters() {
 
   const filters: EventFilters = {
     tags: searchParams.get("tags") ?? undefined,
-    location: searchParams.get("location") ?? undefined,
     page: Number(searchParams.get("page")) || 1,
     limit: Number(searchParams.get("limit")) || 6,
     eventType: searchParams.get("eventType") ?? undefined,
     title: searchParams.get("title") ?? undefined,
     description: searchParams.get("description") ?? undefined,
+    location: searchParams.get("location") ?? undefined,
     sortOrder: searchParams.get("sortOrder") ?? undefined,
     sortBy: searchParams.get("sortBy") ?? undefined,
+    eventTimeLine: searchParams.get("eventTimeLine") ?? undefined,
   };
 
   const resetFilters = () => {

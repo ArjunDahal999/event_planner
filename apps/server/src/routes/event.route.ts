@@ -215,6 +215,13 @@ router.post(
  *           type: string
  *           enum: [event_date, created_at]
  *           default: event_date
+ *       - in: query
+ *         name: eventTimeLine
+ *         required: false
+ *         schema:
+ *           type: string
+ *           enum: [past, upcoming]
+ *           default: past
  *         description: Field to sort by
  *       - in: query
  *         name: page
