@@ -1,6 +1,4 @@
-```markdown
 ![Event Planner Screenshot](./images/ss-1.png)
-```
 
 # Pre-requisites 
 - Node.js
@@ -83,9 +81,8 @@ A full-stack event management web application built with **React and Express** u
 ### Backend
 - Node.js
 - Knex.js
-
 - Express / API Server
-- Database (Dockerized)
+- Database- MySQL (Dockerized)
 
 ### Dev Tools
 - pnpm (package manager)
