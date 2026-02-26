@@ -1,4 +1,4 @@
-export const TAG_CONSTANT = [
+const TAG_CONSTANT = [
   "Algorithms",
   "Android",
   "Angular",
@@ -99,4 +99,6 @@ export const TAG_CONSTANT = [
   "Unit Testing",
   "Vue.js",
   "Web3",
-];
+] as const;
+
+export default TAG_CONSTANT;

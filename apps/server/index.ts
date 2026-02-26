@@ -3,7 +3,7 @@ import cors from "cors";
 import swaggerJsdoc from "swagger-jsdoc";
 import { swaggerConfig } from "./src/config/swagger.config";
 import swaggerUi from "swagger-ui-express";
-import { env } from "./src/libs/validate-env";
+import env from "./src/libs/validate-env";
 import { router } from "./src/routes/index.route";
 import morgan from "morgan";
 import { zodMiddleware } from "./src/middleware/zod.middleware";

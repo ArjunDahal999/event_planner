@@ -1,5 +1,8 @@
 import type { Knex } from "knex";
-import { EVENT_TABLE, RSVP_TABLE, USER_TABLE } from "../constants";
+
+const USER_TABLE = "users";
+const RSVP_TABLE = "rsvp";
+const EVENT_TABLE = "event";
 
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(RSVP_TABLE, (table) => {

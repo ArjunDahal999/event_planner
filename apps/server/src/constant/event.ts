@@ -1,4 +1,4 @@
-export const EVENTS_CONSTANT = [
+const EVENTS_CONSTANT = [
   // Major Global Conferences
   "AWS re:Invent",
   "Microsoft Build",
@@ -108,4 +108,6 @@ export const EVENTS_CONSTANT = [
   "CI/CD Carnival",
   "GraphQL Gala",
   "Tailwind Track",
-];
+] as const;
+
+export default EVENTS_CONSTANT;

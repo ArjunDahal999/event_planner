@@ -5,7 +5,7 @@ import path from "path";
 const envFilePath = path.resolve(__dirname, "../../.env");
 dotenv.config({ path: envFilePath });
 
-export const env = cleanEnv(process.env, {
+const env = cleanEnv(process.env, {
   PORT: port({ default: 8000 }),
   SMTP_HOST: str({ default: "smtp.example.com" }),
   SMTP_PORT: str({ default: "587" }),
@@ -27,3 +27,5 @@ export const env = cleanEnv(process.env, {
   APP_URL: str({ default: "http://localhost:3000" }),
   SERVER_URL: str({ default: "http://localhost:9000" }),
 });
+
+export default env;

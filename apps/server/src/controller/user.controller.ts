@@ -22,7 +22,7 @@ import {
   verifyRefreshToken,
 } from "../helper/jwt.helper";
 import type { IApiResponse, IRegisterResponse } from "@event-planner/shared";
-import { env } from "../libs/validate-env";
+import env from "../libs/validate-env";
 
 class UserController {
   async register(

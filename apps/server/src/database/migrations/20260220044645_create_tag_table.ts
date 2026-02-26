@@ -1,5 +1,6 @@
 import type { Knex } from "knex";
-import { TAG_TABLE } from "../constants";
+
+export const TAG_TABLE = "tag";
 
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(TAG_TABLE, (table) => {

@@ -1,7 +1,9 @@
 import type { Knex } from "knex";
 
+export const REFRESH_TOKEN_TABLE = "refresh_tokens";
+
 export async function up(knex: Knex): Promise<void> {
-  return knex.schema.createTable("refresh_tokens", (table) => {
+  return knex.schema.createTable(REFRESH_TOKEN_TABLE, (table) => {
     table.increments("id").primary();
     table
       .integer("user_id")

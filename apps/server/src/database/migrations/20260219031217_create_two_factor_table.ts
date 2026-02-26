@@ -1,5 +1,6 @@
 import type { Knex } from "knex";
-import { TWO_FACTOR_AUTHENTICATION_TABLE } from "../constants";
+
+export const TWO_FACTOR_AUTHENTICATION_TABLE = "two_factor_authentication";
 
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(TWO_FACTOR_AUTHENTICATION_TABLE, (table) => {
