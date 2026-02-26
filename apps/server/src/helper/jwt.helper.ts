@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
-import { env } from "../libs/validate-env.ts";
+import env from "../libs/validate-env";
+import logger from "../libs/winston";
 
 export const generateAccessToken = (user_id: number) => {
   try {
@@ -12,7 +13,7 @@ export const generateAccessToken = (user_id: number) => {
     );
     return accessToken;
   } catch (error) {
-    return null;
+    throw new Error("Failed to generate access token");
   }
 };
 
@@ -27,7 +28,7 @@ export const generateRefreshToken = (user_id: number) => {
     );
     return refreshToken;
   } catch (error) {
-    return null;
+    throw new Error("Failed to generate refresh token");
   }
 };
 
@@ -42,7 +43,7 @@ export const verifyAccessToken = (
     };
     return decoded;
   } catch (error) {
-    return null;
+    throw new Error("Invalid access token");
   }
 };
 
@@ -57,6 +58,7 @@ export const verifyRefreshToken = (
     };
     return decoded;
   } catch (error) {
+    logger.error(error);
     throw new Error("Invalid refresh token");
   }
 };

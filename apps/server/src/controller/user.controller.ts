@@ -1,22 +1,33 @@
 import type { NextFunction, Request, Response } from "express";
-import { userService } from "../services/user.service.ts";
-import { type LoginUserDTO, type RegisterUserDTO } from "@event-planner/shared";
-import logger from "../libs/winston.ts";
-import { HttpError } from "../utils/http-error.ts";
-import { compareHashWithString, hashString } from "../helper/bcrypt.helper.ts";
-import { authService } from "../services/auth.service.ts";
-import { generateToken } from "../helper/token.helper.ts";
-import emailService from "../services/email.service.ts";
+import { userService } from "../services/user.service";
+import type {
+  Generate2FADTO,
+  IGenerate2FAResponse,
+  ILoginResponse,
+  IRefreshTokenResponse,
+  IVerifyEmailResponse,
+  LoginUserDTO,
+  RegisterUserDTO,
+  VerifyEmailDTO,
+} from "@event-planner/shared";
+import logger from "../libs/winston";
+import { HttpError } from "../utils/http-error";
+import { compareHashWithString, hashString } from "../helper/bcrypt.helper";
+import { authService } from "../services/auth.service";
+import { generateSixDigitToken, generateToken } from "../helper/token.helper";
+import emailService from "../services/email.service";
 import {
   generateAccessToken,
   generateRefreshToken,
   verifyRefreshToken,
-} from "../helper/jwt.helper.ts";
+} from "../helper/jwt.helper";
+import type { IApiResponse, IRegisterResponse } from "@event-planner/shared";
+import env from "../libs/validate-env";
 
 class UserController {
   async register(
     req: Request<{}, {}, RegisterUserDTO>,
-    res: Response,
+    res: Response<IApiResponse<IRegisterResponse>>,
     next: NextFunction,
   ) {
     const { email, name, password } = req.body;
@@ -53,14 +64,25 @@ class UserController {
         message: "Account registered successfully.",
         success: true,
         statusCode: 201,
-        data: { name, email, id: createdUserId },
+        data: {
+          name,
+          email,
+          id: createdUserId,
+          activationLink:
+            env.APP_URL +
+            `/activate?email=${encodeURIComponent(email)}&token=${tokenPayload.token}`,
+        },
       });
     } catch (err) {
       next(err);
     }
   }
 
-  async verifyEmail(req: Request, res: Response, next: NextFunction) {
+  async verifyEmail(
+    req: Request<{}, {}, VerifyEmailDTO>,
+    res: Response<IApiResponse<IVerifyEmailResponse>>,
+    next: NextFunction,
+  ) {
     const { token, email } = req.body;
     try {
       //  fetch user by email to get user ID for token verification
@@ -90,7 +112,10 @@ class UserController {
 
       logger.info(`Account verified successfully for email: ${email}`);
       res.status(200).json({
-        message: "Account verified successfully.",
+        data: {
+          id: user.id,
+        },
+        message: "Email verified successfully.",
         success: true,
         statusCode: 200,
       });
@@ -100,8 +125,8 @@ class UserController {
   }
 
   async generate2FA(
-    req: Request<{}, {}, LoginUserDTO>,
-    res: Response,
+    req: Request<{}, {}, Generate2FADTO>,
+    res: Response<IApiResponse<IGenerate2FAResponse>>,
     next: NextFunction,
   ) {
     const { email, password } = req.body;
@@ -136,18 +161,18 @@ class UserController {
         });
       }
 
-      const tokenPayload = generateToken({ timer: 10 * 60 * 60 * 1000 });
+      const tokenPayload = generateSixDigitToken();
       await authService().revoke2FASecret({ email });
       await authService().create2FASecret({
         email,
-        secret: tokenPayload.token,
+        secret: tokenPayload,
         userId: user.id,
       });
 
       emailService.sendEmail({
         to: email,
         subject: "Your 2FA Code",
-        body: `Your 2FA code is: ${tokenPayload.token}`,
+        body: `---SIX DIGIT CODE ----: ${tokenPayload}`,
       });
 
       logger.info(`User logged in successfully: ${email}`);
@@ -169,7 +194,11 @@ class UserController {
     }
   }
 
-  async loginWith2FA(req: Request, res: Response, next: NextFunction) {
+  async loginWith2FA(
+    req: Request<{}, {}, LoginUserDTO>,
+    res: Response<IApiResponse<ILoginResponse>>,
+    next: NextFunction,
+  ) {
     const { email, token } = req.body;
     try {
       const user = await userService().getUserByEmail(email);
@@ -192,16 +221,17 @@ class UserController {
 
       await authService().delete2FASecret({ email });
       const accessToken = generateAccessToken(user.id);
+      await authService().revokeRefreshToken({ userId: user.id });
       const refreshToken = generateRefreshToken(user.id);
 
-      const hashedRefreshToken = await hashString(refreshToken!);
+      const hashedRefreshToken = await hashString(refreshToken);
       await authService().createAccessToken({
         userId: user.id,
         refreshToken: hashedRefreshToken,
       });
       logger.info(`User logged in successfully with 2FA: ${email}`);
       res
-        .cookie("access_token", accessToken, {
+        .cookie("refresh_token", refreshToken, {
           httpOnly: true,
           secure: process.env.NODE_ENV === "production",
           sameSite: "strict",
@@ -212,7 +242,12 @@ class UserController {
           success: true,
           statusCode: 200,
           data: {
-            user,
+            user: {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              is_email_verified: user.is_email_verified,
+            },
             accessToken,
             refreshToken,
           },
@@ -221,20 +256,20 @@ class UserController {
       next(err);
     }
   }
-  //TODO
-  async logout(req: Request, res: Response, next: NextFunction) {}
 
-  async refreshToken(req: Request, res: Response, next: NextFunction) {
-    const { refreshToken } = req.body;
+  async refreshToken(
+    req: Request,
+    res: Response<IApiResponse<IRefreshTokenResponse>>,
+    next: NextFunction,
+  ) {
+    const refreshToken = req.cookies.refresh_token;
+    if (!refreshToken) {
+      throw new HttpError({
+        message: "Refresh token missing.",
+        statusCode: 401,
+      });
+    }
     try {
-      if (!refreshToken) {
-        logger.warn(`Refresh token or user ID missing in request.`);
-        throw new HttpError({
-          message: "Refresh token and user ID are required.",
-          statusCode: 400,
-        });
-      }
-
       const decoded = verifyRefreshToken(refreshToken);
       if (!decoded) {
         logger.warn(`Invalid refresh token attempt.`);
@@ -248,20 +283,19 @@ class UserController {
       });
 
       if (!storedTokenData) {
-        logger.warn(`Invalid refresh token attempt.`);
+        logger.warn(`Refresh token not found in DB.`);
         throw new HttpError({
-          message: "Invalid refresh token.",
+          message: " Refresh token not found in DB.",
           statusCode: 401,
         });
       }
-
-      const isTokenValid = await compareHashWithString({
+      const isMatch = await compareHashWithString({
         string: refreshToken,
         hashedString: storedTokenData,
       });
 
-      if (!isTokenValid) {
-        logger.warn(`Invalid refresh token attempt.`);
+      if (!isMatch) {
+        logger.warn(`Refresh token mismatch.`);
         throw new HttpError({
           message: "Invalid refresh token.",
           statusCode: 401,
@@ -280,14 +314,77 @@ class UserController {
       logger.info(
         `Access token refreshed successfully for user ID: ${decoded._id}`,
       );
-      res.status(200).json({
-        message: "Access token refreshed successfully.",
+      res
+        .cookie("refresh_token", newRefreshToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
+        })
+        .status(200)
+        .json({
+          message: "Access token refreshed successfully.",
+          success: true,
+          statusCode: 200,
+          data: {
+            accessToken,
+            refreshToken: newRefreshToken,
+          },
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async logout(req: Request, res: Response, next: NextFunction) {
+    const refreshToken = req.cookies.refresh_token;
+    if (!refreshToken) {
+      throw new HttpError({
+        message: "Refresh token missing.",
+        statusCode: 401,
+      });
+    }
+    try {
+      const decoded = verifyRefreshToken(refreshToken);
+      if (!decoded) {
+        logger.warn(`Invalid refresh token attempt.`);
+        throw new HttpError({
+          message: "Invalid refresh token.",
+          statusCode: 401,
+        });
+      }
+      const storedTokenData = await authService().getRefreshToken({
+        userId: decoded._id,
+      });
+
+      if (!storedTokenData) {
+        logger.warn(`Refresh token not found in DB.`);
+        throw new HttpError({
+          message: " Refresh token not found in DB.",
+          statusCode: 401,
+        });
+      }
+      const isMatch = await compareHashWithString({
+        string: refreshToken,
+        hashedString: storedTokenData,
+      });
+
+      if (!isMatch) {
+        logger.warn(`Refresh token mismatch.`);
+        throw new HttpError({
+          message: "Invalid refresh token.",
+          statusCode: 401,
+        });
+      }
+
+      await authService().revokeRefreshToken({ userId: decoded._id });
+      logger.info(
+        `Refresh token deleted successfully for user ID: ${decoded._id}`,
+      );
+      res.clearCookie("refresh_token").status(200).json({
+        message: "Refresh token deleted successfully.",
         success: true,
         statusCode: 200,
-        data: {
-          accessToken,
-          refreshToken: newRefreshToken,
-        },
+        data: {},
       });
     } catch (err) {
       next(err);

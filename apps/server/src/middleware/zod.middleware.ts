@@ -1,6 +1,6 @@
 import { type NextFunction, type Request, type Response } from "express";
 import { z } from "zod";
-import logger from "../libs/winston.ts";
+import logger from "../libs/winston";
 
 export function zodMiddleware(
   err: unknown,

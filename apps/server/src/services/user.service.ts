@@ -1,5 +1,5 @@
-import db from "../database/db.ts";
-import type { IUser } from "../database/types.ts";
+import db from "../database/db";
+import type { IUser } from "../database/types";
 
 export const userService = () => {
   return Object.freeze({

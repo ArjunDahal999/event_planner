@@ -1,9 +1,16 @@
 import express from "express";
-import userController from "../controller/user.controller.ts";
-import { validateRequest } from "../middleware/validate-request.middleware.ts";
-import { loginUserSchema, registerUserSchema } from "@event-planner/shared";
+import userController from "../controller/user.controller";
+import { validateRequest } from "../middleware/validate-request.middleware";
+import {
+  generate2FASchema,
+  loginUserSchema,
+  refreshTokenSchema,
+  registerUserSchema,
+  verifyEmailSchema,
+} from "@event-planner/shared";
+import { isUserAuthenticated } from "src/middleware/auth.middleware";
 
-const router = express.Router();
+const router: express.Router = express.Router();
 
 /**
  * @swagger
@@ -72,7 +79,11 @@ router.post(
  *       500:
  *         description: Internal server error.
  */
-router.post("/verifyEmail", userController.verifyEmail);
+router.post(
+  "/verifyEmail",
+  validateRequest({ schema: verifyEmailSchema, scope: "body" }),
+  userController.verifyEmail,
+);
 
 /**
  * @swagger
@@ -105,7 +116,7 @@ router.post("/verifyEmail", userController.verifyEmail);
  */
 router.post(
   "/generate2FA",
-  validateRequest({ schema: loginUserSchema, scope: "body" }),
+  validateRequest({ schema: generate2FASchema, scope: "body" }),
   userController.generate2FA,
 );
 
@@ -138,7 +149,11 @@ router.post(
  *       500:
  *         description: Internal server error.
  */
-router.post("/loginWith2FA", userController.loginWith2FA);
+router.post(
+  "/loginWith2FA",
+  validateRequest({ schema: loginUserSchema, scope: "body" }),
+  userController.loginWith2FA,
+);
 
 /**
  * @swagger
@@ -155,7 +170,7 @@ router.post("/loginWith2FA", userController.loginWith2FA);
  *         description: Internal server error.
  *
  */
-router.get("/logout", () => {});
+router.post("/logout", userController.logout);
 
 /**
  * @swagger

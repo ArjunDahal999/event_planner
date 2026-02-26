@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import type { NextFunction, Request, Response } from "express";
-import { env } from "../libs/validate-env.ts";
-import { HttpError } from "../utils/http-error.ts";
+import env from "../libs/validate-env";
+import { HttpError } from "../utils/http-error";
 
 interface JwtPayload {
   _id: string;

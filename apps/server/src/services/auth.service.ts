@@ -3,14 +3,14 @@ import {
   TWO_FACTOR_AUTHENTICATION_TABLE,
   USER_ACTIVATION_TABLE,
   USER_TABLE,
-} from "../database/constants.ts";
-import db from "../database/db.ts";
+} from "../database/constants";
+import db from "../database/db";
 import {
   type IRefreshToken,
   type ITwoFactorAuthentication,
   type IUser,
   type IUserActivation,
-} from "../database/types.ts";
+} from "../database/types";
 
 export const authService = () =>
   Object.freeze({
@@ -25,6 +25,7 @@ export const authService = () =>
     getRefreshToken,
     createAccessToken,
     updateAccessToken,
+    revokeRefreshToken,
   });
 
 async function getUserActivationToken({
@@ -184,7 +185,7 @@ async function createAccessToken({
   refreshToken: string;
 }): Promise<string> {
   try {
-    const as = await db<IRefreshToken>(REFRESH_TOKEN_TABLE).insert({
+    await db<IRefreshToken>(REFRESH_TOKEN_TABLE).insert({
       user_id: userId,
       token: refreshToken,
     });
@@ -208,6 +209,20 @@ async function updateAccessToken({
       .update({ token: refreshToken });
   } catch (err) {
     console.error("Error updating access token:", err);
+    throw err;
+  }
+}
+async function revokeRefreshToken({
+  userId,
+}: {
+  userId: number;
+}): Promise<void> {
+  try {
+    await db<IRefreshToken>(REFRESH_TOKEN_TABLE)
+      .where({ user_id: userId })
+      .del();
+  } catch (err) {
+    console.error("Error deleting access token:", err);
     throw err;
   }
 }

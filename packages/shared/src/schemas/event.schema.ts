@@ -1,7 +1,7 @@
 import z from "zod";
 
 export const eventTypeEnum = z.enum(["public", "private"]);
-
+export const eventTimeLine = z.enum(["past", "upcoming"]);
 const datePreprocess = z.preprocess((arg) => {
   if (typeof arg === "string" || typeof arg === "number") return new Date(arg);
   if (arg instanceof Date) return arg;
@@ -13,11 +13,20 @@ export const createEventSchema = z.object({
   location: z.string().min(1),
   description: z.string().min(1),
   event_date: datePreprocess,
-  event_type: eventTypeEnum.optional().default("public"),
-  tags: z
-    .array(z.string())
-    .default([])
-    .transform((tags) => [...new Set(tags.map((t) => t.trim().toLowerCase()))]),
+  event_type: eventTypeEnum.default("public"),
+  tags: z.preprocess(
+    (val) =>
+      typeof val === "string"
+        ? val
+            .split(",")
+            .map((t) => t.trim().toLowerCase())
+            .filter(Boolean)
+        : val,
+    z
+      .array(z.string())
+      .default([])
+      .transform((tags) => [...new Set(tags)]),
+  ),
 });
 
 export type CreateEventDTO = z.infer<typeof createEventSchema>;
@@ -33,6 +42,7 @@ export const eventFilterSchema = z.object({
     )
     .default(""),
   eventType: eventTypeEnum.optional(),
+  eventTimeLine: eventTimeLine.optional(),
   location: z.string().optional(),
   title: z.string().optional(),
   description: z.string().optional(),

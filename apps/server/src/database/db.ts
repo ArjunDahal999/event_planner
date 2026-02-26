@@ -1,8 +1,5 @@
 import Knex from "knex";
-import config from "./knexfile.ts";
+import config from "./knexfile";
 
-const environment = (process.env.NODE_ENV ||
-  "development") as keyof typeof config;
-
-const db = Knex(config[environment]);
+const db = Knex(config);
 export default db;

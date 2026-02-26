@@ -1,17 +1,17 @@
 import type {
   CreateEventDTO,
   EventFilterDTO,
-} from "../../../../packages/shared/src/schemas/event.schema.ts";
+} from "../../../../packages/shared/src/schemas/event.schema";
 import {
   EVENT_TABLE,
   EVENT_TAG_TABLE,
   TAG_TABLE,
   USER_TABLE,
-} from "../database/constants.ts";
-import { getEventWithTagsQuery } from "../database/data-access/get-event-with.query.ts";
-import db from "../database/db.ts";
-import type { ITags, IEvent, IEventTag, IUser } from "../database/types.ts";
-import { generateRandomColor } from "../helper/random-color-generator.ts";
+} from "../database/constants";
+import { getEventWithTagsQuery } from "../database/data-access/get-event-with.query";
+import db from "../database/db";
+import type { ITags, IEvent, IEventTag, IUser } from "../database/types";
+import { generateRandomColor } from "../helper/random-color-generator";
 
 export const eventService = () => {
   return Object.freeze({
@@ -33,38 +33,40 @@ async function createEventWithTags({
 }) {
   try {
     const { tags, ...eventDetails } = eventData;
-    // first creating the event to get the event ID
-    const [eventId] = await db<IEvent>(EVENT_TABLE).insert({
-      ...eventDetails,
-      user_id: userId,
-    });
 
-    if (tags.length <= 0) return;
-    // payload for tags table
-    const tagsPayload = tags.map((tag) => {
-      return {
+    await db.transaction(async (trx) => {
+      const [eventId] = await trx<IEvent>(EVENT_TABLE).insert({
+        ...eventDetails,
+        user_id: userId,
+      });
+
+      if (tags.length <= 0) return;
+
+      // payload for tags table
+      const tagsPayload = tags.map((tag) => ({
         name: tag,
         color: generateRandomColor(),
-      };
-    });
+      }));
 
-    // if existing name is sent, ignore that row
-    await db<ITags>(TAG_TABLE).insert(tagsPayload).onConflict("name").ignore();
+      // if existing name is sent, ignore that row
+      await trx<ITags>(TAG_TABLE)
+        .insert(tagsPayload)
+        .onConflict("name")
+        .ignore();
 
-    // we need to refetch all tags id that were recently created
-    const createdTags = await db<ITags>(TAG_TABLE)
-      .select("id", "name")
-      .whereIn("name", tags);
+      // we need to refetch all tags id that were recently created
+      const createdTags = await trx<ITags>(TAG_TABLE)
+        .select("id", "name")
+        .whereIn("name", tags);
 
-    // now we insert into event_tag table
-    await db<IEventTag>(EVENT_TAG_TABLE).insert(
-      createdTags.map((t) => {
-        return {
+      // now we insert into event_tag table
+      await trx<IEventTag>(EVENT_TAG_TABLE).insert(
+        createdTags.map((t) => ({
           event_id: eventId,
           tag_id: t.id,
-        };
-      }),
-    );
+        })),
+      );
+    });
   } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : "Failed to create event",
@@ -105,6 +107,15 @@ async function getAllEvents({ filters }: { filters: EventFilterDTO }) {
         `${EVENT_TABLE}.description LIKE '%${filters.description}%' `,
       );
     }
+    if (filters.eventTimeLine) {
+      const now = new Date();
+      const formattedDate = now.toISOString().slice(0, 19).replace("T", " "); // YYYY-MM-DD HH:mm:ss
+      if (filters.eventTimeLine === "upcoming") {
+        whereBuilder.push(`${EVENT_TABLE}.event_date >= '${formattedDate}'`);
+      } else {
+        whereBuilder.push(`${EVENT_TABLE}.event_date < '${formattedDate}'`);
+      }
+    }
 
     const whereClause =
       whereBuilder.length > 0 ? whereBuilder.join(" AND ") : "1=1";
@@ -131,10 +142,10 @@ async function getAllEvents({ filters }: { filters: EventFilterDTO }) {
 
 async function getEventById({ eventId }: { eventId: number }) {
   try {
-    const events = await getEventWithTagsQuery({
+    const event = await getEventWithTagsQuery({
       where: `${EVENT_TABLE}.id =${eventId}`,
     });
-    return events;
+    return event;
   } catch (error: any) {
     if (error.code === "ER_NO_REFERENCED_ROW_2") {
       throw new Error("Event or user does not exist.");
@@ -177,36 +188,48 @@ async function updateEvent({
 }) {
   try {
     const { tags, ...rest } = eventData;
-    await db<IEvent>(EVENT_TABLE)
-      .where({ id: eventId, user_id: userId })
-      .update(rest);
 
-    // first of all removing all the tags associated with the event from event_tag table (so deleting the row)
-    await db.raw(`DELETE FROM ${EVENT_TAG_TABLE} where event_id=${eventId}`);
+    await db.transaction(async (trx) => {
+      const updatedCount = await trx<IEvent>(EVENT_TABLE)
+        .where({ id: eventId, user_id: userId })
+        .update(rest);
 
-    // create the tags if they are new
-    const tagsPayload = tags.map((tag) => {
-      return {
+      if (updatedCount === 0) {
+        throw new Error(
+          "Event not found or you do not have permission to update it.",
+        );
+      }
+
+      // remove all existing tag associations for this event
+      await trx.raw(`DELETE FROM ${EVENT_TAG_TABLE} WHERE event_id = ?`, [
+        eventId,
+      ]);
+
+      // create the tags if they are new
+      const tagsPayload = tags.map((tag) => ({
         name: tag,
         color: generateRandomColor(),
-      };
-    });
-    // if existing name is sent, ignore that row
-    await db<ITags>(TAG_TABLE).insert(tagsPayload).onConflict("name").ignore();
-    // we need to refetch all tags id that were recently created
-    const createdTags = await db<ITags>(TAG_TABLE)
-      .select("id", "name")
-      .whereIn("name", tags);
+      }));
 
-    // now we insert into event_tag table
-    await db<IEventTag>(EVENT_TAG_TABLE).insert(
-      createdTags.map((t) => {
-        return {
+      // if existing name is sent, ignore that row
+      await trx<ITags>(TAG_TABLE)
+        .insert(tagsPayload)
+        .onConflict("name")
+        .ignore();
+
+      // refetch all tag IDs by name
+      const createdTags = await trx<ITags>(TAG_TABLE)
+        .select("id", "name")
+        .whereIn("name", tags);
+
+      // insert new event-tag associations
+      await trx<IEventTag>(EVENT_TAG_TABLE).insert(
+        createdTags.map((t) => ({
           event_id: eventId,
           tag_id: t.id,
-        };
-      }),
-    );
+        })),
+      );
+    });
   } catch (error: any) {
     if (error.code === "ER_NO_REFERENCED_ROW_2") {
       throw new Error("Event or user does not exist.");

@@ -1,18 +1,18 @@
-import { th } from "zod/locales";
 import {
   EVENT_TABLE,
   EVENT_TAG_TABLE,
+  RSVP_TABLE,
   TAG_TABLE,
   USER_TABLE,
-} from "../constants.ts";
-import db from "../db.ts";
-import type { IEvent, IEventTag, ITags, IUser } from "../types.ts";
+} from "../constants";
+import db from "../db";
+import type { IEvent, IEventTag, IRSPV, ITags, IUser } from "../types";
 
 export const getEventWithTagsQuery = async ({
   where = "",
   having = "",
   havingBindings = "",
-  limit = 1,
+  limit = 10,
   page = 1,
   sortBy,
   sortOrder,
@@ -26,18 +26,19 @@ export const getEventWithTagsQuery = async ({
   sortOrder?: "asc" | "desc";
 }) => {
   let baseQuery = db<IEvent>(EVENT_TABLE)
-    .leftJoin<IEventTag>(
+    .leftJoin(
       EVENT_TAG_TABLE,
       `${EVENT_TABLE}.id`,
       `${EVENT_TAG_TABLE}.event_id`,
     )
-    .leftJoin<ITags>(TAG_TABLE, `${EVENT_TAG_TABLE}.tag_id`, `${TAG_TABLE}.id`)
-    .leftJoin<IUser>(USER_TABLE, `${USER_TABLE}.id`, `${EVENT_TABLE}.user_id`);
+    .leftJoin(TAG_TABLE, `${EVENT_TAG_TABLE}.tag_id`, `${TAG_TABLE}.id`)
+    .leftJoin(USER_TABLE, `${USER_TABLE}.id`, `${EVENT_TABLE}.user_id`);
 
   if (where) baseQuery = baseQuery.whereRaw(where);
   if (having && havingBindings)
     baseQuery = baseQuery.havingRaw(having, havingBindings);
-  if (sortBy && sortOrder) baseQuery.orderBy(sortBy, sortOrder);
+
+  baseQuery.orderBy(sortBy ?? `${EVENT_TABLE}.created_at`, sortOrder ?? "desc");
 
   const [count] = await db
     .count("* as total")
@@ -71,60 +72,61 @@ export const getEventWithTagsQuery = async ({
       `${EVENT_TABLE}.created_at as createdAt`,
       `${EVENT_TABLE}.user_id as userId`,
       `${USER_TABLE}.name as userName`,
-      db.raw(
-        ` IF(COUNT(${TAG_TABLE}.id) = 0,
-                JSON_ARRAY(),
-                JSON_ARRAYAGG(JSON_OBJECT('tagName', ${TAG_TABLE}.name,'tagColor', ${TAG_TABLE}.color))) as tags`,
-      ),
+      db.raw(`
+  IF(COUNT(${TAG_TABLE}.id) = 0,
+    JSON_ARRAY(),
+    JSON_ARRAYAGG(
+      JSON_OBJECT(
+        'tagName', ${TAG_TABLE}.name,
+        'tagColor', ${TAG_TABLE}.color
+      )
+    )
+  ) as tags
+`),
     )
     .limit(limit)
     .offset((page - 1) * limit);
+
+  const eventIds = events.map((e) => e.id);
+
+  let rsvpSummaryMap: Record<number, { response: string; count: number }[]> =
+    {};
+
+  if (eventIds.length) {
+    const rsvpSummary = await db<IRSPV>(RSVP_TABLE)
+      .select("event_id", "response")
+      .count("response as count")
+      .whereIn("event_id", eventIds)
+      .groupBy("event_id", "response");
+
+    rsvpSummaryMap = rsvpSummary.reduce(
+      (acc, row: any) => {
+        if (!acc[row.event_id]) acc[row.event_id] = [];
+
+        acc[row.event_id].push({
+          response: row.response,
+          count: Number(row.count),
+        });
+
+        return acc;
+      },
+      {} as Record<number, { response: string; count: number }[]>,
+    );
+  }
+
+  const eventsWithRsvp = events.map((event) => ({
+    ...event,
+    tags: typeof event.tags === "string" ? JSON.parse(event.tags) : event.tags,
+    rsvpSummary: rsvpSummaryMap[event.id] || [],
+  }));
+
   return {
-    data: events,
+    events: eventsWithRsvp,
     meta: {
-      totalCount: count.total,
-      currentPage: +page,
+      totalCount: parseInt(count.total as string, 10),
+      currentPage: page,
       limit: +limit,
-      totalPage: Math.ceil((count.total as number) / +limit),
+      totalPage: Math.ceil(parseInt(count.total as string, 10) / +limit),
     },
   };
 };
-
-/*
-      const events = await db(EVENT_TABLE)
-        .leftJoin(
-          EVENT_TAG_TABLE,
-          `${EVENT_TABLE}.id`,
-          `${EVENT_TAG_TABLE}.event_id`,
-        )
-        .leftJoin(TAG_TABLE, `${EVENT_TAG_TABLE}.tag_id`, `${TAG_TABLE}.id`)
-        .leftJoin(USER_TABLE, `${USER_TABLE}.id`, `${EVENT_TABLE}.user_id`)
-        .where({ user_id: userId })
-        .select(
-          `${EVENT_TABLE}.id`,
-          `${EVENT_TABLE}.title`,
-          `${EVENT_TABLE}.description`,
-          `${EVENT_TABLE}.event_date as eventDate`,
-          `${EVENT_TABLE}.location`,
-          `${EVENT_TABLE}.event_type as eventType`,
-          `${EVENT_TABLE}.user_id as userId`,
-          `${USER_TABLE}.name  as userName`,
-          `${TAG_TABLE}.name as tagName`,
-          `${TAG_TABLE}.color as tagColor`,
-        );
-
-      const map = new Map();
-      events.forEach(({ id, tagName, tagColor, ...rest }) => {
-        if (!map.has(id)) {
-          map.set(id, {
-            id,
-            ...rest,
-            tags: [tagName && { tagName, tagColor }],
-          });
-        } else {
-          map.get(id).tags.push(tagName && { tagName, tagColor });
-        }
-      });
-      const data = [...map.values()];
-
-*/

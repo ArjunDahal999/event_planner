@@ -1,6 +1,6 @@
 import type { Knex } from "knex";
-import { EVENT_TAG_TABLE } from "../constants";
 
+const EVENT_TAG_TABLE = "event_tag";
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(EVENT_TAG_TABLE, (table) => {
     table.increments("id").primary();

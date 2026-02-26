@@ -1,9 +1,9 @@
 import express from "express";
-import userRouter from "./user.route.ts";
-import eventRouter from "./event.route.ts";
-import { isUserAuthenticated } from "../middleware/auth.middleware.ts";
-import rsvpRouter from "./rsvp.route.ts";
-const router = express.Router();
+import userRouter from "./user.route";
+import eventRouter from "./event.route";
+import { isUserAuthenticated } from "../middleware/auth.middleware";
+import rsvpRouter from "./rsvp.route";
+const router: express.Router = express.Router();
 
 router.use("/", userRouter);
 router.use("/event", isUserAuthenticated, eventRouter);

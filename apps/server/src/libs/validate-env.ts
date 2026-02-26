@@ -1,14 +1,11 @@
 import { cleanEnv, str, port } from "envalid";
 import dotenv from "dotenv";
 import path from "path";
-import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const envFilePath = path.resolve(__dirname, "../../.env");
 dotenv.config({ path: envFilePath });
 
-export const env = cleanEnv(process.env, {
+const env = cleanEnv(process.env, {
   PORT: port({ default: 8000 }),
   SMTP_HOST: str({ default: "smtp.example.com" }),
   SMTP_PORT: str({ default: "587" }),
@@ -27,4 +24,8 @@ export const env = cleanEnv(process.env, {
   MYSQL_USER: str({ default: "app_user" }),
   MYSQL_PASSWORD: str({ default: "userPassword" }),
   MYSQL_DATABASE: str({ default: "app_db" }),
+  APP_URL: str({ default: "http://localhost:3000" }),
+  SERVER_URL: str({ default: "http://localhost:9000" }),
 });
+
+export default env;
