@@ -9,8 +9,13 @@
 ```bash
 git clone https://github.com/ArjunDahal999/event_planner.git
 ```
+2. cd into the repository:
 
-2. Install dependencies:
+```bash
+cd event_planner
+```
+
+3. Install dependencies:
 
 ```bash
 pnpm install
@@ -18,7 +23,7 @@ pnpm install
 
 4. Environment Variables
 ```bash
- Rename .env.exmaple -> .env
+ Rename .env.exmaple -> .env in both apps/client and apps/server directory
 
 ```
 
@@ -31,21 +36,24 @@ docker compose up
 6. Run the database migrations:
 
 ```bash
-pnpm db:latest && pnpm db:seed
+pnpm db:latest
+```
+7. Run the database seed:
+
+```bash
+pnpm db:seed
 ```
 
-
-
-7. Run the development server:
+8. Run the development server:
 
 ```bash
 pnpm dev
 ```
 
-8. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+9. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 
-9. Open [http://localhost:9000/docs](http://localhost:9000/docs) to view the server docs.
+10. Open [http://localhost:9000/docs](http://localhost:9000/docs) to view the server docs.
 
 #  Event Planner
 

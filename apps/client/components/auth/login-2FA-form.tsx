@@ -45,8 +45,9 @@ const InputOTPForm = ({ onSubmit, email }: InputOTPFormProps) => {
       <h2 className="text-2xl font-semibold text-gray-800 mb-2">
         Verify your login
       </h2>
-      <p className="text-sm text-gray-500 mb-6">
-        Check your terminal for the verification code
+      <p className="text-sm text-primary mb-6">
+        Note:Check your terminal for the verification code; this will be sent to
+        email in prod
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">

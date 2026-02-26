@@ -17,21 +17,21 @@ function Pagination({
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex absolute bottom-2 left-1/2 transform -translate-x-1/2 gap-2 mt-6 justify-center">
+    <div className="flex absolute bottom-2 left-1/2 transform -translate-x-1/2 gap-2 mt-6 justify-center ">
       <button
         disabled={page <= 1}
         onClick={() => updateFilters({ page: String(page - 1) })}
-        className="px-4 py-2 border rounded disabled:opacity-50"
+        className="px-4 py-2 border shrink-0 rounded disabled:opacity-50"
       >
         Previous
       </button>
-      <span className="self-center text-sm">
+      <span className="self-center shrink-0 text-sm">
         Page {page} of {totalPages}
       </span>
       <button
         disabled={page >= totalPages}
         onClick={() => updateFilters({ page: String(page + 1) })}
-        className="px-4 py-2 border rounded disabled:opacity-50"
+        className="px-4 py-2 border shrink-0 rounded disabled:opacity-50"
       >
         Next
       </button>

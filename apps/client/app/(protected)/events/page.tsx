@@ -35,7 +35,7 @@ const EventsPage = () => {
 
   return (
     <ViewTransition enter={"slide-out"} exit={"slide-in"} default={"none"}>
-      <section className=" relative pb-16 ">
+      <section className=" relative pb-32 md:pb-16 p-8 ">
         <div>
           <Link href="/events/create">
             <Button>Create Event</Button>
@@ -43,10 +43,7 @@ const EventsPage = () => {
         </div>
         <EventFilter />
 
-        <div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 transition-main-grid min-h-[70vh] place-items-center  
-        "
-        >
+        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  place-items-center ">
           {isLoading &&
             [...Array(6)].map((_, index) => <EventCardSkeleton key={index} />)}
           {!isLoading && eventsResponse?.events.length === 0 && (
@@ -57,7 +54,7 @@ const EventsPage = () => {
           {eventsResponse?.events.map((event) => (
             <ViewTransition key={event.id}>
               <Link href={`/events/${event.id}`} className="h-fit">
-                <EventCard.Root className="w-sm p-4" event={event}>
+                <EventCard.Root className=" w-80 md:w-sm p-4" event={event}>
                   <EventCard.Header />
                   <EventCard.Description />
                   <EventCard.Date />

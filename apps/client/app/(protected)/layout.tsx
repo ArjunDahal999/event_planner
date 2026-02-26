@@ -9,7 +9,7 @@ export default async function ProtectedLayout({
 }) {
   const cookiesList = await cookies();
   if (!cookiesList.get("refresh_token")?.value) {
-    redirect("/login");
+    redirect("/register");
   }
   return (
     <div className="flex flex-col pt-4 max-w-7xl mx-auto min-h-screen">
