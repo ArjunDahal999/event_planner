@@ -1,6 +1,3 @@
-![Event Planner Screenshot](./images/ss-1.png)
-![Event Planner Screenshot](./images/ss-2.png)
-![Event Planner Screenshot](./images/ss-3.png)
 
 # Pre-requisites 
 - Node.js
@@ -95,15 +92,6 @@ A full-stack event management web application built with **React and Express** u
 - Monorepo workspace setup
 
 
-## 📦 Project Structure
-event_planner
-├── apps
-│   ├── client
-│   └── server
-├── packages
-│   └── shared
-│       └── src
-│           ├── index.ts
-│           ├── schemas
-│           └── types
-
+![Event Planner Screenshot](./images/ss-1.png)
+![Event Planner Screenshot](./images/ss-2.png)
+![Event Planner Screenshot](./images/ss-3.png)
