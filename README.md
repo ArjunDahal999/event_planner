@@ -21,14 +21,14 @@ pnpm install
 
 4. Environment Variables
 ```bash
-Create a .env file inside apps/server and apps/client or just  rename .env.exmaple -> .env
+ Rename .env.exmaple -> .env
 
 ```
 
 5. Spin Up Database server using Docker
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
 6. Run the database migrations:

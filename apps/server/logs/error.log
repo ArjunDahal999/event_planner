@@ -89,3 +89,17 @@
 2026-02-26T08:32:42.635Z [ERROR]: Error: Not logged in
 2026-02-26T08:32:43.642Z [ERROR]: Error: Not logged in
 2026-02-26T08:34:23.297Z [ERROR]: Error: Email is already registered.
+2026-02-26T09:50:47.212Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-26T09:50:47.226Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-26T09:50:50.419Z [ERROR]: Error: Not logged in
+2026-02-26T09:50:51.427Z [ERROR]: Error: Not logged in
+2026-02-26T09:50:53.432Z [ERROR]: Error: Not logged in
+2026-02-26T09:50:55.240Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-26T09:50:57.436Z [ERROR]: Error: Not logged in
+2026-02-26T09:50:59.328Z [ERROR]: Error:  Refresh token not found in DB.
+2026-02-26T09:51:00.082Z [ERROR]: Error: Not logged in
+2026-02-26T09:51:01.088Z [ERROR]: Error: Not logged in
+2026-02-26T09:51:03.141Z [ERROR]: Error: Not logged in
+2026-02-26T09:51:06.982Z [ERROR]: Error: Refresh token missing.
+2026-02-26T09:51:06.988Z [ERROR]: Error: Refresh token missing.
+2026-02-26T09:51:11.305Z [ERROR]: Error: Invalid email or password.
