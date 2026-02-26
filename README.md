@@ -1,4 +1,6 @@
 ![Event Planner Screenshot](./images/ss-1.png)
+![Event Planner Screenshot](./images/ss-2.png)
+![Event Planner Screenshot](./images/ss-3.png)
 
 # Pre-requisites 
 - Node.js
@@ -18,8 +20,10 @@ pnpm install
 ```
 
 4. Environment Variables
+```bash
+Create a .env file inside apps/server and apps/client or just  rename .env.exmaple -> .env
 
-Create a .env file in the root of the project and add the following environment variables:
+```
 
 5. Spin Up Database server using Docker
 
@@ -30,9 +34,10 @@ docker-compose up
 6. Run the database migrations:
 
 ```bash
-pnpm db:push
+pnpm db:latest && pnpm db:seed
 ```
-    
+
+
 
 7. Run the development server:
 
