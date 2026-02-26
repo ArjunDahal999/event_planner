@@ -17,7 +17,7 @@ const EventFilterInner = () => {
   };
 
   return (
-    <div className="flex flex-wrap gap-2 gap-x-2 py-4 items-center justify-center">
+    <div className="flex flex-wrap gap-2 gap-x-2 py-4 items-center justify-start">
       <Button
         type="button"
         className="flex items-center justify-center shadow-sm px-2 h-10 border rounded-md disabled:opacity-50"
@@ -84,7 +84,7 @@ const EventFilterInner = () => {
         onChange={(e) => {
           setActiveFilterType(e.target.value);
         }}
-        className="p-[0.35rem] flex-1 md:flex-none border shadow-sm rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+        className="p-[0.35rem] mx-2  flex-1 md:flex-none border shadow-sm rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
       >
         <option value="">--</option>
         <option value="title">Title</option>

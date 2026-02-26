@@ -10,6 +10,9 @@ A full-stack event management web application built with **React and Express** u
 - [x] Dockerized database setup
 - [x] Server docs using swagger
 - [x] Server side filtering
+- [x] Server side pagination
+
+
 
 
 
@@ -33,3 +36,14 @@ A full-stack event management web application built with **React and Express** u
 ---
 
 ## 📦 Project Structure
+event_planner
+├── apps
+│   ├── client
+│   └── server
+├── packages
+│   └── shared
+│       └── src
+│           ├── index.ts
+│           ├── schemas
+│           └── types
+

@@ -335,8 +335,61 @@ class UserController {
     }
   }
 
-  //TODO
-  async logout(req: Request, res: Response, next: NextFunction) {}
+  async logout(req: Request, res: Response, next: NextFunction) {
+    const refreshToken = req.cookies.refresh_token;
+    if (!refreshToken) {
+      throw new HttpError({
+        message: "Refresh token missing.",
+        statusCode: 401,
+      });
+    }
+    try {
+      const decoded = verifyRefreshToken(refreshToken);
+      if (!decoded) {
+        logger.warn(`Invalid refresh token attempt.`);
+        throw new HttpError({
+          message: "Invalid refresh token.",
+          statusCode: 401,
+        });
+      }
+      const storedTokenData = await authService().getRefreshToken({
+        userId: decoded._id,
+      });
+
+      if (!storedTokenData) {
+        logger.warn(`Refresh token not found in DB.`);
+        throw new HttpError({
+          message: " Refresh token not found in DB.",
+          statusCode: 401,
+        });
+      }
+      const isMatch = await compareHashWithString({
+        string: refreshToken,
+        hashedString: storedTokenData,
+      });
+
+      if (!isMatch) {
+        logger.warn(`Refresh token mismatch.`);
+        throw new HttpError({
+          message: "Invalid refresh token.",
+          statusCode: 401,
+        });
+      }
+
+      await authService().revokeRefreshToken({ userId: decoded._id });
+      logger.info(
+        `Refresh token deleted successfully for user ID: ${decoded._id}`,
+      );
+      res.clearCookie("refresh_token").status(200).json({
+        message: "Refresh token deleted successfully.",
+        success: true,
+        statusCode: 200,
+        data: {},
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 const userController = new UserController();

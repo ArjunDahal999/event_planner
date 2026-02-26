@@ -8,6 +8,7 @@ import {
   registerUserSchema,
   verifyEmailSchema,
 } from "@event-planner/shared";
+import { isUserAuthenticated } from "src/middleware/auth.middleware";
 
 const router: express.Router = express.Router();
 
@@ -169,7 +170,7 @@ router.post(
  *         description: Internal server error.
  *
  */
-router.get("/logout", () => {});
+router.post("/logout", userController.logout);
 
 /**
  * @swagger

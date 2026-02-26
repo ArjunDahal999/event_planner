@@ -4,7 +4,14 @@
 import { authService } from "@/services/auth.service";
 import { tokenStore } from "@/utils/token-store";
 import { ILoginResponse, LoginUserDTO } from "@event-planner/shared";
-import React, { createContext, useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface IAuthContext {
   isLoading: boolean;
@@ -16,9 +23,18 @@ interface IAuthContext {
 }
 export const AuthContext = createContext<IAuthContext | null>(null);
 
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};
+
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   const logout = useCallback(async () => {
     try {
@@ -27,6 +43,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         credentials: "include",
       });
       localStorage.removeItem("userId");
+      router.push("/");
     } finally {
       tokenStore().clearAccessToken();
       setIsAuthenticated(false);

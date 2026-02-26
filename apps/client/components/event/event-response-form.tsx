@@ -49,6 +49,9 @@ const EventResponseForm = ({ eventId }: { eventId: number }) => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY_CONSTANT.EVENTS],
       });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY_CONSTANT.EVENT, eventId.toString()],
+      });
       toast.success(res.message);
     },
   });
