@@ -1,7 +1,7 @@
 import { IEvent } from "@event-planner/shared";
 import { createContext, useContext, ReactNode, ViewTransition } from "react";
 import { hexToRgba } from "@/utils/hex-to-rgb";
-import { FlameIcon, GlobeIcon, UserKeyIcon } from "lucide-react";
+import { GlobeIcon, UserKeyIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import Image from "next/image";
@@ -71,7 +71,7 @@ const EventHeader = () => {
   return (
     <ViewTransition name={`event-title-${id}`}>
       <h3
-        className="font-bold cursor-pointer text-black hover:text-primary hover:underline 
+        className="font-bold cursor-pointer group-hover:text-primary text-black hover:text-primary hover:underline 
     text-center h-12 flex items-center line-clamp-1 "
       >
         {title}

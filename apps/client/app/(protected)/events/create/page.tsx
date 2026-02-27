@@ -1,5 +1,6 @@
 "use client";
 import EventForm from "@/components/event/event-form";
+import LockCover from "@/components/lock-cover";
 import { Button } from "@/components/ui/button";
 import QUERY_KEY_CONSTANT from "@/constant/query-key-constant";
 import { eventService } from "@/services/event.service";
@@ -31,7 +32,7 @@ const CreateEventPage = () => {
   });
 
   return (
-    <div className="">
+    <div className=" pt-8">
       <Link href={"/events"}>
         <Button className=" w-fit group">
           <ChevronLeft className=" group-hover:translate-x-2 transition-transform duration-500 " />{" "}
@@ -39,7 +40,8 @@ const CreateEventPage = () => {
         </Button>
       </Link>
       <ViewTransition enter="slide-out" exit="slide-in" default={"none"}>
-        <div className="flex gap-y-2 flex-col pt-3 ">
+        <div className="flex gap-y-2 relative flex-col pt-3 w-fit mx-auto ">
+          <LockCover />
           <EventForm mode="create" onSubmit={mutate} />
         </div>
       </ViewTransition>

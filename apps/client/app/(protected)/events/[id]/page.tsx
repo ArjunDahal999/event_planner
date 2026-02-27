@@ -8,11 +8,10 @@ import { CalendarDays, ChevronLeft, MapPin, Tag, User } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { hexToRgba } from "@/utils/hex-to-rgb";
-import EventResponseForm from "@/components/event/event-response-form";
-import { rsvpService } from "@/services/rsvp.service";
 import QUERY_KEY_CONSTANT from "@/constant/query-key-constant";
 import { EventOptions } from "@/components/event/event-option";
 import Image from "next/image";
+import EventRsvpResponse from "@/components/event/event-rsvp";
 
 const Event = () => {
   const params = useParams<{ id: string }>();
@@ -28,31 +27,25 @@ const Event = () => {
     enabled: !!params.id,
   });
 
-  const { data: rsvpResponse, isLoading: isRsvpLoading } = useQuery({
-    queryKey: [QUERY_KEY_CONSTANT.RSVP, params.id],
-    queryFn: () => rsvpService().getRsvp({ eventId: parseInt(params.id) }),
-    enabled: !!params.id,
-  });
-
   const event = eventResponse?.data;
 
   const rsvpMap = {
-    "YES":{
-      image:"/fire.png",
-      count:0
+    YES: {
+      image: "/fire.png",
+      count: 0,
     },
-    "NO":{
-      image:"/cross.png",
-      count:0
+    NO: {
+      image: "/cross.png",
+      count: 0,
     },
-    "MAY BE":{
-      image:"/question.png",
-      count:0
-    }
-  }
-  event?.rsvpSummary?.forEach((rsvp)=>{
+    "MAY BE": {
+      image: "/question.png",
+      count: 0,
+    },
+  };
+  event?.rsvpSummary?.forEach((rsvp) => {
     rsvpMap[rsvp.response as "YES" | "NO" | "MAY BE"].count = rsvp.count;
-  })
+  });
 
   if (isLoading)
     return (
@@ -152,46 +145,28 @@ const Event = () => {
           </ViewTransition>
         </div>
       </ViewTransition>
-
-      {!isRsvpLoading && rsvpResponse?.data && (
-        <div className="bg-green-400/40 rounded-lg shadow-md p-6  w-full mx-auto">
-          <h2 className="text-2xl font-semibold mb-4">
-            {rsvpResponse?.data
-              ? `Your response: ${rsvpResponse.data.response}`
-              : "Are you attending the event?"}
-          </h2>
-          <p className="text-muted-foreground mb-4">
-            You Have Submitted your response in{" "}
-            <span className="font-medium">
-              {rsvpResponse?.data?.createdAt
-                ? new Date(rsvpResponse.data!.createdAt).toUTCString()
-                : "N/A"}
-            </span>
-          </p>
-        </div>
-      )}
-      {!isRsvpLoading && !rsvpResponse?.data && (
-        <EventResponseForm eventId={event.id} />
-      )}
+      <EventRsvpResponse id={event.id} />
     </div>
   );
 };
 
 export default Event;
 
-
-
-const EventRsvpSummary = ({rsvpMap}: {rsvpMap: Record<string, {image:string, count:number}>}) => {
+const EventRsvpSummary = ({
+  rsvpMap,
+}: {
+  rsvpMap: Record<string, { image: string; count: number }>;
+}) => {
   return (
     <div className="flex flex-wrap items-center gap-6 text-muted-foreground text-sm">
       <div className="flex items-center gap-2">
         {Object.entries(rsvpMap).map(([key, value]) => (
-            <div key={key} className="flex items-center gap-2">
-              <Image src={value.image} alt="" width={40} height={40} />
-              {key}: {value.count}
-            </div>
-        ))} 
+          <div key={key} className="flex items-center gap-2">
+            <Image src={value.image} alt="" width={40} height={40} />
+            {key}: {value.count}
+          </div>
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};

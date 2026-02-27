@@ -2,6 +2,7 @@ import { Router } from "express";
 import rsvpController from "../controller/rsvp.controller";
 import { validateRequest } from "../middleware/validate-request.middleware";
 import { rsvpCreateSchema } from "@event-planner/shared";
+import { isUserAuthenticated } from "src/middleware/auth.middleware";
 
 const rsvpRouter: Router = Router();
 
@@ -53,6 +54,7 @@ const rsvpRouter: Router = Router();
  */
 rsvpRouter.post(
   "/",
+  isUserAuthenticated,
   validateRequest({
     schema: rsvpCreateSchema,
   }),
@@ -105,7 +107,7 @@ rsvpRouter.post(
  *       400:
  *         description: Bad request. Invalid input data.
  */
-rsvpRouter.get("/", rsvpController.getRsvp);
+rsvpRouter.get("/", isUserAuthenticated, rsvpController.getRsvp);
 
 /**
  * @swagger
@@ -151,6 +153,7 @@ rsvpRouter.get("/", rsvpController.getRsvp);
  */
 rsvpRouter.put(
   "/",
+  isUserAuthenticated,
   validateRequest({
     schema: rsvpCreateSchema,
   }),
@@ -192,6 +195,6 @@ rsvpRouter.put(
  *               example:
  *                 message: RSVP deleted successfully
  */
-rsvpRouter.delete("/", rsvpController.deleteRsvp);
+rsvpRouter.delete("/", isUserAuthenticated, rsvpController.deleteRsvp);
 
 export default rsvpRouter;

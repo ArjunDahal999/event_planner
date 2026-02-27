@@ -6,6 +6,6 @@ import rsvpRouter from "./rsvp.route";
 const router: express.Router = express.Router();
 
 router.use("/", userRouter);
-router.use("/event", isUserAuthenticated, eventRouter);
-router.use("/rsvp", isUserAuthenticated, rsvpRouter);
+router.use("/event", eventRouter);
+router.use("/rsvp", rsvpRouter);
 export { router };

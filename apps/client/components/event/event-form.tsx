@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { CreateEventDTO, createEventSchema } from "@event-planner/shared";
 import { Button } from "../ui/button";
+import LockCover from "../lock-cover";
 
 type EventFormValues = {
   title: string;
@@ -52,7 +53,7 @@ const EventForm = (props: EventFormProps) => {
 
   return (
     <>
-      <div className="max-w-3xl shadow-sm mx-auto bg-white   border p-8">
+      <div className="max-w-3xl shadow-sm mx-auto bg-red   border p-8">
         <h2 className="text-2xl font-semibold mb-6 text-gray-800">
           {props.mode === "create" ? "Create New Event" : "Update Event"}
         </h2>

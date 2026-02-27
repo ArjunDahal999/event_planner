@@ -120,3 +120,280 @@
 2026-02-26T10:59:23.848Z [ERROR]: Error: Refresh token missing.
 2026-02-26T10:59:23.857Z [ERROR]: Error: Refresh token missing.
 2026-02-26T11:10:05.882Z [ERROR]: Error: Invalid refresh token.
+2026-02-26T11:37:29.407Z [ERROR]: Error: Refresh token missing.
+2026-02-26T11:37:29.421Z [ERROR]: Error: Refresh token missing.
+2026-02-26T11:40:22.883Z [ERROR]: Error: Invalid refresh token.
+2026-02-26T11:40:22.958Z [ERROR]: Error: Invalid refresh token.
+2026-02-26T11:40:29.225Z [ERROR]: Error: Refresh token missing.
+2026-02-26T11:40:29.235Z [ERROR]: Error: Refresh token missing.
+2026-02-26T11:40:32.540Z [ERROR]: Error: Refresh token missing.
+2026-02-26T11:40:32.549Z [ERROR]: Error: Refresh token missing.
+2026-02-26T11:40:39.589Z [ERROR]: Error: Refresh token missing.
+2026-02-26T11:40:39.599Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:36:01.996Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:36:02.000Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:52:47.958Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:52:47.964Z [ERROR]: Validation error: [{"code":"invalid_value","values":["event_date","created_at"],"path":["sortBy"],"message":"Invalid option: expected one of \"event_date\"|\"created_at\""}]
+2026-02-27T14:52:47.986Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:53:21.197Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:53:21.204Z [ERROR]: Validation error: [{"code":"invalid_value","values":["event_date","created_at"],"path":["sortBy"],"message":"Invalid option: expected one of \"event_date\"|\"created_at\""}]
+2026-02-27T14:53:21.207Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:53:24.830Z [ERROR]: Validation error: [{"code":"invalid_value","values":["event_date","created_at"],"path":["sortBy"],"message":"Invalid option: expected one of \"event_date\"|\"created_at\""}]
+2026-02-27T14:53:26.371Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:53:26.372Z [ERROR]: Validation error: [{"code":"invalid_value","values":["event_date","created_at"],"path":["sortBy"],"message":"Invalid option: expected one of \"event_date\"|\"created_at\""}]
+2026-02-27T14:53:26.379Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:53:27.381Z [ERROR]: Validation error: [{"code":"invalid_value","values":["event_date","created_at"],"path":["sortBy"],"message":"Invalid option: expected one of \"event_date\"|\"created_at\""}]
+2026-02-27T14:53:29.387Z [ERROR]: Validation error: [{"code":"invalid_value","values":["event_date","created_at"],"path":["sortBy"],"message":"Invalid option: expected one of \"event_date\"|\"created_at\""}]
+2026-02-27T14:53:33.417Z [ERROR]: Validation error: [{"code":"invalid_value","values":["event_date","created_at"],"path":["sortBy"],"message":"Invalid option: expected one of \"event_date\"|\"created_at\""}]
+2026-02-27T14:53:46.168Z [ERROR]: Validation error: [{"code":"invalid_value","values":["event_date","created_at"],"path":["sortBy"],"message":"Invalid option: expected one of \"event_date\"|\"created_at\""}]
+2026-02-27T14:53:47.177Z [ERROR]: Error retrieving events: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-27T14:53:47.177Z [ERROR]: Error: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-27T14:53:49.184Z [ERROR]: Error retrieving events: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-27T14:53:49.184Z [ERROR]: Error: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-27T14:53:53.190Z [ERROR]: Error retrieving events: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-27T14:53:53.190Z [ERROR]: Error: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-27T14:54:01.432Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:54:01.441Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:54:01.444Z [ERROR]: Error retrieving events: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-27T14:54:01.445Z [ERROR]: Error: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-27T14:54:02.464Z [ERROR]: Error retrieving events: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-27T14:54:02.465Z [ERROR]: Error: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-27T14:54:04.471Z [ERROR]: Error retrieving events: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-27T14:54:04.471Z [ERROR]: Error: connect ECONNREFUSED 127.0.0.1:3307
+2026-02-27T14:54:32.253Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:54:32.273Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:54:40.107Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:54:40.117Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:56:17.210Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:56:17.219Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:56:17.312Z [ERROR]: Error: Refresh token missing.
+2026-02-27T14:56:17.322Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:01:37.946Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:01:37.947Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:01:37.960Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:01:37.972Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:01:38.283Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:01:38.296Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:01:38.313Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:01:38.321Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:03:07.024Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:03:07.032Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:03:40.400Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:03:40.408Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:04:23.770Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:04:23.780Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:05:48.388Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:05:48.397Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:12:28.535Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:12:28.542Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:12:29.694Z [ERROR]: Error: Not logged in
+2026-02-27T15:12:29.699Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:12:29.700Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:12:30.711Z [ERROR]: Error: Not logged in
+2026-02-27T15:12:30.725Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:12:30.726Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:12:32.718Z [ERROR]: Error: Not logged in
+2026-02-27T15:12:32.737Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:12:32.737Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:12:36.725Z [ERROR]: Error: Not logged in
+2026-02-27T15:12:36.747Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:12:36.747Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:12:41.226Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:13:54.355Z [ERROR]: Error: Not logged in
+2026-02-27T15:13:54.356Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:13:54.356Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:13:55.365Z [ERROR]: Error: Not logged in
+2026-02-27T15:13:55.375Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:13:55.376Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:13:57.371Z [ERROR]: Error: Not logged in
+2026-02-27T15:13:57.384Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:13:57.385Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:14:01.377Z [ERROR]: Error: Not logged in
+2026-02-27T15:14:01.393Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:14:01.393Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:15:24.419Z [ERROR]: Error: Not logged in
+2026-02-27T15:15:25.427Z [ERROR]: Error: Not logged in
+2026-02-27T15:15:27.190Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:15:27.194Z [ERROR]: Error: Not logged in
+2026-02-27T15:15:27.201Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:15:28.614Z [ERROR]: Error: Not logged in
+2026-02-27T15:15:29.621Z [ERROR]: Error: Not logged in
+2026-02-27T15:15:31.626Z [ERROR]: Error: Not logged in
+2026-02-27T15:15:35.633Z [ERROR]: Error: Not logged in
+2026-02-27T15:16:54.683Z [ERROR]: Error: Not logged in
+2026-02-27T15:18:14.831Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:18:14.839Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:18:51.912Z [ERROR]: Error: Not logged in
+2026-02-27T15:21:45.904Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:21:45.928Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:23:56.965Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:23:56.966Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:23:57.270Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:23:57.270Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:23:58.294Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:23:58.295Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:00.301Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:00.302Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:04.309Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:04.310Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:12.689Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:12.689Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:13.695Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:13.695Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:15.702Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:15.702Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:19.710Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:19.710Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:23.179Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:23.179Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:24.191Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:24.192Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:26.199Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:26.200Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:30.206Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:30.206Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:37.668Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:37.669Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:38.675Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:38.675Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:40.682Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:40.682Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:41.453Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:41.454Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:42.470Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:42.470Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:44.478Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:44.479Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:24:48.485Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:24:48.485Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:27:16.970Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:27:16.971Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:27:17.987Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:27:17.988Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:27:19.994Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:27:19.994Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:27:24.001Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:27:24.002Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:27:26.746Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:27:26.747Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:27:27.754Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:27:27.754Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:27:29.761Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:27:29.761Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:27:33.767Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:27:33.767Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:28:00.796Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:28:00.796Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:28:01.802Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:28:01.802Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:28:03.239Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:28:03.239Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:28:04.251Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:28:04.251Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:28:06.259Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:28:06.259Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:28:10.265Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:28:10.265Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:28:10.281Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:28:10.281Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:28:11.289Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:28:11.289Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:28:13.294Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:28:13.295Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:28:17.235Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:28:17.235Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:28:18.241Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:28:18.242Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:28:20.335Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:28:20.336Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:28:21.342Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:28:21.343Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:28:23.333Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:28:23.334Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:28:24.348Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:28:24.349Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:32:37.582Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:32:37.583Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:32:37.585Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:32:37.585Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:32:38.591Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:32:38.592Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:32:38.601Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:32:38.601Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:32:40.598Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:32:40.598Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:32:40.611Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:32:40.611Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:32:44.605Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:32:44.605Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:32:44.622Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:32:44.622Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:33:28.866Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:33:28.866Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:33:28.906Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:33:28.906Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:33:29.886Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:33:29.886Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:33:29.915Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:33:29.916Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:33:31.892Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:33:31.892Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:33:31.921Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:33:31.922Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:33:35.900Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:33:35.900Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:33:35.919Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:33:35.920Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:33:35.922Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T15:33:35.922Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T15:38:02.716Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:38:02.727Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:38:09.786Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:38:09.795Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:38:35.742Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:38:35.752Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:44:55.143Z [ERROR]: Error: Refresh token missing.
+2026-02-27T15:44:55.163Z [ERROR]: Error: Refresh token missing.
+2026-02-27T16:11:17.123Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:11:17.123Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:11:18.137Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:11:18.138Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:11:20.143Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:11:20.143Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:11:24.150Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:11:24.151Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:11:57.908Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:11:57.908Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:11:57.911Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:11:57.911Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:11:58.923Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:11:58.923Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:12:01.003Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:12:01.003Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:12:02.050Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:12:02.051Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:12:04.094Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:12:04.095Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:12:08.100Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:12:08.101Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:12:44.267Z [ERROR]: Error: You have already RSVP'd to this event.
+2026-02-27T16:12:48.635Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:12:48.635Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:12:49.643Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:12:49.644Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:12:51.679Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:12:51.679Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:12:55.688Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:12:55.688Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:13:22.205Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:13:22.205Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:13:23.214Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:13:23.214Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:13:25.221Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:13:25.221Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:13:29.230Z [ERROR]: Error retrieving RSVP: Undefined binding(s) detected when compiling FIRST. Undefined column(s): [user_id] query: select * from `rsvp` where `event_id` = ? and `user_id` = ? limit ?
+2026-02-27T16:13:29.230Z [ERROR]: Error: Failed to retrieve RSVP
+2026-02-27T16:38:41.010Z [ERROR]: Error: Refresh token missing.
+2026-02-27T16:38:41.021Z [ERROR]: Error: Refresh token missing.
+2026-02-27T16:48:53.714Z [ERROR]: Error: Refresh token missing.
+2026-02-27T16:48:53.724Z [ERROR]: Error: Refresh token missing.

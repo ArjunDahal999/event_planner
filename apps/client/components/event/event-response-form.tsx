@@ -44,7 +44,7 @@ const EventResponseForm = ({ eventId }: { eventId: number }) => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY_CONSTANT.RSVP, eventId.toString()],
+        queryKey: [QUERY_KEY_CONSTANT.RSVP, eventId],
       });
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY_CONSTANT.EVENTS],
@@ -57,8 +57,8 @@ const EventResponseForm = ({ eventId }: { eventId: number }) => {
   });
 
   return (
-    <div>
-      <div className="bg-slate-400/10 rounded-lg shadow-md p-6 min-w-md mx-auto">
+    <div className=" w-full">
+      <div className="bg-slate-400/10 rounded-lg shadow-md p-6 w-full mx-auto">
         <h2 className="text-2xl font-semibold mb-4">
           Are you attending the event?
         </h2>

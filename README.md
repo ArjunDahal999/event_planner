@@ -55,6 +55,10 @@ pnpm dev
 
 10. Open [http://localhost:9000/docs](http://localhost:9000/docs) to view the server docs.
 
+# Assumption 
+- The actual data that needs to be sent to end user's email , is logged  in terminal .
+- User can view both public and private events,but only owner can edit and delete events.   
+
 #  Event Planner
 
 A full-stack event management web application built with **React and Express** using a **monorepo architecture**.  
@@ -77,8 +81,7 @@ A full-stack event management web application built with **React and Express** u
 - [x] Migartion File for database schema changhes
 - [x] Email Verification
 - [x] Two Factor Authentiation (2FA)
-
-
+- [x] Logger using Winston
 
 
 ## Tech Stack

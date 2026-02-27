@@ -2,40 +2,9 @@ import express from "express";
 import eventController from "../controller/event.controller";
 import { createEventSchema, eventFilterSchema } from "@event-planner/shared";
 import { validateRequest } from "../middleware/validate-request.middleware";
+import { isUserAuthenticated } from "src/middleware/auth.middleware";
 
 const router: express.Router = express.Router();
-
-/**
- * @swagger
- * /api/v1/event:
- *   get:
- *     tags:
- *       - Event
- *     summary: Get current user's profile
- *     description: Retrieve the profile of the currently authenticated user.
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: User profile retrieved successfully.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *               example:
- *                 message: User profile endpoint
- *       401:
- *         description: Unauthorized
- *       500:
- *         description: Internal server error.
- */
-router.get("/", (req, res) => {
-  const userId = res.locals.user;
-  res.status(200).json({ message: "User profile endpoint" });
-});
 
 /**
  * @swagger
@@ -154,6 +123,7 @@ router.get("/", (req, res) => {
  */
 router.post(
   "/",
+  isUserAuthenticated,
   validateRequest({ schema: createEventSchema, scope: "body" }),
   eventController.createEvent,
 );
@@ -284,7 +254,7 @@ router.get(
  *       500:
  *         description: Internal server error
  */
-router.get("/user", eventController.getAllUserEvents);
+router.get("/user", isUserAuthenticated, eventController.getAllUserEvents);
 
 /**
  * @swagger
@@ -359,6 +329,7 @@ router.get("/:id", eventController.getEventById);
  */
 router.put(
   "/:id",
+  isUserAuthenticated,
   validateRequest({ schema: createEventSchema, scope: "body" }),
   eventController.updateEvent,
 );
@@ -398,6 +369,6 @@ router.put(
  *       500:
  *         description: Internal server error
  */
-router.delete("/:id", eventController.deleteEvent);
+router.delete("/:id", isUserAuthenticated, eventController.deleteEvent);
 
 export default router;

@@ -14,6 +14,7 @@ export const eventService = () =>
     getEventById,
     updateEvent,
     deleteEvent,
+    getEventsForLandingPage,
   });
 
 async function createEvent({ payload }: { payload: CreateEventDTO }) {
@@ -84,6 +85,16 @@ async function getEvents({ filters }: { filters: EventFilters }) {
 async function deleteEvent({ eventId }: { eventId: number }) {
   try {
     const { data } = await api.delete<IApiResponse<[]>>(`event/${eventId}`);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getEventsForLandingPage() {
+  try {
+    const { data } =
+      await api.get<IApiResponse<IEventResponse>>(`event/all?limit=6`);
     return data;
   } catch (error) {
     throw error;
