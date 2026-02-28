@@ -3,6 +3,9 @@
 - Node.js
 - Docker
 - pnpm
+```bash
+ npm i pnpm -g
+```
 
 1. Clone the repository:
 
@@ -23,7 +26,7 @@ pnpm install
 
 4. Environment Variables
 ```bash
- Rename .env.exmaple -> .env in both apps/client and apps/server directory
+ Rename .env.example -> .env in both apps/client and apps/server directory
 
 ```
 
@@ -44,7 +47,7 @@ pnpm db:latest
 pnpm db:seed
 ```
 
-8. Run the development server:
+8. This will run client and server parallelly:
 
 ```bash
 pnpm dev
