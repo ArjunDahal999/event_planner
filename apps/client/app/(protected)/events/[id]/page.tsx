@@ -2,7 +2,7 @@
 
 import { eventService } from "@/services/event.service";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { ViewTransition } from "react";
 import { CalendarDays, ChevronLeft, MapPin, Tag, User } from "lucide-react";
 import Link from "next/link";
@@ -15,7 +15,7 @@ import EventRsvpResponse from "@/components/event/event-rsvp";
 
 const Event = () => {
   const params = useParams<{ id: string }>();
-
+  const router = useRouter();
   const {
     data: eventResponse,
     isLoading,
@@ -67,11 +67,9 @@ const Event = () => {
 
   return (
     <div className="max-w-7xl   px-6  space-y-10 pb-20  flex flex-col gap-y-12">
-      <Link href="/events">
-        <Button className=" w-fit">
-          <ChevronLeft /> Back
-        </Button>
-      </Link>
+      <Button onClick={() => router.back()} className=" w-fit">
+        <ChevronLeft /> Back
+      </Button>
       <ViewTransition>
         <div className=" bg-primary/10  p-4 shadow-sm  rounded-lg space-y-8">
           <div className="space-y-4 p-6 rounded-xl">
