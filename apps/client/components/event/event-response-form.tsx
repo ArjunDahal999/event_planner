@@ -71,7 +71,7 @@ const EventResponseForm = ({ eventId }: { eventId: number }) => {
                 setIsDialogOpen(true);
               }}
               key={response.id}
-              className={`transition-all duration-300 ease-in-out size-80 ${response.color} flex items-center justify-center shadow-md hover:shadow-none`}
+              className={`transition-all duration-300 size-20 ease-in-out md:size-80 ${response.color} flex items-center justify-center shadow-md hover:shadow-none`}
             >
               <response.icon size={200} className="text-white" />
             </button>
