@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { cn } from "@/lib/utils";
 import { RotateCcwIcon, Loader2Icon } from "lucide-react";
 import { Button } from "../ui/button";
 import { EventFilters, useEventFilters } from "./use-filter.hook";
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 
 type TextFilterKey = keyof EventFilters;
 type EventTypeOption = {
@@ -29,13 +30,19 @@ const EVENT_TYPE_OPTIONS: EventTypeOption[] = [
 
 const EventFilterInner = () => {
   const { filters, updateFilters, isPending, resetFilters } = useEventFilters();
-  const [activeFilterTypes, setActiveFilterTypes] = useState<TextFilterKey[]>(
-    [],
+  const filtersPresentInSearchParams = Object.entries(filters).filter(
+    ([_, v]) => v != null,
   );
-
-  const [filterTexts, setFilterTexts] = useState<
-    Partial<Record<TextFilterKey, string>>
-  >({});
+  const activeFilters = filtersPresentInSearchParams
+    .filter(([_, v]) => !Number.isInteger(v)) //  page and limit to be in filter
+    .map(([k]) => k);
+  const appliedFilters: Partial<Record<TextFilterKey, string>> =
+    Object.fromEntries(filtersPresentInSearchParams);
+  const [activeFilterTypes, setActiveFilterTypes] = useState<TextFilterKey[]>(
+    activeFilters as Array<TextFilterKey>,
+  );
+  const [filterTexts, setFilterTexts] =
+    useState<Partial<Record<TextFilterKey, string>>>(appliedFilters);
 
   const handleReset = () => {
     setFilterTexts({});
